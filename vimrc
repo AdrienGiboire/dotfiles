@@ -152,7 +152,7 @@ endif
 
 " _. Color {{{
 if count(g:vimified_packages, 'color')
-    Bundle 'altercation/vim-colors-solarized'
+    Bundle 'tomasr/molokai'
 endif
 " }}}
 
@@ -160,7 +160,7 @@ endif
 
 " General {{{
 filetype plugin indent on
-colorscheme solarized
+colorscheme molokai
 set background=light
 syntax on
 
