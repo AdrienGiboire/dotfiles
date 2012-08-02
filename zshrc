@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="personal"
+ZSH_THEME="whoshallsucceed"
 
 # Example aliases
 alias zshconfig="mate ~/.zshrc"
