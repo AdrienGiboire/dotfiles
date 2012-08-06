@@ -1,10 +1,9 @@
 [core]
-	excludesfile = /Users/adyoulikeadyoulike/.gitignore
+	excludesfile = /Users/adrien/.gitignore
 	editor = vim
 [user]
 	name = Adrien Giboire
 	email = adrien.giboire@gmail.com
-[diff]
 [color]
 	ui = auto
 [alias]
