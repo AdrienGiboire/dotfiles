@@ -4,12 +4,12 @@ function prompt_char {
 }
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[magenta]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}!"
 #ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
-PROMPT='%{$fg[magenta]%}%n%{$reset_color%} in %{$fg[yellow]%}${PWD/#$HOME/~}%{$reset_color%} ($(git_time_since_commit)$(git_prompt_info)) $(prompt_char) '
+PROMPT='%{$fg[magenta]%}%n%{$reset_color%} in %{$fg[yellow]%}${PWD/#$HOME/~}%{$reset_color%} $(git_time_since_commit)$(git_prompt_info) $(prompt_char) '
 
 local return_status="%{$fg[red]%}%(?..✘)%{$reset_color%}"
 RPROMPT='${return_status}%{$reset_color%}'
@@ -51,15 +51,15 @@ function git_time_since_commit() {
 			fi
 
 			if [ "$HOURS" -gt 24 ]; then
-				echo "$(rvm_prompt)$COLOR${DAYS}d${SUB_HOURS}h${SUB_MINUTES}m%{$reset_color%}|"
+				echo "($(rvm_prompt)$COLOR${DAYS}d${SUB_HOURS}h${SUB_MINUTES}m%{$reset_color%}|"
 			elif [ "$MINUTES" -gt 60 ]; then
-					echo "$(rvm_prompt)$COLOR${HOURS}h${SUB_MINUTES}m%{$reset_color%}|"
+					echo "($(rvm_prompt)$COLOR${HOURS}h${SUB_MINUTES}m%{$reset_color%}|"
 			else
-				echo "$(rvm_prompt)$COLOR${MINUTES}m%{$reset_color%}|"
+				echo "($(rvm_prompt)$COLOR${MINUTES}m%{$reset_color%}|"
 			fi
 		else
 			COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL"
-			echo "$(rvm_prompt)$COLOR~|"
+			echo "($(rvm_prompt)$COLOR~|"
 		fi
 	fi
 }
