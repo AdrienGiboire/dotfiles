@@ -17,7 +17,7 @@ elif [ -f $HOME/.githelpers ]; then
   echo "Backup $HOME/.githelpers in $HOME/.githelpers.orig"
   mv $HOME/.githelpers $HOME/.githelpers.orig
 fi
-echo "Linking $PWD/gitconfig $HOME/.githelpers"
+echo "Linking $PWD/githelpers $HOME/.githelpers"
 ln -s $PWD/githelpers $HOME/.githelpers
 
 if [ -L $HOME/.vimrc ]; then
@@ -27,7 +27,7 @@ elif [ -f $HOME/.vimrc ]; then
   echo "Backup $HOME/.vimrc in $HOME/.vimrc.orig"
   mv $HOME/.vimrc $HOME/.vimrc.orig
 fi
-echo "Linking $PWD/gitconfig $HOME/.vimrc"
+echo "Linking $PWD/vimrc $HOME/.vimrc"
 ln -s $PWD/vimrc $HOME/.vimrc
 
 if [ -L $HOME/.zshrc ]; then
@@ -37,7 +37,17 @@ elif [ -f $HOME/.zshrc ]; then
   echo "Backup $HOME/.zshrc in $HOME/.zshrc.orig"
   mv $HOME/.zshrc $HOME/.zshrc.orig
 fi
-echo "Linking $PWD/gitconfig $HOME/.zshrc"
+echo "Linking $PWD/zshrc $HOME/.zshrc"
 ln -s $PWD/zshrc $HOME/.zshrc
+
+if [ -L $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme ]; then
+  echo "Removing $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme"
+  rm $HOME/.zshrc
+elif [ -f $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme ]; then
+  echo "Backup $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme in $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme.orig"
+  mv $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme.orig
+fi
+echo "Linking $PWD/.oh-my-zsh/themes/whoshallsuceed.zsh-theme $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme"
+ln -s $PWD/.oh-my-zsh/themes/whoshallsuceed.zsh-theme $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme
 
 echo "Links created."
