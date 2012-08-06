@@ -107,7 +107,7 @@ if count(g:vimified_packages, 'ruby')
     Bundle 'nelstrom/vim-textobj-rubyblock'
     Bundle 'ecomba/vim-ruby-refactoring'
 
-    autocmd User Rails set softtabstop=4 tabstop=4 shiftwidth=4 noexpandtab
+    autocmd User Rails set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
 endif
 " }}}
 
@@ -125,7 +125,7 @@ endif
 if count(g:vimified_packages, 'js')
     Bundle 'kchmck/vim-coffee-script'
 	au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
-	au BufNewFile,BufReadPost *.coffee setl tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+	au BufNewFile,BufReadPost *.coffee setl tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 endif
 " }}}
 
@@ -287,11 +287,11 @@ set completeopt=longest,menuone,preview
 
 " White characters {{{
 set autoindent
-set tabstop=4
-set softtabstop=4
+set tabstop=2
+set softtabstop=2
 set textwidth=80
-set shiftwidth=4
-set noexpandtab
+set shiftwidth=2
+set expandtab
 set wrap
 set formatoptions=qrn1
 set colorcolumn=+1
