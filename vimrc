@@ -431,6 +431,7 @@ vmap <C-Down> ]egv
 
 set foldlevelstart=0
 set foldmethod=syntax
+set nofoldenable
 
 " Space to toggle folds.
 nnoremap <space> za
