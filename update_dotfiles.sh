@@ -40,14 +40,14 @@ fi
 echo "Linking $PWD/zshrc $HOME/.zshrc"
 ln -s $PWD/zshrc $HOME/.zshrc
 
-if [ -L $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme ]; then
-  echo "Removing $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme"
+if [ -L $HOME/.oh-my-zsh/themes/whoshallsucceed.zsh-theme ]; then
+  echo "Removing $HOME/.oh-my-zsh/themes/whoshallsucceed.zsh-theme"
   rm $HOME/.zshrc
-elif [ -f $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme ]; then
-  echo "Backup $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme in $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme.orig"
-  mv $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme.orig
+elif [ -f $HOME/.oh-my-zsh/themes/whoshallsucceed.zsh-theme ]; then
+  echo "Backup $HOME/.oh-my-zsh/themes/whoshallsucceed.zsh-theme in $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme.orig"
+  mv $HOME/.oh-my-zsh/themes/whoshallsucceed.zsh-theme $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme.orig
 fi
-echo "Linking $PWD/.oh-my-zsh/themes/whoshallsuceed.zsh-theme $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme"
-ln -s $PWD/.oh-my-zsh/themes/whoshallsuceed.zsh-theme $HOME/.oh-my-zsh/themes/whoshallsuceed.zsh-theme
+echo "Linking $PWD/.oh-my-zsh/themes/whoshallsucceed.zsh-theme $HOME/.oh-my-zsh/themes/whoshallsucceed.zsh-theme"
+ln -s $PWD/.oh-my-zsh/themes/whoshallsucceed.zsh-theme $HOME/.oh-my-zsh/themes/whoshallsucceed.zsh-theme
 
 echo "Links created."
