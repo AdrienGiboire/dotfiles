@@ -22,7 +22,7 @@ endif
 " Use this variable inside your local configuration to declare
 " which package you would like to include
 if ! exists('g:vimified_packages')
-    let g:vimified_packages = ['general', 'fancy', 'coding', 'ruby', 'html', 'css', 'js', 'color']
+    let g:vimified_packages = ['general', 'fancy', 'ruby', 'html', 'js', 'color']
 endif
 " }}}
 
@@ -40,22 +40,9 @@ if count(g:vimified_packages, 'general')
     Bundle "mileszs/ack.vim"
     nnoremap <leader>a :Ack!<space>
 
-    Bundle 'matthias-guenther/hammer.vim'
-    nmap <leader>p :Hammer<cr>
-
-    Bundle 'tsaleh/vim-align'
-    Bundle 'tpope/vim-endwise'
-    Bundle 'tpope/vim-repeat'
-    Bundle 'tpope/vim-speeddating'
-    Bundle 'tpope/vim-surround'
-    Bundle 'tpope/vim-unimpaired'
-    Bundle 'kana/vim-textobj-user'
-
-    Bundle 'michaeljsmith/vim-indent-object'
-    let g:indentobject_meaningful_indentation = ["haml", "sass", "python", "yaml", "markdown"]
-
-    Bundle 'kien/ctrlp.vim'
-    Bundle 'vim-scripts/scratch.vim'
+    Bundle 'git://git.wincent.com/command-t.git'
+    map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+    map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
 endif
 " }}}
 
@@ -67,46 +54,10 @@ if count(g:vimified_packages, 'fancy')
 endif
 " }}}
 
-" _. OS {{{
-if count(g:vimified_packages, 'os')
-    Bundle 'zaiste/tmux.vim'
-    Bundle 'benmills/vimux'
-    map <Leader>rp :PromptVimTmuxCommand<CR>
-    map <Leader>rl :RunLastVimTmuxCommand<CR>
-
-    vmap <LocalLeader>rs "vy :call RunVimTmuxCommand(@v . "\n", 0)<CR>
-    nmap <LocalLeader>rs vip<LocalLeader>rs<CR>
-endif
-" }}}
-
-" _. Coding {{{
-
-if count(g:vimified_packages, 'coding')
-    Bundle 'majutsushi/tagbar'
-    Bundle 'gregsexton/gitv'
-
-	Bundle 'sjl/splice.vim', {'rtp': '~/.vim/bundle/splice.vim/'}
-
-    Bundle 'tpope/vim-fugitive'
-    nmap <leader>g :Ggrep
-    " ,f for global git serach for word under the cursor (with highlight)
-    nmap <leader>f :let @/="\\<<C-R><C-W>\\>"<CR>:set hls<CR>:silent Ggrep -w "<C-R><C-W>"<CR>:ccl<CR>:cw<CR><CR>
-    " same in visual mode
-    :vmap <leader>f y:let @/=escape(@", '\\[]$^*.')<CR>:set hls<CR>:silent Ggrep -F "<C-R>=escape(@", '\\"#')<CR>"<CR>:ccl<CR>:cw<CR><CR>
-
-    " --
-
-    autocmd FileType gitcommit set tw=68 spell
-endif
-" }}}
-
 " _. Ruby {{{
 if count(g:vimified_packages, 'ruby')
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'tpope/vim-rails'
-    Bundle 'nelstrom/vim-textobj-rubyblock'
-    Bundle 'ecomba/vim-ruby-refactoring'
-
     autocmd User Rails set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
 endif
 " }}}
@@ -118,41 +69,18 @@ if count(g:vimified_packages, 'html')
 endif
 " }}}
 
-" _. CSS {{{
-" }}}
-
 " _. JS {{{
 if count(g:vimified_packages, 'js')
     Bundle 'kchmck/vim-coffee-script'
-	au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
-	au BufNewFile,BufReadPost *.coffee setl tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-endif
-" }}}
-
-" _. Clojure {{{
-if count(g:vimified_packages, 'clojure')
-    Bundle 'zaiste/VimClojure'
-
-    let vimclojure#HighlightBuiltins=1
-    let vimclojure#ParenRainbow=0
-endif
-" }}}
-
-" _. Haskell {{{
-if count(g:vimified_packages, 'haskell')
-    Bundle 'Twinside/vim-syntax-haskell-cabal'
-    Bundle 'lukerandall/haskellmode-vim'
-
-    au BufEnter *.hs compiler ghc
-
-    let g:ghc = "/usr/local/bin/ghc"
-    let g:haddock_browser = "open"
+    au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+    au BufNewFile,BufReadPost *.coffee setl tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab
 endif
 " }}}
 
 " _. Color {{{
 if count(g:vimified_packages, 'color')
     Bundle 'tomasr/molokai'
+    colorscheme molokai
 endif
 " }}}
 
@@ -160,7 +88,6 @@ endif
 
 " General {{{
 filetype plugin indent on
-colorscheme molokai
 set background=light
 syntax on
 
@@ -233,8 +160,6 @@ vnoremap <leader>L y:execute @@<cr>
 " Source visual selection
 nnoremap <leader>L ^vg_y:execute @@<cr>
 
-" Fast saving
-nmap <leader>ww :w!<cr>
 " Fast saving and closing current buffer without closing windows displaying the
 " buffer
 nmap <leader>wq :w!<cr>:Bclose<cr>
@@ -244,12 +169,6 @@ nmap <leader>wq :w!<cr>:Bclose<cr>
 cmap w!! w !sudo tee % >/dev/null
 
 " }}}
-
-" . abbrevs {{{
-"
-iabbrev a@ adrien@adyoulike.com
-
-" . }}}
 
 " Settings {{{
 set autoread
@@ -292,6 +211,8 @@ set numberwidth=10
 set ruler
 set shell=/bin/zsh
 set showcmd
+
+set exrc
 
 set matchtime=2
 
@@ -407,13 +328,9 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-" Easy buffer navigation
-noremap <leader>bp :bprevious<cr>
-noremap <leader>bn :bnext<cr>
-
 " Splits ,v and ,h to open new splits (vertical and horizontal)
 nnoremap <leader>v <C-w>v<C-w>l
-nnoremap <leader>s <C-w>s<C-w>j
+nnoremap <leader>h <C-w>s<C-w>j
 
 " Reselect visual block after indent/outdent
 vnoremap < <gv
