@@ -22,7 +22,7 @@ endif
 " Use this variable inside your local configuration to declare
 " which package you would like to include
 if ! exists('g:vimified_packages')
-    let g:vimified_packages = ['general', 'fancy', 'ruby', 'html', 'js', 'color']
+    let g:vimified_packages = ['general', 'ruby', 'html', 'js', 'color']
 endif
 " }}}
 
@@ -41,16 +41,39 @@ if count(g:vimified_packages, 'general')
     nnoremap <leader>a :Ack!<space>
 
     Bundle 'git://git.wincent.com/command-t.git'
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    map <leader>gr :topleft :split config/routes.rb<cr>
+    function! ShowRoutes()
+    " Requires 'scratch' plugin
+      :topleft 100 :split __Routes__
+    " Make sure Vim doesn't write __Routes__ as a file
+      :set buftype=nofile
+    " Delete everything
+      :normal 1GdG
+    " Put routes output in buffer
+      :0r! rake -s routes
+    " Size window to number of lines (1 plus rake output length)
+      :exec ":normal " . line("$") . "_ "
+    " Move cursor to bottom
+      :normal 1GG
+    " Delete empty trailing line
+      :normal dd
+    endfunction
+    map <leader>gR :call ShowRoutes()<cr>
+    map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
+    map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
+    map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
+    map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
+    map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
+    map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
+    map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets/sass<cr>
+    map <leader>gf :CommandTFlush<cr>\|:CommandT features<cr>
+    map <leader>gg :topleft 100 :split Gemfile<cr>
+    map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
     map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
     map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
-endif
-" }}}
-
-" _. Fancy {{{
-if count(g:vimified_packages, 'fancy')
-    Bundle 'Lokaltog/vim-powerline'
-    let g:Powerline_symbols = 'fancy'
-    let g:Powerline_cache_enabled = 1
 endif
 " }}}
 
