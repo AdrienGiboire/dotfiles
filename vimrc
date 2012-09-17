@@ -102,8 +102,8 @@ endif
 
 " _. Color {{{
 if count(g:vimified_packages, 'color')
-    Bundle 'tomasr/molokai'
-    colorscheme molokai
+    Bundle 'w0ng/vim-hybrid'
+    colorscheme hybrid
 endif
 " }}}
 
@@ -116,6 +116,8 @@ syntax on
 
 " Set 5 lines to the cursor - when moving vertically
 set scrolloff=5
+
+set switchbuf=useopen
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
