@@ -350,11 +350,11 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-" Quick Windows Navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+" Easy splitted window navigation
+noremap <C-h>  <C-w>h
+noremap <C-j>  <C-w>j
+noremap <C-k>  <C-w>k
+noremap <C-l>  <C-w>l
 
 " Splits ,v and ,h to open new splits (vertical and horizontal)
 nnoremap <leader>v <C-w>v<C-w>l
