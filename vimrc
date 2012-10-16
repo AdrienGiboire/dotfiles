@@ -234,6 +234,7 @@ set shell=/bin/zsh
 set showcmd
 
 set exrc
+set secure
 
 set matchtime=2
 
