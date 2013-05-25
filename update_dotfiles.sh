@@ -20,16 +20,6 @@ fi
 echo "Linking $PWD/githelpers $HOME/.githelpers"
 ln -s $PWD/githelpers $HOME/.githelpers
 
-if [ -L $HOME/.vimrc ]; then
-  echo "Removing $HOME/.vimrc"
-  rm $HOME/.vimrc
-elif [ -f $HOME/.vimrc ]; then
-  echo "Backup $HOME/.vimrc in $HOME/.vimrc.orig"
-  mv $HOME/.vimrc $HOME/.vimrc.orig
-fi
-echo "Linking $PWD/vimrc $HOME/.vimrc"
-ln -s $PWD/vimrc $HOME/.vimrc
-
 if [ -L $HOME/.zshrc ]; then
   echo "Removing $HOME/.zshrc"
   rm $HOME/.zshrc
