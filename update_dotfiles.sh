@@ -50,15 +50,15 @@ fi
 echo "Linking $PWD/zshenv /etc/zsh/zshenv"
 ln -s $PWD/zshenv /etc/zsh/zshenv
 
-if [ -L /etc/zsh/dir_colors ]; then
-  echo "Removing /etc/zsh/dir_colors"
-  rm /etc/zsh/dir_colors
-elif [ -f /etc/zsh/dir_colors ]; then
-  echo "Backup /etc/zsh/dir_colors in /etc/zsh/dir_colors.orig"
-  mv /etc/zsh/dir_colors /etc/zsh/dir_colors.orig
+if [ -L /etc/dir_colors ]; then
+  echo "Removing /etc/dir_colors"
+  rm /etc/dir_colors
+elif [ -f /etc/dir_colors ]; then
+  echo "Backup /etc/dir_colors in /etc/dir_colors.orig"
+  mv /etc/dir_colors /etc/dir_colors.orig
 fi
-echo "Linking $PWD/dir_colors /etc/zsh/dir_colors"
-ln -s $PWD/dir_colors /etc/zsh/dir_colors
+echo "Linking $PWD/dir_colors /etc/dir_colors"
+ln -s $PWD/dir_colors /etc/dir_colors
 
 if [ -L /etc/zsh/zshrc ]; then
   echo "Removing /etc/zsh/zshrc"
