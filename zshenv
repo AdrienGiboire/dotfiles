@@ -27,3 +27,13 @@ umask 022
 
 # De la couleur pour grep
 export GREP_OPTIONS='--color=auto'
+
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+
+
+# NVM
+if [ -s ~/.nvm/nvm.sh ]; then
+	NVM_DIR=~/.nvm
+	source ~/.nvm/nvm.sh
+fi

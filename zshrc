@@ -30,64 +30,6 @@ alias md='mkdir'
 alias rd='rmdir'
 alias upgrade='apt-get update && apt-get upgrade && apt-get clean'
 
-
-#######################################
-# 2. Prompt et définition des touches #
-#######################################
-
-# Exemple : ma touche HOME, cf  man termcap, est codifiee K1 (upper left
-# key  on keyboard)  dans le  /etc/termcap.  En me  referant a  l'entree
-# correspondant a mon terminal (par exemple 'linux') dans ce fichier, je
-# lis :  K1=\E[1~, c'est la sequence  de caracteres qui sera  envoyee au
-# shell. La commande bindkey dit simplement au shell : a chaque fois que
-# tu rencontres telle sequence de caractere, tu dois faire telle action.
-# La liste des actions est disponible dans "man zshzle".
-
-# Correspondance touches-fonction
-bindkey ''    beginning-of-line       # Home
-bindkey "\e[1~" beginning-of-line
-bindkey "\e[H"  beginning-of-line
-bindkey ''    end-of-line             # End
-bindkey "\e[4~" end-of-line
-bindkey "\e[F"  end-of-line
-bindkey ''    delete-char             # Del
-bindkey '[3~' delete-char
-bindkey '[2~' overwrite-mode          # Insert
-bindkey '[5~' history-search-backward # PgUp
-bindkey '[6~' history-search-forward  # PgDn
-
-# Prompt couleur (la couleur n'est pas la même pour le root et
-# pour les simples utilisateurs)
-if [ "`id -u`" -eq 0 ]; then
-  export PS1="%{[36;1m%}%T %{[34m%}%n%{[33m%}@%{[37m%}%m %{[32m%}%~ %{[33m%}%#%{[0m%} "
-else
-  export PS1="%{[36;1m%}%T %{[31m%}%n%{[33m%}@%{[37m%}%m %{[32m%}%~ %{[33m%}%#%{[0m%} "
-fi
-
-# Prise en charge des touches [début], [fin] et autres
-typeset -A key
-
-key[Home]=${terminfo[khome]}
-key[End]=${terminfo[kend]}
-key[Insert]=${terminfo[kich1]}
-key[Delete]=${terminfo[kdch1]}
-key[Up]=${terminfo[kcuu1]}
-key[Down]=${terminfo[kcud1]}
-key[Left]=${terminfo[kcub1]}
-key[Right]=${terminfo[kcuf1]}
-key[PageUp]=${terminfo[kpp]}
-key[PageDown]=${terminfo[knp]}
-
-[[ -n "${key[Home]}"    ]]  && bindkey  "${key[Home]}"    beginning-of-line
-[[ -n "${key[End]}"     ]]  && bindkey  "${key[End]}"     end-of-line
-[[ -n "${key[Insert]}"  ]]  && bindkey  "${key[Insert]}"  overwrite-mode
-[[ -n "${key[Delete]}"  ]]  && bindkey  "${key[Delete]}"  delete-char
-[[ -n "${key[Up]}"      ]]  && bindkey  "${key[Up]}"      up-line-or-history
-[[ -n "${key[Down]}"    ]]  && bindkey  "${key[Down]}"    down-line-or-history
-[[ -n "${key[Left]}"    ]]  && bindkey  "${key[Left]}"    backward-char
-[[ -n "${key[Right]}"   ]]  && bindkey  "${key[Right]}"   forward-char
-
-
 # Titre de la fenêtre d'un xterm
 case $TERM in
    xterm*)
@@ -149,7 +91,7 @@ setopt nullglob
 #                   de la liste
 # 2ème tabulation : complète avec le 2ème item de la liste, etc...
 # Si vous voulez ce schéma, décommentez la ligne suivante :
-setopt menu_complete
+#setopt menu_complete
 
 # Schéma C :
 # 1ère tabulation : complète jusqu'au bout de la partie commune et
@@ -242,6 +184,11 @@ zstyle ':completion:*' use-compctl false
 
 autoload -U compinit
 compinit
+
+autoload -U promptinit
+promptinit
+prompt adam2
+
 
 # Le logiciel autojump <https://github.com/joelthelion/autojump> fournit un
 # moyen d'accéder rapidement aux répertoires fréquemment visités, en tapant
