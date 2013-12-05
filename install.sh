@@ -1,14 +1,14 @@
 #!/usr/env sh
 
-INSTALLDIR=$PWD
+INSTALLDIR=$PWD/dotfiles
 
 create_symlinks () {
   if [ ! -f ~/.vim ]; then
-    ln -sfn $INSTALLDIR/dotfiles/ ~/.vim
+    ln -sfn $INSTALLDIR/ ~/.vim
   fi
 
   if [ ! -f ~/.vimrc ]; then
-    ln -sfn $INSTALLDIR/dotfiles/vimrc ~/.vimrc
+    ln -sfn $INSTALLDIR/vimrc ~/.vimrc
   fi
 }
 
@@ -24,22 +24,23 @@ if [ "$?" != "0" ]; then
   exit 1
 fi
 
-if [ ! -d "$INSTALLDIR/dotfiles" ]; then
+if [ ! -d "$INSTALLDIR" ]; then
   echo "cloning repository."
   git clone git://github.com/AdrienGiboire/dotfiles.git
   create_symlinks
-  cd $INSTALLDIR/dotfiles
+  cd $INSTALLDIR
 
 else
   echo "updating repository."
-  cd $INSTALLDIR/dotfiles
+  cd $INSTALLDIR
   git pull origin master
   create_symlinks
 fi
 
 if [ -d "bundle" ]; then
   echo "creating bundle and backup directories"
-  mkdir -p bundle tmp/backup tmp/swap tmp/undo
+  mkdir bundle
+  mkdir -p tmp/backup tmp/swap tmp/undo
 fi
 
 if [ ! -d "bundle/vundle" ]; then
