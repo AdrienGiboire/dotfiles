@@ -26,8 +26,6 @@ let g:ctrlp_working_path_mode = ''
 " }}}
 
 " _. Color {{{
-Bundle 'w0ng/vim-hybrid'
-colorscheme hybrid
 " }}}
 
 " }}}
