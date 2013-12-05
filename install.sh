@@ -4,11 +4,11 @@ INSTALLDIR=$PWD
 
 create_symlinks () {
   if [ ! -f ~/.vim ]; then
-    ln -sfn $INSTALLDIR/dotfiles/vim ~/.vim
+    ln -sfn $INSTALLDIR/dotfiles/ ~/.vim
   fi
 
   if [ ! -f ~/.vimrc ]; then
-    ln -sfn $INSTALLDIR/dotfiles/vim/vimrc ~/.vimrc
+    ln -sfn $INSTALLDIR/dotfiles/vimrc ~/.vimrc
   fi
 }
 
