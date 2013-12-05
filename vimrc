@@ -21,21 +21,7 @@ nnoremap <leader>a :Ack!<space>
 Bundle "kien/ctrlp.vim"
 " }}}
 
-" _. Ruby {{{
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-rails'
-autocmd User Rails set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
-" }}}
-
-" _. HTML {{{
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-markdown'
-" }}}
-
 " _. JS {{{
-Bundle 'kchmck/vim-coffee-script'
-au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
-au BufNewFile,BufReadPost *.coffee setl tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab
 " }}}
 
 " _. Color {{{
@@ -45,6 +31,8 @@ colorscheme hybrid
 
 " }}}
 
+" SETTINGS {{{
+
 " General {{{
 filetype plugin indent on
 set background=dark
@@ -52,12 +40,6 @@ syntax on
 
 " Set 5 lines to the cursor - when moving vertically
 set scrolloff=5
-
-set switchbuf=useopen
-
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
 " }}}
 
 " Mappings {{{
@@ -115,24 +97,14 @@ cnoremap <c-e> <end>
 " Fast saving and closing current buffer without closing windows displaying the
 " buffer
 nmap <leader>wq :w!<cr>:Bclose<cr>
-
-" w!! to write a file as sudo
-" stolen from Steve Losh
-cmap w!! w !sudo tee % >/dev/null
-
 " }}}
 
-" Settings {{{
-set autoread
+" Others {{{
 set backspace=indent,eol,start
-set binary
-set cinoptions=:0,(s,u0,U1,g0,t0
-set completeopt=menuone,preview
 set encoding=utf-8
 set hidden
 set history=1000
 set incsearch
-set laststatus=2
 set list
 
 set exrc
@@ -140,16 +112,6 @@ set secure
 
 " Don't redraw while executing macros
 set nolazyredraw
-
-" Disable the macvim toolbar
-set guioptions-=T
-
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-set showbreak=↪
-
-set notimeout
-set ttimeout
-set ttimeoutlen=10
 
 " _ backups {{{
 set undodir=~/.vim/tmp/undo//     " undo files
@@ -159,20 +121,11 @@ set backup
 set noswapfile
 " _ }}}
 
-set modelines=0
 set noeol
 set relativenumber
 set numberwidth=4
 set ruler
 set shell=/bin/zsh
-set showcmd
-
-set exrc
-set secure
-
-set matchtime=2
-
-set completeopt=longest,menuone,preview
 
 " White characters {{{
 set autoindent
@@ -182,37 +135,12 @@ set textwidth=80
 set shiftwidth=2
 set expandtab
 set wrap
-set formatoptions=qrn1
-set colorcolumn=+1
 " }}}
 
 set visualbell
 
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc
 set wildmenu
-
-set dictionary=/usr/share/dict/words
-" }}}
-
-" Triggers {{{
-
-" Save when losing focus
-au FocusLost    * :silent! wall
-"
-" When vimrc is edited, reload it
-autocmd! BufWritePost vimrc source ~/.vimrc
-
-" }}}
-
-" Cursorline {{{
-" Only show cursorline in the current window and in normal mode.
-augroup cline
-    au!
-    au WinLeave * set nocursorline
-    au WinEnter * set cursorline
-    " au InsertEnter * set nocursorline
-    " au InsertLeave * set cursorline
-augroup END
 " }}}
 
 " Trailing whitespace {{{
@@ -289,12 +217,6 @@ nnoremap <leader>h <C-w>s<C-w>j
 vnoremap < <gv
 vnoremap > >gv
 
-" Bubbling lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
 " }}}
 
 " . folding {{{
@@ -307,65 +229,9 @@ set nofoldenable
 nnoremap <space> za
 vnoremap <space> za
 
-" Make zO recursively open whatever top level fold we're in, no matter where the
-" cursor happens to be.
-nnoremap zO zCzO
-
 " Use ,z to "focus" the current fold.
 nnoremap <leader>z zMzvzz
 
-function! MyFoldText() " {{{
-    let line = getline(v:foldstart)
-
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
-
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-endfunction " }}}
-set foldtext=MyFoldText()
-
-" }}}
-
-" Quick editing {{{
-
-nnoremap <leader>ev <C-w>s<C-w>j:e $MYVIMRC<cr>
-nnoremap <leader>es <C-w>s<C-w>j:e ~/.vim/snippets/<cr>
-nnoremap <leader>eg <C-w>s<C-w>j:e ~/.gitconfig<cr>
-nnoremap <leader>ez <C-w>s<C-w>j:e ~/.zshrc<cr>
-nnoremap <leader>et <C-w>s<C-w>j:e ~/.tmux.conf<cr>
-
-" showmarks
-let g:showmarks_enable = 1
-hi! link ShowMarksHLl LineNr
-hi! link ShowMarksHLu LineNr
-hi! link ShowMarksHLo LineNr
-hi! link ShowMarksHLm LineNr
-
-" }}}
-
-" _ Vim {{{
-augroup ft_vim
-    au!
-
-    au FileType vim setlocal foldmethod=marker
-    au FileType help setlocal textwidth=78
-    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
-augroup END
-" }}}
-
-" EXTENSIONS {{{
-
-" _. Gist {{{
-" Send visual selection to gist.github.com as a private, filetyped Gist
-" Requires the gist command line too (brew install gist)
-vnoremap <leader>G :w !gist -p -t %:e \| pbcopy<cr>
 " }}}
 
 " }}}
@@ -381,25 +247,6 @@ vnoremap ar a[
 " }}}
 
 " Buffer Handling {{{
-" Visit http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
-" to learn more about :Bclose
-
-" Delete buffer while keeping window layout (don't close buffer's windows).
-" Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
-if v:version < 700 || exists('loaded_bclose') || &cp
-  finish
-endif
-let loaded_bclose = 1
-if !exists('bclose_multiple')
-  let bclose_multiple = 1
-endif
-
-" Display an error message.
-function! s:Warn(msg)
-  echohl ErrorMsg
-  echomsg a:msg
-  echohl NONE
-endfunction
 
 " Command ':Bclose' executes ':bd' to delete buffer in current window.
 " The window will show the alternate buffer (Ctrl-^) if it exists,
@@ -457,10 +304,4 @@ endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 nnoremap <silent> <Leader>bd :Bclose<CR>
 
-" }}}
-
-" Load addidional configuration (ie to overwrite shorcuts) {{{
-if filereadable(expand("~/.vim/after.vimrc"))
-  source ~/.vim/after.vimrc
-endif
 " }}}
