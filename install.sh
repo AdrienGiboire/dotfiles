@@ -12,8 +12,6 @@ create_symlinks () {
   fi
 }
 
-vim +BundleInstall +qall 2>/dev/null
-
 which git > /dev/null
 if [ "$?" != "0" ]; then
   echo "git is missing."
