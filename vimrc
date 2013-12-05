@@ -2,29 +2,8 @@
 set nocompatible
 filetype off
 
-" Load external configuration before anything else {{{
-if filereadable(expand("~/.vim/before.vimrc"))
-  source ~/.vim/before.vimrc
-endif
-" }}}
-
 let mapleader = ","
 let maplocalleader = '\'
-
-" Local vimrc configuration {{{
-let s:localrc = expand($HOME . '/.vim/local.vimrc')
-if filereadable(s:localrc)
-    exec ':so ' . s:localrc
-endif
-" }}}
-
-" PACKAGE LIST {{{
-" Use this variable inside your local configuration to declare
-" which package you would like to include
-if ! exists('g:vimified_packages')
-    let g:vimified_packages = ['general', 'ruby', 'html', 'js', 'color']
-endif
-" }}}
 
 " VUNDLE {{{
 set rtp+=~/.vim/bundle/vundle/
@@ -36,75 +15,30 @@ Bundle 'gmarik/vundle'
 " PACKAGES {{{
 
 " _. General {{{
-if count(g:vimified_packages, 'general')
-    Bundle "mileszs/ack.vim"
-    nnoremap <leader>a :Ack!<space>
-
-    Bundle 'git://git.wincent.com/command-t.git'
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    map <leader>gr :topleft :split config/routes.rb<cr>
-    function! ShowRoutes()
-    " Requires 'scratch' plugin
-      :topleft 100 :split __Routes__
-    " Make sure Vim doesn't write __Routes__ as a file
-      :set buftype=nofile
-    " Delete everything
-      :normal 1GdG
-    " Put routes output in buffer
-      :0r! rake -s routes
-    " Size window to number of lines (1 plus rake output length)
-      :exec ":normal " . line("$") . "_ "
-    " Move cursor to bottom
-      :normal 1GG
-    " Delete empty trailing line
-      :normal dd
-    endfunction
-    map <leader>gR :call ShowRoutes()<cr>
-    map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-    map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-    map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-    map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
-    map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-    map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
-    map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets/sass<cr>
-    map <leader>gf :CommandTFlush<cr>\|:CommandT features<cr>
-    map <leader>gg :topleft 100 :split Gemfile<cr>
-    map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
-    map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-    map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
-endif
+Bundle "mileszs/ack.vim"
+nnoremap <leader>a :Ack!<space>
 " }}}
 
 " _. Ruby {{{
-if count(g:vimified_packages, 'ruby')
-    Bundle 'vim-ruby/vim-ruby'
-    Bundle 'tpope/vim-rails'
-    autocmd User Rails set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
-endif
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-rails'
+autocmd User Rails set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
 " }}}
 
 " _. HTML {{{
-if count(g:vimified_packages, 'html')
-    Bundle 'tpope/vim-haml'
-    Bundle 'tpope/vim-markdown'
-endif
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-markdown'
 " }}}
 
 " _. JS {{{
-if count(g:vimified_packages, 'js')
-    Bundle 'kchmck/vim-coffee-script'
-    au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
-    au BufNewFile,BufReadPost *.coffee setl tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab
-endif
+Bundle 'kchmck/vim-coffee-script'
+au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+au BufNewFile,BufReadPost *.coffee setl tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab
 " }}}
 
 " _. Color {{{
-if count(g:vimified_packages, 'color')
-    Bundle 'w0ng/vim-hybrid'
-    colorscheme hybrid
-endif
+Bundle 'w0ng/vim-hybrid'
+colorscheme hybrid
 " }}}
 
 " }}}
@@ -127,7 +61,7 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " Mappings {{{
 
 " You want to be part of the gurus? Time to get in serious stuff and stop using
-" arrow keys.
+" arrow keys. Learn the Hard Way!
 noremap <left> <nop>
 noremap <up> <nop>
 noremap <down> <nop>
@@ -175,11 +109,6 @@ command! W :w
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
-
-" Source current line
-vnoremap <leader>L y:execute @@<cr>
-" Source visual selection
-nnoremap <leader>L ^vg_y:execute @@<cr>
 
 " Fast saving and closing current buffer without closing windows displaying the
 " buffer
@@ -276,8 +205,8 @@ augroup cline
     au!
     au WinLeave * set nocursorline
     au WinEnter * set cursorline
-    au InsertEnter * set nocursorline
-    au InsertLeave * set cursorline
+    " au InsertEnter * set nocursorline
+    " au InsertLeave * set cursorline
 augroup END
 " }}}
 
@@ -326,15 +255,6 @@ nnoremap g, g,zz
 
 " Open a Quickfix window for the last search.
 nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-
-" Highlight word {{{
-
-nnoremap <silent> <leader>hh :execute 'match InterestingWord1 /\<<c-r><c-w>\>/'<cr>
-nnoremap <silent> <leader>h1 :execute 'match InterestingWord1 /\<<c-r><c-w>\>/'<cr>
-nnoremap <silent> <leader>h2 :execute '2match InterestingWord2 /\<<c-r><c-w>\>/'<cr>
-nnoremap <silent> <leader>h3 :execute '3match InterestingWord3 /\<<c-r><c-w>\>/'<cr>
-
-" }}}
 
 " }}}
 
