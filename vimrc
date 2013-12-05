@@ -17,6 +17,8 @@ Bundle 'gmarik/vundle'
 " _. General {{{
 Bundle "mileszs/ack.vim"
 nnoremap <leader>a :Ack!<space>
+
+Bundle "kien/ctrlp.vim"
 " }}}
 
 " _. Ruby {{{
