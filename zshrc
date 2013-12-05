@@ -1,7 +1,3 @@
-# /etc/zsh/zshrc ou ~/.zshrc
-# Fichier de configuration principal de zsh, lu au lancement des shells interactifs
-# (et non des shells d'interprétation de fichier)
-
 alias ls='ls -G'
 alias ll='ls -l'
 alias la='ls -a'
@@ -18,7 +14,10 @@ alias upgrade='apt-get update && apt-get upgrade && apt-get clean'
 alias tomstart='/usr/local/bin/apache-tomcat-7.0.41/bin/startup.sh'
 alias tomstop='/usr/local/bin/apache-tomcat-7.0.41/bin/shutdown.sh'
 
+# PolySpot
 alias cm='cd /usr/local/bin/apache-tomcat-7.0.41/webapps/customer/service/gui/'
+alias sg='cd /usr/local/bin/apache-tomcat-7.0.41/webapps/schneider/gui/'
+alias acm='cd /usr/local/bin/apache-tomcat-7.0.41/webapps/customer/service/admin-customer-matrix/src/main/webapp/gui'
 
 # Le logiciel autojump <https://github.com/joelthelion/autojump> fournit un
 # moyen d'accéder rapidement aux répertoires fréquemment visités, en tapant
@@ -27,6 +26,7 @@ alias cm='cd /usr/local/bin/apache-tomcat-7.0.41/webapps/customer/service/gui/'
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 export PATH=/usr/local/share/npm/bin:$PATH
+export PATH=/Users/adrien/android-sdk/sdk/platform-tools:$PATH
 
 autoload -Uz promptinit
 promptinit
