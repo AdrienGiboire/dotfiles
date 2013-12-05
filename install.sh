@@ -39,7 +39,7 @@ fi
 
 if [ -d "bundle" ]; then
   echo "creating bundle and backup directories"
-  mdkir -p bundle tmp/backup tmp/swap tmp/undo
+  mkdir -p bundle tmp/backup tmp/swap tmp/undo
 fi
 
 if [ ! -d "bundle/vundle" ]; then
@@ -47,4 +47,4 @@ if [ ! -d "bundle/vundle" ]; then
   git clone https://github.com/gmarik/vundle.git bundle/vundle
 fi
 
-vim +BundleInstall +qall 2>/dev/null
+vim +BundleInstall +qall 2> /dev/null
