@@ -159,7 +159,7 @@ set noswapfile
 set modelines=0
 set noeol
 set relativenumber
-set numberwidth=10
+set numberwidth=4
 set ruler
 set shell=/bin/zsh
 set showcmd
