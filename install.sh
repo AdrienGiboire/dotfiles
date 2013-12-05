@@ -37,7 +37,7 @@ else
   create_symlinks
 fi
 
-if [ -d "bundle" ]; then
+if [ ! -d "bundle" ]; then
   echo "creating bundle and backup directories"
   mkdir bundle
   mkdir -p tmp/backup tmp/swap tmp/undo
