@@ -47,7 +47,7 @@ colorscheme hybrid
 
 " General {{{
 filetype plugin indent on
-set background=light
+set background=dark
 syntax on
 
 " Set 5 lines to the cursor - when moving vertically
@@ -134,6 +134,9 @@ set history=1000
 set incsearch
 set laststatus=2
 set list
+
+set exrc
+set secure
 
 " Don't redraw while executing macros
 set nolazyredraw
