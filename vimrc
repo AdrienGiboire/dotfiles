@@ -107,6 +107,7 @@ set hidden
 set history=1000
 set incsearch
 set list
+set listchars-=trail:⌴
 
 set exrc
 set secure
