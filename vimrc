@@ -19,6 +19,7 @@ Bundle "mileszs/ack.vim"
 nnoremap <leader>a :Ack!<space>
 
 Bundle "kien/ctrlp.vim"
+let g:ctrlp_working_path_mode = ''
 " }}}
 
 " _. JS {{{
