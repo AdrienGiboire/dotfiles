@@ -20,6 +20,15 @@ nnoremap <leader>a :Ack!<space>
 
 Bundle "kien/ctrlp.vim"
 let g:ctrlp_working_path_mode = ''
+
+Bundle "bling/vim-airline"
+" Nice looking powerline symbols
+let g:airline_powerline_fonts = 1
+" Smarter tab line
+let g:airline#extensions#tabline#enabled = 1
+" Separators for tab line
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 " }}}
 
 " _. JS {{{
