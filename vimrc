@@ -16,16 +16,15 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 " }}}
 
-" PACKAGES {{{
-
-" _. General {{{
+" GENERAL {{{
 Bundle "mileszs/ack.vim"
 nnoremap <leader>a :Ack!<space>
 
 Bundle "kien/ctrlp.vim"
 let g:ctrlp_working_path_mode = ''
+" }}}
 
-Bundle "bling/vim-airline"
+" UI {{{
 " Nice looking powerline symbols
 let g:airline_powerline_fonts = 1
 " Smarter tab line
@@ -35,26 +34,35 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 " }}}
 
-" _. JS {{{
+Bundle "bling/vim-airline"
 " }}}
 
-" _. Color {{{
+" HTML {{{
+Bundle 'plasticboy/vim-markdown'
 " }}}
 
+" CSS {{{
+Bundle 'groenewege/vim-less'
 " }}}
 
-" SETTINGS {{{
+" JS {{{
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'pangloss/vim-javascript'
+Bundle 'alfredodeza/jacinto.vim'
 
-" General {{{
+Bundle 'Shutnik/jshint2.vim'
+" Lint JavaScript files after reading it:
+let jshint2_read = 1
+" Lint JavaScript files after saving it:
+let jshint2_save = 1
+" }}}
+
 filetype plugin indent on
 set background=dark
 syntax on
 
 " Set 5 lines to the cursor - when moving vertically
 set scrolloff=5
-" }}}
-
-" Mappings {{{
 
 " You want to be part of the gurus? Time to get in serious stuff and stop using
 " arrow keys. Learn the Hard Way!
@@ -109,9 +117,7 @@ cnoremap <c-e> <end>
 " Fast saving and closing current buffer without closing windows displaying the
 " buffer
 nmap <leader>wq :w!<cr>:Bclose<cr>
-" }}}
 
-" Others {{{
 set backspace=indent,eol,start
 set encoding=utf-8
 set hidden
