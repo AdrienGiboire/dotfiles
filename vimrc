@@ -26,13 +26,9 @@ let g:ctrlp_working_path_mode = ''
 
 " UI {{{
 " Nice looking powerline symbols
-let g:airline_powerline_fonts = 1
-" Smarter tab line
-let g:airline#extensions#tabline#enabled = 1
-" Separators for tab line
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-" }}}
+call g:check_defined('g:airline_left_sep', '')
+call g:check_defined('g:airline_right_sep', '')
+call g:check_defined('g:airline_branch_prefix', '')
 
 Bundle "bling/vim-airline"
 " }}}
