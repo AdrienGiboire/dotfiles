@@ -11,18 +11,18 @@ alias df='df --human-readable'
 alias du='du --human-readable'
 alias upgrade='apt-get update && apt-get upgrade && apt-get clean'
 
-alias tomstart='/usr/local/bin/apache-tomcat-7.0.41/bin/startup.sh'
+# PolySpot
+export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home'
+export CATALINA_OPTS='-Dpolyspot.home=/Users/Adrien/code/polyspot/standaloneHome -Dinstance.id=Default_matrix_ui'
+alias tomstart='/usr/local/bin/apache-tomcat-7.0.41/bin/startup.sh && tail -f /usr/local/bin/apache-tomcat-7.0.41/logs/catalina.out ~/code/polyspot/standaloneHome/logs/matrix.log'
 alias tomstop='/usr/local/bin/apache-tomcat-7.0.41/bin/shutdown.sh'
 
-# PolySpot
 alias cm='cd /usr/local/bin/apache-tomcat-7.0.41/webapps/customer/service/gui/'
 alias sg='cd /usr/local/bin/apache-tomcat-7.0.41/webapps/schneider/gui/'
-alias acm='cd /usr/local/bin/apache-tomcat-7.0.41/webapps/customer/service/admin-customer-matrix/src/main/webapp/gui'
+alias startpesl='sh /Users/Adrien/code/polyspot/polyspot-community-package-6.3.0-SNAPSHOT/bin/startall.sh && tail -f /Users/Adrien/code/polyspot/polyspot-community-package-6.3.0-SNAPSHOT/home/logs/catalina.out'
+alias stoppesl='sh /Users/Adrien/code/polyspot/polyspot-community-package-6.3.0-SNAPSHOT/bin/stopall.sh'
+alias acm='cd /Users/Adrien/code/polyspot/cm/cm-angular/sara-manager'
 
-# Le logiciel autojump <https://github.com/joelthelion/autojump> fournit un
-# moyen d'accéder rapidement aux répertoires fréquemment visités, en tapant
-# simplement �un_bout_du_nom_du_répertore"». Si vous souhaitez l'utiliser,
-# installez le paquet autojump et décommentez la ligne suivant :
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 export PATH=/usr/local/share/npm/bin:$PATH
