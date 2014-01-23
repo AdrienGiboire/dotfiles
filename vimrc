@@ -31,6 +31,13 @@ call g:check_defined('g:airline_right_sep', '')
 call g:check_defined('g:airline_branch_prefix', '')
 
 Bundle "bling/vim-airline"
+
+" Highlight current line only on focused window
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
 " }}}
 
 " HTML {{{
