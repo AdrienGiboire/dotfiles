@@ -29,6 +29,6 @@ export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=/Users/adrien/android-sdk/sdk/platform-tools:$PATH
 export PATH=/Users/Adrien/Library/Python/2.7/bin:$PATH
 
-autoload -Uz promptinit
-promptinit
-prompt adam2
+export PGDATA='/usr/local/var/postgres/data'
+
+. '/Users/Adrien/code/powerline/powerline/bindings/zsh/powerline.zsh'
