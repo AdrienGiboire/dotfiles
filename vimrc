@@ -5,6 +5,10 @@ filetype off
 let mapleader = ","
 let maplocalleader = '\'
 
+" Utils {{{
+source ~/.vim/functions/util.vim
+" }}}
+
 " VUNDLE {{{
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
