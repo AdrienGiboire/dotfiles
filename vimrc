@@ -123,6 +123,8 @@ set listchars=trail:⌴
 set exrc
 set secure
 
+set shell=zsh\ -l
+
 " Don't redraw while executing macros
 set nolazyredraw
 
@@ -138,7 +140,6 @@ set noeol
 set relativenumber
 set numberwidth=4
 set ruler
-set shell=/bin/zsh
 
 " White characters {{{
 set autoindent
