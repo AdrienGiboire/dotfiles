@@ -262,6 +262,26 @@ vnoremap ar a[
 
 " Buffer Handling {{{
 
+" Visit http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
+" to learn more about :Bclose
+
+" Delete buffer while keeping window layout (don't close buffer's windows).
+" Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
+if v:version < 700 || exists('loaded_bclose') || &cp
+  finish
+endif
+let loaded_bclose = 1
+if !exists('bclose_multiple')
+  let bclose_multiple = 1
+endif
+
+" Display an error message.
+function! s:Warn(msg)
+  echohl ErrorMsg
+  echomsg a:msg
+  echohl NONE
+endfunction
+
 " Command ':Bclose' executes ':bd' to delete buffer in current window.
 " The window will show the alternate buffer (Ctrl-^) if it exists,
 " or the previous buffer (:bp), or a blank buffer if no previous.
