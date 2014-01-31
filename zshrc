@@ -52,7 +52,7 @@ COMPLETION_WAITING_DOTS="true"
 # yyyy-mm-dd
 # HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(brew git git-flow)
+plugins=(brew git git-flow vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
