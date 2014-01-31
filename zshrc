@@ -20,6 +20,8 @@ alias c='cd ~/code'
 alias less='less --quiet'
 alias df='df --human-readable'
 alias du='du --human-readable'
+# }}}
+
 
 # PolySpot {{{
 export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home'
@@ -34,7 +36,6 @@ alias stoppesl='sh /Users/Adrien/code/polyspot/polyspot-community-package-6.3.0-
 alias acm='cd /Users/Adrien/code/polyspot/cm/cm-angular/sara-manager'
 # }}}
 
-# }}}
 
 # Uncomment following line if you want to disable command autocorrection
 # DISABLE_CORRECTION="true"
@@ -42,19 +43,9 @@ alias acm='cd /Users/Adrien/code/polyspot/cm/cm-angular/sara-manager'
 # Red dots will be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment following line if you want to  shown in the command execution time stamp
-# in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
-# yyyy-mm-dd
-# HIST_STAMPS="mm/dd/yyyy"
-
-plugins=(brew git git-flow vi-mode)
-
 source $ZSH/oh-my-zsh.sh
+
+plugins=(brew git git-flow)
 
 # User configuration
 
@@ -70,9 +61,6 @@ fi
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 export PGDATA='/usr/local/var/postgres/data'
@@ -80,3 +68,39 @@ export PGDATA='/usr/local/var/postgres/data'
 . '/Users/Adrien/code/powerline/powerline/bindings/zsh/powerline.zsh'
 
 export LANG=en_US.UTF-8
+
+# Ensures that $terminfo values are valid and updates editor information when
+# the keymap changes.
+function zle-keymap-select zle-line-init zle-line-finish {
+  # The terminal must be in application mode when ZLE is active for $terminfo
+  # values to be valid.
+  if (( ${+terminfo[smkx]} )); then
+    printf '%s' ${terminfo[smkx]}
+  fi
+  if (( ${+terminfo[rmkx]} )); then
+    printf '%s' ${terminfo[rmkx]}
+  fi
+
+  zle reset-prompt
+  zle -R
+}
+
+zle -N zle-line-init
+zle -N zle-line-finish
+zle -N zle-keymap-select
+
+bindkey -v
+
+# if mode indicator wasn't setup by theme, define default
+if [[ "$MODE_INDICATOR" == "" ]]; then
+  MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[red]%}<<%{$reset_color%}"
+fi
+
+function vi_mode_prompt_info() {
+  echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+}
+
+# define right prompt, if it wasn't defined by a theme
+if [[ "$RPS1" == "" && "$RPROMPT" == "" ]]; then
+  RPS1='$(vi_mode_prompt_info)'
+fi
