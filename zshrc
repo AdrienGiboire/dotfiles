@@ -22,21 +22,6 @@ alias df='df --human-readable'
 alias du='du --human-readable'
 # }}}
 
-
-# PolySpot {{{
-export JAVA_HOME='/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home'
-export CATALINA_OPTS='-Dpolyspot.home=/Users/Adrien/code/polyspot/standaloneHome -Dinstance.id=Default_matrix_ui'
-alias tomstart='/usr/local/bin/apache-tomcat-7.0.41/bin/startup.sh && tail -f /usr/local/bin/apache-tomcat-7.0.41/logs/catalina.out ~/code/polyspot/standaloneHome/logs/matrix.log'
-alias tomstop='/usr/local/bin/apache-tomcat-7.0.41/bin/shutdown.sh'
-
-alias cm='cd /usr/local/bin/apache-tomcat-7.0.41/webapps/customer/service/gui/'
-alias sg='cd /usr/local/bin/apache-tomcat-7.0.41/webapps/schneider/gui/'
-alias startpesl='sh /Users/Adrien/code/polyspot/polyspot-community-package-6.3.0-SNAPSHOT/bin/startall.sh && tail -f /Users/Adrien/code/polyspot/polyspot-community-package-6.3.0-SNAPSHOT/home/logs/catalina.out && tail -f /Users/Adrien/code/polyspot/polyspot-community-package-6.3.0-SNAPSHOT/home/logs/engine.log'
-alias stoppesl='sh /Users/Adrien/code/polyspot/polyspot-community-package-6.3.0-SNAPSHOT/bin/stopall.sh'
-alias acm='cd /Users/Adrien/code/polyspot/cm/cm-angular/sara-manager'
-# }}}
-
-
 # Uncomment following line if you want to disable command autocorrection
 # DISABLE_CORRECTION="true"
 
