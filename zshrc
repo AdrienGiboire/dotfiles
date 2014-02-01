@@ -7,8 +7,24 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
 
-# Aliases {{{
+# Red dots will be displayed while waiting for completion
+COMPLETION_WAITING_DOTS="true"
 
+source $ZSH/oh-my-zsh.sh
+
+plugins=(brew git git-flow)
+
+# Disable auto-correct
+unsetopt correct_all
+
+# Always work in a tmux session if tmux is installed
+if which tmux 2>&1 >/dev/null; then
+  if [ $TERM != "screen-256color" ] && [  $TERM != "screen" ]; then
+    tmux attach -t hack || tmux new -s hack; exit
+  fi
+fi
+
+# Aliases {{{
 alias ls='ls -G'
 alias ll='ls -l'
 alias la='ls -a'
@@ -21,18 +37,6 @@ alias less='less --quiet'
 alias df='df --human-readable'
 alias du='du --human-readable'
 # }}}
-
-# Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
-
-# Red dots will be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
-
-source $ZSH/oh-my-zsh.sh
-
-plugins=(brew git git-flow)
-
-# User configuration
 
 export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=/Users/adrien/android-sdk/sdk/platform-tools:$PATH
@@ -49,8 +53,6 @@ export ARCHFLAGS="-arch x86_64"
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 export PGDATA='/usr/local/var/postgres/data'
-
-. '/Users/Adrien/code/powerline/powerline/bindings/zsh/powerline.zsh'
 
 export LANG=en_US.UTF-8
 
@@ -75,17 +77,3 @@ zle -N zle-line-finish
 zle -N zle-keymap-select
 
 bindkey -v
-
-# if mode indicator wasn't setup by theme, define default
-if [[ "$MODE_INDICATOR" == "" ]]; then
-  MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[red]%}<<%{$reset_color%}"
-fi
-
-function vi_mode_prompt_info() {
-  echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
-}
-
-# define right prompt, if it wasn't defined by a theme
-if [[ "$RPS1" == "" && "$RPROMPT" == "" ]]; then
-  RPS1='$(vi_mode_prompt_info)'
-fi
