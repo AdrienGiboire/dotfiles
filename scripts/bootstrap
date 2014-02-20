@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+echo "==> Pulling latest dotfiles..."
+git pull &> /dev/null
+
+echo "==> Updating git submodules..."
+git submodule init &> /dev/null
+git submodule update &> /dev/null
+
+echo "==> Done bootstraping!"
