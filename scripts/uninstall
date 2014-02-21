@@ -29,9 +29,9 @@ fi
 echo "==> Deleting files..."
 
 for file in "${list_of_files[@]}"; do
-  if [ $verbose ]; then
+  if $verbose; then
     echo "====> Deleting $file..."
-  end
+  fi
 
   rm -fr "$file"
 done
