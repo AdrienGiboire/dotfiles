@@ -2,28 +2,11 @@
 set nocompatible
 filetype off
 
-" Load external configuration before anything else {{{
-if filereadable(expand("~/.vim/before.vimrc"))
-  source ~/.vim/before.vimrc
-endif
-" }}}
-
 let mapleader = ","
 let maplocalleader = '\'
 
-" Local vimrc configuration {{{
-let s:localrc = expand($HOME . '/.vim/local.vimrc')
-if filereadable(s:localrc)
-    exec ':so ' . s:localrc
-endif
-" }}}
-
-" PACKAGE LIST {{{
-" Use this variable inside your local configuration to declare
-" which package you would like to include
-if ! exists('g:vimified_packages')
-    let g:vimified_packages = ['general', 'ruby', 'html', 'js', 'color']
-endif
+" Utils {{{
+source ~/.vim/functions/util.vim
 " }}}
 
 " VUNDLE {{{
@@ -33,101 +16,59 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 " }}}
 
-" PACKAGES {{{
+" GENERAL {{{
+Bundle "mileszs/ack.vim"
+nnoremap <leader>a :Ack!<space>
 
-" _. General {{{
-if count(g:vimified_packages, 'general')
-    Bundle "mileszs/ack.vim"
-    nnoremap <leader>a :Ack!<space>
-
-    Bundle 'git://git.wincent.com/command-t.git'
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    map <leader>gr :topleft :split config/routes.rb<cr>
-    function! ShowRoutes()
-    " Requires 'scratch' plugin
-      :topleft 100 :split __Routes__
-    " Make sure Vim doesn't write __Routes__ as a file
-      :set buftype=nofile
-    " Delete everything
-      :normal 1GdG
-    " Put routes output in buffer
-      :0r! rake -s routes
-    " Size window to number of lines (1 plus rake output length)
-      :exec ":normal " . line("$") . "_ "
-    " Move cursor to bottom
-      :normal 1GG
-    " Delete empty trailing line
-      :normal dd
-    endfunction
-    map <leader>gR :call ShowRoutes()<cr>
-    map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-    map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-    map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-    map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
-    map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-    map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
-    map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets/sass<cr>
-    map <leader>gf :CommandTFlush<cr>\|:CommandT features<cr>
-    map <leader>gg :topleft 100 :split Gemfile<cr>
-    map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
-    map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-    map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
-endif
+Bundle "kien/ctrlp.vim"
+let g:ctrlp_working_path_mode = ''
 " }}}
 
-" _. Ruby {{{
-if count(g:vimified_packages, 'ruby')
-    Bundle 'vim-ruby/vim-ruby'
-    Bundle 'tpope/vim-rails'
-    autocmd User Rails set softtabstop=2 tabstop=2 shiftwidth=2 expandtab
-endif
+" UI {{{
+" Nice looking powerline symbols
+call g:check_defined('g:airline_left_sep', '')
+call g:check_defined('g:airline_right_sep', '')
+call g:check_defined('g:airline_branch_prefix', '')
+
+Bundle "bling/vim-airline"
+
+" Highlight current line only on focused window
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
 " }}}
 
-" _. HTML {{{
-if count(g:vimified_packages, 'html')
-    Bundle 'tpope/vim-haml'
-    Bundle 'tpope/vim-markdown'
-endif
+" HTML {{{
+Bundle 'plasticboy/vim-markdown'
 " }}}
 
-" _. JS {{{
-if count(g:vimified_packages, 'js')
-    Bundle 'kchmck/vim-coffee-script'
-    au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
-    au BufNewFile,BufReadPost *.coffee setl tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab
-endif
+" CSS {{{
+Bundle 'groenewege/vim-less'
 " }}}
 
-" _. Color {{{
-if count(g:vimified_packages, 'color')
-    Bundle 'w0ng/vim-hybrid'
-    colorscheme hybrid
-endif
+" JS {{{
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'pangloss/vim-javascript'
+Bundle 'alfredodeza/jacinto.vim'
+
+Bundle 'Shutnik/jshint2.vim'
+" Lint JavaScript files after reading it:
+let jshint2_read = 1
+" Lint JavaScript files after saving it:
+let jshint2_save = 1
 " }}}
 
-" }}}
-
-" General {{{
 filetype plugin indent on
-set background=light
+set background=dark
 syntax on
 
 " Set 5 lines to the cursor - when moving vertically
 set scrolloff=5
 
-set switchbuf=useopen
-
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" }}}
-
-" Mappings {{{
-
 " You want to be part of the gurus? Time to get in serious stuff and stop using
-" arrow keys.
+" arrow keys. Learn the Hard Way!
 noremap <left> <nop>
 noremap <up> <nop>
 noremap <down> <nop>
@@ -167,8 +108,6 @@ nmap <silent> <leader>nn :set invnumber<CR>
 nmap <silent> <leader>pp :set invpaste<CR>
 nmap <silent> <leader>ii :set invrelativenumber<CR>
 
-nmap ; :
-
 " Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
 
@@ -176,46 +115,25 @@ command! W :w
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
 
-" Source current line
-vnoremap <leader>L y:execute @@<cr>
-" Source visual selection
-nnoremap <leader>L ^vg_y:execute @@<cr>
-
 " Fast saving and closing current buffer without closing windows displaying the
 " buffer
 nmap <leader>wq :w!<cr>:Bclose<cr>
 
-" w!! to write a file as sudo
-" stolen from Steve Losh
-cmap w!! w !sudo tee % >/dev/null
-
-" }}}
-
-" Settings {{{
-set autoread
 set backspace=indent,eol,start
-set binary
-set cinoptions=:0,(s,u0,U1,g0,t0
-set completeopt=menuone,preview
 set encoding=utf-8
 set hidden
 set history=1000
 set incsearch
-set laststatus=2
 set list
+set listchars=trail:⌴
+
+set exrc
+set secure
+
+set shell=zsh\ -l
 
 " Don't redraw while executing macros
 set nolazyredraw
-
-" Disable the macvim toolbar
-set guioptions-=T
-
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-set showbreak=↪
-
-set notimeout
-set ttimeout
-set ttimeoutlen=10
 
 " _ backups {{{
 set undodir=~/.vim/tmp/undo//     " undo files
@@ -225,20 +143,10 @@ set backup
 set noswapfile
 " _ }}}
 
-set modelines=0
 set noeol
 set relativenumber
-set numberwidth=10
+set numberwidth=4
 set ruler
-set shell=/bin/zsh
-set showcmd
-
-set exrc
-set secure
-
-set matchtime=2
-
-set completeopt=longest,menuone,preview
 
 " White characters {{{
 set autoindent
@@ -248,37 +156,12 @@ set textwidth=80
 set shiftwidth=2
 set expandtab
 set wrap
-set formatoptions=qrn1
-set colorcolumn=+1
 " }}}
 
 set visualbell
 
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc
 set wildmenu
-
-set dictionary=/usr/share/dict/words
-" }}}
-
-" Triggers {{{
-
-" Save when losing focus
-au FocusLost    * :silent! wall
-"
-" When vimrc is edited, reload it
-autocmd! BufWritePost vimrc source ~/.vimrc
-
-" }}}
-
-" Cursorline {{{
-" Only show cursorline in the current window and in normal mode.
-augroup cline
-    au!
-    au WinLeave * set nocursorline
-    au WinEnter * set cursorline
-    au InsertEnter * set nocursorline
-    au InsertLeave * set cursorline
-augroup END
 " }}}
 
 " Trailing whitespace {{{
@@ -327,15 +210,6 @@ nnoremap g, g,zz
 " Open a Quickfix window for the last search.
 nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
-" Highlight word {{{
-
-nnoremap <silent> <leader>hh :execute 'match InterestingWord1 /\<<c-r><c-w>\>/'<cr>
-nnoremap <silent> <leader>h1 :execute 'match InterestingWord1 /\<<c-r><c-w>\>/'<cr>
-nnoremap <silent> <leader>h2 :execute '2match InterestingWord2 /\<<c-r><c-w>\>/'<cr>
-nnoremap <silent> <leader>h3 :execute '3match InterestingWord3 /\<<c-r><c-w>\>/'<cr>
-
-" }}}
-
 " }}}
 
 " Navigation & UI {{{
@@ -364,83 +238,21 @@ nnoremap <leader>h <C-w>s<C-w>j
 vnoremap < <gv
 vnoremap > >gv
 
-" Bubbling lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
 " }}}
 
 " . folding {{{
 
-set foldlevelstart=0
+set foldlevelstart=2
 set foldmethod=syntax
-set nofoldenable
+set foldnestmax=3
 
 " Space to toggle folds.
 nnoremap <space> za
 vnoremap <space> za
 
-" Make zO recursively open whatever top level fold we're in, no matter where the
-" cursor happens to be.
-nnoremap zO zCzO
-
 " Use ,z to "focus" the current fold.
 nnoremap <leader>z zMzvzz
 
-function! MyFoldText() " {{{
-    let line = getline(v:foldstart)
-
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
-
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-endfunction " }}}
-set foldtext=MyFoldText()
-
-" }}}
-
-" Quick editing {{{
-
-nnoremap <leader>ev <C-w>s<C-w>j:e $MYVIMRC<cr>
-nnoremap <leader>es <C-w>s<C-w>j:e ~/.vim/snippets/<cr>
-nnoremap <leader>eg <C-w>s<C-w>j:e ~/.gitconfig<cr>
-nnoremap <leader>ez <C-w>s<C-w>j:e ~/.zshrc<cr>
-nnoremap <leader>et <C-w>s<C-w>j:e ~/.tmux.conf<cr>
-
-" showmarks
-let g:showmarks_enable = 1
-hi! link ShowMarksHLl LineNr
-hi! link ShowMarksHLu LineNr
-hi! link ShowMarksHLo LineNr
-hi! link ShowMarksHLm LineNr
-
-" }}}
-
-" _ Vim {{{
-augroup ft_vim
-    au!
-
-    au FileType vim setlocal foldmethod=marker
-    au FileType help setlocal textwidth=78
-    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
-augroup END
-" }}}
-
-" EXTENSIONS {{{
-
-" _. Gist {{{
-" Send visual selection to gist.github.com as a private, filetyped Gist
-" Requires the gist command line too (brew install gist)
-vnoremap <leader>G :w !gist -p -t %:e \| pbcopy<cr>
 " }}}
 
 " }}}
@@ -456,6 +268,7 @@ vnoremap ar a[
 " }}}
 
 " Buffer Handling {{{
+
 " Visit http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
 " to learn more about :Bclose
 
@@ -532,10 +345,4 @@ endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 nnoremap <silent> <Leader>bd :Bclose<CR>
 
-" }}}
-
-" Load addidional configuration (ie to overwrite shorcuts) {{{
-if filereadable(expand("~/.vim/after.vimrc"))
-  source ~/.vim/after.vimrc
-endif
 " }}}

@@ -19,7 +19,8 @@
     noff = merge --no-ff
     fa = fetch --all
     pom = push origin master
-    b = branch
+    pum = push upstream master
+    b = branch -v
     ds = diff --stat=160,120
     dh1 = diff HEAD~1
 
