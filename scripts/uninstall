@@ -20,7 +20,7 @@ declare -a list_of_files=(
   ".zshrc"
 )
 
-if [ "$#" -gt 0 ] && [ "$0" = "-v" ]; then
+if [ "$#" -gt 0 ] && [ "$1" = "-v" ]; then
   verbose=true
 else
   verbose=false
