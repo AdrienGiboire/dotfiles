@@ -35,7 +35,7 @@ fi
 export ARCHFLAGS="-arch x86_64"
 
 which brew > /dev/null
-if [ "$?" != "0" ]; then
+if [ "$?" = "0" ]; then
   [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 fi
 
