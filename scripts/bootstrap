@@ -13,6 +13,7 @@ git submodule update &> /dev/null
 wait $!
 
 echo "==> Initializing Vim env..."
+cd .vim
 if [ ! -d "bundle" ]; then
   echo "creating bundle and backup directories"
   mkdir bundle
@@ -26,5 +27,6 @@ fi
 
 vim +BundleInstall +qall 2&> /dev/null
 wait $!
+cd -
 
 echo "==> Done bootstraping!"
