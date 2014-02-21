@@ -7,9 +7,7 @@ git pull &> /dev/null
 wait $!
 
 echo "==> Updating git submodules..."
-git submodule init &> /dev/null
-wait $!
-git submodule update &> /dev/null
+git submodule update --init --recursive &> /dev/null
 wait $!
 
 echo "==> Initializing Vim env..."
