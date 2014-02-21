@@ -12,6 +12,7 @@ rmdir dotfiles.tmp
 
 # git thinks all files are deleted, this reverses that behaviour
 git reset --hard HEAD &> /dev/null
+wait $!
 
 echo "==> Bootstrapping..."
 ./scripts/bootstrap
