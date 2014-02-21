@@ -34,7 +34,10 @@ fi
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+which brew > /dev/null
+if [ "$?" != "0" ]; then
+  [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+fi
 
 export PGDATA='/usr/local/var/postgres/data'
 
