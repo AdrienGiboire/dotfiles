@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+echo "==> Fetching sources..."
+git clone --no-checkout git@github.com:AdrienGiboire/dotfiles.git dotfiles.tmp &> /dev/null
+
+echo "==> Installing..."
+mv dotfiles.tmp/.git ./
+rmdir dotfiles.tmp
+
+# git thinks all files are deleted, this reverses that behaviour
+git reset --hard HEAD 
+
+echo "==> Done!"
