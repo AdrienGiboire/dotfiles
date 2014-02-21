@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+declare -a list_of_files=(
+  "bin"
+  ".git"
+  ".gitconfig"
+  ".githelpers"
+  "README.md"
+  "scripts"
+  ".tmux.conf"
+  ".vim"
+  ".vimrc"
+  ".zlogin"
+  ".zlogout"
+  ".zpresto"
+  ".zshenv"
+  ".zshrc"
+)
+
+for file in "${list_of_files[@]}"; do
+  rm -fr "$file"
+done
