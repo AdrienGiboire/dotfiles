@@ -12,4 +12,19 @@ wait $!
 git submodule update &> /dev/null
 wait $!
 
+echo "==> Initializing Vim env..."
+if [ ! -d "bundle" ]; then
+  echo "creating bundle and backup directories"
+  mkdir bundle
+  mkdir -p tmp/backup tmp/swap tmp/undo
+fi
+
+if [ ! -d "bundle/vundle" ]; then
+  echo "installing Vundle (https://github.com/gmarik/vundle)."
+  git clone https://github.com/gmarik/vundle.git bundle/vundle
+fi
+
+vim +BundleInstall +qall 2&> /dev/null
+wait $!
+
 echo "==> Done bootstraping!"
