@@ -4,6 +4,7 @@ set -e
 
 echo "==> Fetching sources..."
 git clone --no-checkout git@github.com:AdrienGiboire/dotfiles.git dotfiles.tmp &> /dev/null
+wait $!
 
 echo "==> Installing..."
 mv dotfiles.tmp/.git ./
