@@ -20,6 +20,20 @@ declare -a list_of_files=(
   ".zshrc"
 )
 
+if [ "$#" -gt 0 && "$0" = "-v" ]; then
+  verbose=true
+else
+  verbose=false
+fi
+
+echo "==> Deleting files..."
+
 for file in "${list_of_files[@]}"; do
+  if [ $verbose ]; then
+    echo "====> Deleting $file..."
+  end
+
   rm -fr "$file"
 done
+
+echo "==> Done Uninstalling..."
