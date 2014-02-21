@@ -11,7 +11,7 @@ mv dotfiles.tmp/.git ./
 rmdir dotfiles.tmp
 
 # git thinks all files are deleted, this reverses that behaviour
-git reset --hard HEAD 
+git reset --hard HEAD &> /dev/null
 
 echo "==> Bootstrapping..."
 ./scripts/bootstrap
