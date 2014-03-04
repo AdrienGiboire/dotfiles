@@ -1,0 +1,9 @@
+! Xterm customized defaults
+XTerm*reverseVideo: true
+XTerm*visualBell: true
+XTerm*termName: dtterm
+XTerm*saveLines: 5000
+XTerm*scrollBar: true
+XTerm*font: -*-clean-medium-r-*--14-*-*-*-*-60-*-*
+XTerm*color4: RoyalBlue
+XTerm*color12: RoyalBlue
