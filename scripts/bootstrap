@@ -2,6 +2,8 @@
 
 set -e
 
+cd ~/dotfiles
+
 echo "==> Pulling latest dotfiles..."
 git pull &> /dev/null
 wait $!

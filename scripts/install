@@ -3,12 +3,11 @@
 set -e
 
 echo "==> Fetching sources..."
-git clone --no-checkout git@github.com:AdrienGiboire/dotfiles.git dotfiles.tmp &> /dev/null
+git clone --no-checkout git@github.com:AdrienGiboire/dotfiles.git dotfiles &> /dev/null
 wait $!
 
 echo "==> Installing..."
-mv dotfiles.tmp/.git ./
-rmdir dotfiles.tmp
+cd ~/dotfiles
 
 # git thinks all files are deleted, this reverses that behaviour
 git reset --hard HEAD &> /dev/null
