@@ -3,13 +3,9 @@
 set -e
 
 declare -a list_of_files=(
-  "bin"
-  ".git"
+  ".dotfiles"
   ".gitconfig"
   ".githelpers"
-  ".gitmodules"
-  "README.md"
-  "scripts"
   ".tmux.conf"
   ".vim"
   ".vimrc"
@@ -17,6 +13,8 @@ declare -a list_of_files=(
   ".zlogin"
   ".zlogout"
   ".zprezto"
+  ".zpreztorc"
+  ".zprofile"
   ".zshenv"
   ".zshrc"
 )

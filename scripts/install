@@ -2,8 +2,24 @@
 
 set -e
 
+declare -a list_of_files=(
+  ".git"
+  ".gitconfig"
+  ".githelpers"
+  ".gitmodules"
+  ".tmux.conf"
+  ".vim"
+  ".vimrc"
+  ".Xdefaults"
+  ".zlogin"
+  ".zlogout"
+  ".zprezto"
+  ".zshenv"
+  ".zshrc"
+)
+
 echo "==> Fetching sources..."
-git clone --no-checkout git@github.com:AdrienGiboire/dotfiles.git dotfiles &> /dev/null
+git clone --no-checkout git@github.com:AdrienGiboire/dotfiles.git .dotfiles &> /dev/null
 wait $!
 
 echo "==> Installing..."
@@ -15,3 +31,12 @@ wait $!
 
 echo "==> Bootstrapping..."
 ./scripts/bootstrap
+
+echo "==> Linking dotfiles..."
+for file in "${list_of_files[@]}"; do
+  if $verbose; then
+    echo "====> Linking $file..."
+  fi
+
+  ln -s "~/.dotfiles/$file" "~/$file"
+done

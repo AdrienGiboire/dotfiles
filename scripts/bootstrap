@@ -15,14 +15,15 @@ wait $!
 echo "==> Initializing Vim env..."
 cd .vim
 if [ ! -d "bundle" ]; then
-  echo "creating bundle and backup directories"
+  echo "==> Creating bundle and backup directories..."
   mkdir bundle
   mkdir -p tmp/backup tmp/swap tmp/undo
 fi
 
 if [ ! -d "bundle/vundle" ]; then
-  echo "installing Vundle (https://github.com/gmarik/vundle)."
-  git clone https://github.com/gmarik/vundle.git bundle/vundle
+  echo "==> Installing Vundle (https://github.com/gmarik/vundle)..."
+  git clone https://github.com/gmarik/vundle.git bundle/vundle &> /dev/null
+  wait $!
 fi
 
 vim +BundleInstall +qall &> /dev/null
