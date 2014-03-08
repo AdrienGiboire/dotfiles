@@ -9,6 +9,6 @@ curl -L https://raw.github.com/AdrienGiboire/dotfiles/master/scripts/install | s
 ### Update
 ```
 cd ~
-./scripts/update
+./.dotfiles/scripts/update
 ```
 
