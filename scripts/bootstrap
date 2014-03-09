@@ -30,7 +30,4 @@ vim +BundleInstall +qall &> /dev/null
 wait $!
 cd -
 
-# Apply settings regarding terminal (aterm or xterm in our case)
-xrdb ~/.Xdefaults
-
 echo "==> Done bootstraping!"
