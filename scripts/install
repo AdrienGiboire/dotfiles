@@ -23,7 +23,7 @@ git clone --no-checkout git@github.com:AdrienGiboire/dotfiles.git .dotfiles &> /
 wait $!
 
 echo "==> Installing..."
-cd ~/dotfiles
+cd ~/.dotfiles
 
 # git thinks all files are deleted, this reverses that behaviour
 git reset --hard HEAD &> /dev/null

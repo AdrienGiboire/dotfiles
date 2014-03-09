@@ -2,7 +2,7 @@
 
 set -e
 
-cd ~/dotfiles
+cd ~/.dotfiles
 
 echo "==> Pulling latest dotfiles..."
 git pull &> /dev/null
