@@ -29,9 +29,6 @@ cd ~/.dotfiles
 git reset --hard HEAD &> /dev/null
 wait $!
 
-echo "==> Bootstrapping..."
-./scripts/bootstrap
-
 echo "==> Linking dotfiles..."
 for file in "${list_of_files[@]}"; do
   if $verbose; then
@@ -40,3 +37,7 @@ for file in "${list_of_files[@]}"; do
 
   ln -s "~/.dotfiles/$file" "~/$file"
 done
+
+echo "==> Bootstrapping..."
+./scripts/bootstrap
+
