@@ -19,15 +19,11 @@ declare -a list_of_files=(
 )
 
 echo "==> Fetching sources..."
-git clone --no-checkout git@github.com:AdrienGiboire/dotfiles.git .dotfiles &> /dev/null
+git clone git@github.com:AdrienGiboire/dotfiles.git .dotfiles &> /dev/null
 wait $!
 
 echo "==> Installing..."
 cd ~/.dotfiles
-
-# git thinks all files are deleted, this reverses that behaviour
-git reset --hard HEAD &> /dev/null
-wait $!
 
 echo "==> Linking dotfiles..."
 for file in "${list_of_files[@]}"; do
