@@ -3,14 +3,11 @@
 set -e
 
 declare -a list_of_files=(
-  ".git"
   ".gitconfig"
   ".githelpers"
-  ".gitmodules"
   ".tmux.conf"
   ".vim"
   ".vimrc"
-  ".Xdefaults"
   ".zlogin"
   ".zlogout"
   ".zprezto"
@@ -31,7 +28,7 @@ for file in "${list_of_files[@]}"; do
     echo "====> Linking $file..."
   fi
 
-  ln -s "~/.dotfiles/$file" "~/$file"
+  ln -s ~/.dotfiles/$file ~/$file
 done
 
 echo "==> Bootstrapping..."
