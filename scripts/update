@@ -3,7 +3,7 @@
 set -e
 
 echo "==> Bootstrapping..."
-./scripts/bootstrap
+./.dotfiles/scripts/bootstrap
 
 echo "==> Pulling master for submodules..."
 git submodule foreach git pull origin master &> /dev/null
