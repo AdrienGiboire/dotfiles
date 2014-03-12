@@ -9,7 +9,6 @@ declare -a list_of_files=(
   ".tmux.conf"
   ".vim"
   ".vimrc"
-  ".Xdefaults"
   ".zlogin"
   ".zlogout"
   ".zprezto"

@@ -11,6 +11,8 @@ declare -a list_of_files=(
   ".zlogin"
   ".zlogout"
   ".zprezto"
+  ".zpreztorc"
+  ".zprofile"
   ".zshenv"
   ".zshrc"
 )
