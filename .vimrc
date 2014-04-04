@@ -24,6 +24,10 @@ Bundle "kien/ctrlp.vim"
 let g:ctrlp_working_path_mode = ''
 " }}}
 
+" CODING {{{
+Bundle 'joonty/vdebug.git'
+" }}}
+
 " UI {{{
 " Nice looking powerline symbols
 call g:check_defined('g:airline_left_sep', '')
