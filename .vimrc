@@ -42,6 +42,7 @@ augroup END
 
 " HTML {{{
 Bundle 'plasticboy/vim-markdown'
+Bundle 'slim-template/vim-slim.git'
 " }}}
 
 " CSS {{{
