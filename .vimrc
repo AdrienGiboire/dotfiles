@@ -81,10 +81,17 @@ noremap <right> <nop>
 
 " Yank from current cursor position to end of line
 map Y y$
-" Yank content in OS's clipboard. `o` stands for "OS's Clipoard".
-vnoremap <leader>yo "*y
-" Paste content from OS's clipboard
-nnoremap <leader>po "*p
+
+if has("clipboard")
+  vnoremap y "*y
+  nnoremap yy "*yy
+  vnoremap d "*d
+  nnoremap dd "*dd
+  vnoremap x "*x
+  nnoremap x "*x
+  vnoremap p "*p
+  nnoremap p "*p
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
