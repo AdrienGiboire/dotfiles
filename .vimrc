@@ -127,6 +127,9 @@ command! W :w
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
 
+" Make u/U behave for undo like n/N does for search
+nnoremap U <c-r>
+
 " Fast saving and closing current buffer without closing windows displaying the
 " buffer
 nmap <leader>wq :w!<cr>:Bclose<cr>
