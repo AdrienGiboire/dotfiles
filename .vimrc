@@ -257,9 +257,9 @@ vnoremap > >gv
 
 " . folding {{{
 
-set foldlevelstart=2
+set foldlevelstart=1
 set foldmethod=syntax
-set foldnestmax=3
+set foldnestmax=5
 
 " Space to toggle folds.
 nnoremap <space> za
