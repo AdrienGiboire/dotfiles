@@ -3,7 +3,7 @@
 set -e
 
 declare -a list_of_files=(
-  ".bundler-exec"
+  ".bundler-exec.sh"
   ".gitconfig"
   ".githelpers"
   ".tmux.conf"
