@@ -6,63 +6,71 @@ let mapleader = ","
 let maplocalleader = '\'
 
 " Utils {{{
-source ~/.vim/functions/util.vim
+  source ~/.vim/functions/util.vim
 " }}}
 
 " VUNDLE {{{
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+  set rtp+=~/.vim/bundle/vundle/
+  call vundle#rc()
 
-Bundle 'gmarik/vundle'
+  Bundle 'gmarik/vundle'
 " }}}
 
 " GENERAL {{{
-Bundle "mileszs/ack.vim"
-nnoremap <leader>a :Ack!<space>
+  Bundle "mileszs/ack.vim"
+  nnoremap <leader>a :Ack!<space>
 
-Bundle "kien/ctrlp.vim"
-let g:ctrlp_working_path_mode = ''
+  Bundle "kien/ctrlp.vim"
+  let g:ctrlp_working_path_mode = ''
+
+  Bundle 'scrooloose/nerdtree'
+  nmap <C-i> :NERDTreeToggle<CR>
+  " Disable the scrollbars (NERDTree)
+  set guioptions-=r
+  set guioptions-=L
+  " Keep NERDTree window fixed between multiple toggles
+  set winfixwidth
 " }}}
 
 " CODING {{{
-Bundle 'joonty/vdebug.git'
+  Bundle 'joonty/vdebug.git'
 " }}}
 
 " UI {{{
-" Nice looking powerline symbols
-call g:check_defined('g:airline_left_sep', '')
-call g:check_defined('g:airline_right_sep', '')
-call g:check_defined('g:airline_branch_prefix', '')
+  " Nice looking powerline symbols
+  call g:check_defined('g:airline_left_sep', '')
+  call g:check_defined('g:airline_right_sep', '')
+  call g:check_defined('g:airline_branch_prefix', '')
 
-Bundle "bling/vim-airline"
+  Bundle "bling/vim-airline"
 
-" Highlight current line only on focused window
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
-augroup END
+  " Highlight current line only on focused window
+  augroup CursorLine
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+  augroup END
 " }}}
 
 " HTML {{{
-Bundle 'plasticboy/vim-markdown'
-Bundle 'slim-template/vim-slim.git'
+  Bundle 'plasticboy/vim-markdown'
+  Bundle 'slim-template/vim-slim.git'
 " }}}
 
 " CSS {{{
-Bundle 'groenewege/vim-less'
+  Bundle 'groenewege/vim-less'
 " }}}
 
 " JS {{{
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'pangloss/vim-javascript'
-Bundle 'alfredodeza/jacinto.vim'
+  Bundle 'kchmck/vim-coffee-script'
+  Bundle 'pangloss/vim-javascript'
+  Bundle 'alfredodeza/jacinto.vim'
 
-Bundle 'Shutnik/jshint2.vim'
-" Lint JavaScript files after reading it:
-let jshint2_read = 1
-" Lint JavaScript files after saving it:
-let jshint2_save = 1
+  Bundle 'Shutnik/jshint2.vim'
+  " Lint JavaScript files after reading it:
+  let jshint2_read = 1
+  " Lint JavaScript files after saving it:
+  let jshint2_save = 1
 " }}}
 
 filetype plugin indent on
