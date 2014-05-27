@@ -145,6 +145,7 @@ nmap <leader>wq :w!<cr>:Bclose<cr>
 set backspace=indent,eol,start
 set encoding=utf-8
 set hidden
+set laststatus=2
 set history=1000
 set incsearch
 set list
