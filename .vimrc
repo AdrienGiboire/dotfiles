@@ -30,17 +30,19 @@ let maplocalleader = '\'
   set guioptions-=L
   " Keep NERDTree window fixed between multiple toggles
   set winfixwidth
+
+  Bundle 'sheerun/vim-polyglot'
 " }}}
 
-" CODING {{{
-  Bundle 'joonty/vdebug.git'
+" PHP {{{
+  Bundle 'joonty/vdebug'
 " }}}
 
 " UI {{{
   " Nice looking powerline symbols
-  call g:check_defined('g:airline_left_sep', '')
-  call g:check_defined('g:airline_right_sep', '')
-  call g:check_defined('g:airline_branch_prefix', '')
+  call g:Check_defined('g:airline_left_sep', '')
+  call g:Check_defined('g:airline_right_sep', '')
+  call g:Check_defined('g:airline_branch_prefix', '')
 
   Bundle "bling/vim-airline"
 
