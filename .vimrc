@@ -269,6 +269,12 @@ vnoremap > >gv
 nnoremap -- <C-w>-
 nnoremap ++ <C-w>+
 
+" Jump to paragraph ends
+vnoremap g{ :exe "norm m`gv``k".v:count1."{j"<CR>``j``
+vnoremap g} :exe "norm m`gv``j".v:count1."}k"<CR>``k``
+nnoremap g{ :exe "norm k".v:count1."{j"<CR>``j``
+nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
+
 " }}}
 
 " . folding {{{
