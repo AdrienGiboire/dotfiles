@@ -307,6 +307,9 @@ vnoremap ar a[
 nnoremap <Leader><Leader>l /\<<CR>yiw?\<<CR>viwp/\<<CR>viwp:noh<CR>
 nnoremap <Leader><Leader>h ?\w\><CR>yiw/\<<CR>viwp?\w\><CR>viwp:noh<CR>
 
+" find git's inline diffs more easily
+nnoremap <Leader>fd /<<<<<<\_.\{-}>>>>>>.*<CR>
+
 " }}}
 
 " Buffer Handling {{{
