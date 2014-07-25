@@ -265,6 +265,10 @@ nnoremap <leader>h <C-w>s<C-w>j
 vnoremap < <gv
 vnoremap > >gv
 
+" Tweak window height with a fast double button press
+nnoremap -- <C-w>-
+nnoremap ++ <C-w>+
+
 " }}}
 
 " . folding {{{
