@@ -310,6 +310,11 @@ nnoremap <Leader><Leader>h ?\w\><CR>yiw/\<<CR>viwp?\w\><CR>viwp:noh<CR>
 " find git's inline diffs more easily
 nnoremap <Leader>fd /<<<<<<\_.\{-}>>>>>>.*<CR>
 
+" * and # for selected text, trying to keep the search literal (in case of
+" filenames, for example.)
+xnoremap * y/\V<c-r>=escape(@", '/\')<cr><cr>
+xnoremap # y?\V<c-r>=escape(@", '?\')<cr><cr>
+
 " }}}
 
 " Buffer Handling {{{
