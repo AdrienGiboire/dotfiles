@@ -133,6 +133,7 @@ nmap <silent> <leader>ii :set invrelativenumber<CR>
 " Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
 command! Wq :wq
+command! Q :q
 
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
