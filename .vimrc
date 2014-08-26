@@ -383,9 +383,15 @@ function! s:Bclose(bang, buffer)
     endif
   endfor
   execute 'bdelete'.a:bang.' '.btarget
+  let g:last_buffer = expand('%:p')
   execute wcurrent.'wincmd w'
 endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 nnoremap <silent> <Leader>bd :Bclose<CR>
+
+" Save last closed buffer
+au! BufDelete * let g:last_buffer = expand('%:p')
+" Open last closed buffer with `,bl` mapping
+map <silent> <leader>bl :exec ':e '. g:last_buffer<CR>
 
 " }}}
