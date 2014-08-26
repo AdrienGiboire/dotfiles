@@ -92,17 +92,6 @@ noremap <right> <nop>
 " Yank from current cursor position to end of line
 map Y y$
 
-if has("clipboard")
-  vnoremap y "*y
-  nnoremap yy "*yy
-  vnoremap d "*d
-  nnoremap dd "*dd
-  vnoremap x "*x
-  nnoremap x "*x
-  vnoremap p "*p
-  nnoremap p "*p
-endif
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
