@@ -293,6 +293,8 @@ onoremap ar a[
 vnoremap ir i[
 vnoremap ar a[
 
+Bundle 'caigithub/a_indent'
+
 " Simulate emacs' transpose-word feature, including its inverse
 " Note: Doesn't work well with words that include punctuation
 nnoremap <Leader><Leader>l /\<<CR>yiw?\<<CR>viwp/\<<CR>viwp:noh<CR>
