@@ -169,7 +169,6 @@ set ruler
 set autoindent
 set tabstop=2
 set softtabstop=2
-set textwidth=80
 set shiftwidth=2
 set expandtab
 set wrap
