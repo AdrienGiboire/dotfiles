@@ -286,6 +286,8 @@ nnoremap <leader>z zMzvzz
 
 " TEXT OBJECTS {{{
 
+Bundle 'adriengiboire/a_pair'
+
 " Shortcut for [] motion
 onoremap ir i[
 onoremap ar a[
