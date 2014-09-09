@@ -79,6 +79,8 @@ let maplocalleader = '\'
 
 " GIT {{{
 autocmd Filetype gitcommit setlocal spell textwidth=72
+
+Bundle 'tpope/vim-fugitive'
 " }}}
 
 filetype plugin indent on
