@@ -52,6 +52,8 @@ let maplocalleader = '\'
     au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
     au WinLeave * setlocal nocursorline
   augroup END
+
+  Bundle 'christoomey/vim-tmux-navigator'
 " }}}
 
 " HTML {{{
