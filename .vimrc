@@ -75,6 +75,10 @@ let maplocalleader = '\'
   let jshint2_save = 1
 " }}}
 
+" GIT {{{
+autocmd Filetype gitcommit setlocal spell textwidth=72
+" }}}
+
 filetype plugin indent on
 set background=dark
 syntax on
