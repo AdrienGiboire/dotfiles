@@ -32,6 +32,12 @@ let maplocalleader = '\'
   set winfixwidth
 
   Bundle 'sheerun/vim-polyglot'
+  Bundle 'junegunn/vim-easy-align'
+  " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+  vmap <Enter> <Plug>(EasyAlign)
+
+  " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+  nmap <Leader>a <Plug>(EasyAlign)
 " }}}
 
 " PHP {{{
@@ -78,9 +84,8 @@ let maplocalleader = '\'
 " }}}
 
 " GIT {{{
-autocmd Filetype gitcommit setlocal spell textwidth=72
-
-Bundle 'tpope/vim-fugitive'
+  autocmd Filetype gitcommit setlocal spell textwidth=72
+  Bundle 'tpope/vim-fugitive'
 " }}}
 
 filetype plugin indent on
