@@ -62,6 +62,11 @@ let maplocalleader = '\'
   Bundle 'christoomey/vim-tmux-navigator'
 " }}}
 
+" Ruby {{{
+  Bundle 'sunaku/vim-ruby-minitest'
+  set completefunc=syntaxcomplete#Complete
+" }}}
+
 " HTML {{{
   Bundle 'plasticboy/vim-markdown'
   Bundle 'slim-template/vim-slim.git'
