@@ -1,0 +1,45 @@
+#!/bin/sh
+
+# Set our defaults for the options
+GIT=0
+MOVE=0
+
+# Parse the options
+while getopts 'gm' opt
+do
+  case $opt in
+    g) GIT=1 ;;
+    m) MOVE=1 ;;
+  esac
+done
+
+# Skip over the processed options
+shift $((OPTIND-1))
+
+convert () {
+  current_name=$1
+  new_name="`dirname $1`/`basename $1 | tr 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 'abcdefghijklmnopqrstuvwxyz'`"
+
+  [ $MOVE = 1 ] && { mv $current_name $new_name; }
+  [ $GIT = 1 ] && { git mv -f $current_name $new_name; }
+}
+
+[ $# = 0 ] && {
+  echo "Usage: tolower [options] item1 item2 …"
+  echo "Options: -g (default: $GIT), -m (default: $MOVE)"
+  exit 1
+}
+
+for item in $*
+do
+  [ "`dirname $item`" != "`basename $item`" ] && {
+    [ -d $item ] && {
+      for subitem in `ls $item`
+      do
+        tolower $item/$subitem
+      done
+    }
+
+    convert $item
+  }
+done

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+convert () {
+  mv $1 `dirname $1`/`basename $1 | tr 'abcdefghijklmnopqrstuvwxyz' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'`
+}
+
+[ $# = 0 ] && { echo "Usage: toupper item1 item2 …"; exit; }
+
+for item in $*
+do
+  [ "`dirname $item`" != "`basename $item`" ] && {
+    [ -d $item ] && {
+      for subitem in `ls $item`
+      do
+        toupper $item/$subitem
+      done
+    }
+
+    convert $item
+  }
+done

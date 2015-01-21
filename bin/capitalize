@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# Set our defaults
+VERBOSE=0
+WITH_MV=0
+WORD_SEPARATOR=$' '
+
+# Process options
+while getopts 'vmd:' opt
+do
+  case $opt in
+    v) VERBOSE=1 ;;
+    m) WITH_MV=1 ;;
+    d) WORD_SEPARATOR=$"$OPTARG" ;;
+  esac
+done
+
+# Shift processed options
+shift $((OPTIND-1))
+
+convert () {
+  current_filename=`basename $1`
+
+  # Change default word separator
+  IFS=$WORD_SEPARATOR
+
+  filename=($current_filename)
+
+  # Reset default word separator since it has a global behavior…
+  IFS=$'\t'
+
+  output=""
+  length=${#filename[@]}
+  for i in "${!filename[@]}"
+  do
+    output+="$(tr '[:lower:]' '[:upper:]' <<< "${filename[$i]:0:1}")"
+    output+="$(tr '[:upper:]' '[:lower:]' <<< "${filename[$i]:1}")"
+    [ $i != $((length-1)) ] && { output+="$WORD_SEPARATOR"; }
+  done
+
+  [ $VERBOSE = 1 ] && { echo $output; }
+
+  [ $WITH_MV = 1 ] && {
+    echo "$1 => `dirname $1`/$output"
+    mv $1 "`dirname $1`/$output"
+  }
+}
+
+[ $# = 0 ] && {
+  echo "Usage: capitalize [options] item1 item2 …"
+  echo "Options: -m (move file, default: $WITH_MV) | -d <delimitator> (default: \"$WORD_SEPARATOR\") | -v (verbose)"
+  exit 1
+}
+
+for item in $*
+do
+  [ "`dirname $item`" != "`basename $item`" ] && {
+    [ -d $item ] && {
+      for subitem in `ls $item`
+      do
+        capitalize $item/$subitem
+      done
+    }
+
+    convert $item
+  }
+done
