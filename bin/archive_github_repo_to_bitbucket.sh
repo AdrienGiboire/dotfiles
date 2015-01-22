@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Here are a few things to keep in mind:
+# - You can deal with Bitbucket repositories in CLI
+# - You can deal with Github repositories in CLI
+# - After the script is done running, you still have to manually delete Github repositories
+
 function clone_from_github
 {
     echo "Cloning $github_organisation/$repository from GitHub..."
