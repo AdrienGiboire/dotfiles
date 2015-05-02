@@ -1,0 +1,84 @@
+#!/bin/sh
+
+################################################################################
+# Build and prepare current ionic project to be published on Play Store
+#
+# Preparing a project to be published on the Play Store can quickly become time
+# consuming and the commands are not really easy to remember so I made up this
+# script to help a little.
+################################################################################
+
+function cordova_build
+{
+    cordova build --release $platform
+}
+
+function jar_signer
+{
+    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $keystore.keystore $app_path/$app_name/platforms/android/ant-build/CordovaApp-release-unsigned.apk $jarsign
+}
+
+function zip_align
+{
+    final_apk_path=$app_path/$app_name/platforms/android/ant-build/$app_name-$version.apk
+    if [ -f $final_apk_path ]; then
+	rm -fr $final_apk_path
+    fi
+
+    zipalign -v 4 $app_path/$app_name/platforms/android/ant-build/CordovaApp-release-unsigned.apk $final_apk_path
+}
+
+function main
+{
+    cordova_build && jar_signer && zip_align
+}
+
+function usage
+{
+    echo "usage: bps"
+}
+
+### Run
+
+if [ "$1" = "" ]; then
+    usage
+    exit 1
+fi
+
+app_name=
+app_path=
+jarsign=
+keystore=
+platform="android"
+version=
+
+while [ "$1" != "" ]; do
+    case $1 in
+	-a | --app )
+	    shift
+	    app_name=$1
+	    ;;
+	-j | --jarsign )
+	    shift
+	    jarsign=$1
+	    ;;
+	-k | --keystore )
+	    shift
+	    keystore=$1
+	    ;;
+	-p | --path )
+	    shift
+	    app_path=$1
+	    ;;
+	-v | --version )
+	    shift
+	    version=$1
+	    ;;
+	* )
+	    usage
+	    exit 1
+    esac
+    shift
+done
+
+main
