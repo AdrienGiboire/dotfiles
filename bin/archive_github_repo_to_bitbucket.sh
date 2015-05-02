@@ -126,7 +126,7 @@ function main
 	create_bitbucket_repository
 	
 	push_on_bitbucket
-    
+	
 	clean_relicate
     done
 }
@@ -144,8 +144,8 @@ function usage
 ### Run
 
 if [ "$1" = "" ]; then
-   usage
-   exit 1
+    usage
+    exit 1
 fi
 
 bitbucket_username=

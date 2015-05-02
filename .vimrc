@@ -18,7 +18,8 @@ let maplocalleader = '\'
 
 " GENERAL {{{
   Bundle "mileszs/ack.vim"
-  nnoremap <leader>a :Ack!<space>
+  let g:ackprg = 'ag --nogroup --nocolor --column'
+  nnoremap <leader>ag :Ack!<space>
 
   Bundle "kien/ctrlp.vim"
   let g:ctrlp_working_path_mode = ''
@@ -37,7 +38,7 @@ let maplocalleader = '\'
   vmap <Enter> <Plug>(EasyAlign)
 
   " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
-  nmap <Leader>a <Plug>(EasyAlign)
+  nmap <Leader>ea <Plug>(EasyAlign)
 " }}}
 
 " PHP {{{
