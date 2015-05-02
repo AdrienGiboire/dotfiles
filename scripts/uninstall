@@ -7,6 +7,7 @@ declare -a list_of_files=(
   ".dotfiles"
   ".gitconfig"
   ".githelpers"
+  ".jshintrc"
   ".tmux.conf"
   ".vim"
   ".vimrc"

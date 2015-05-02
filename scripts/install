@@ -6,6 +6,7 @@ declare -a list_of_files=(
   ".bundler-exec.sh"
   ".gitconfig"
   ".githelpers"
+  ".jshintrc"
   ".tmux.conf"
   ".vim"
   ".vimrc"
