@@ -26,6 +26,40 @@ wait $!
 echo "==> Installing..."
 cd ~/.dotfiles
 
+echo "==> Installing Brew..."
+command -v brew >/dev/null 2>&1 || { echo >&2 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; exit 1; }
+
+echo "==> Installing Cask..."
+brew install caskroom/cask/brew-cask
+
+echo "==> Installing apps..."
+apps=(
+  android-file-transfer
+  appcleaner
+  asepsis
+  battle-net
+  caffeine
+  cheatsheet
+  dash
+  doubletwist
+  dropbox
+  evernote
+  firefox
+  google-chrome
+  google-drive
+  google-hangouts
+  hipchat
+  iterm2
+  skype
+  slack
+  spectacle
+  spotify
+  steam
+  vlc
+)
+
+brew cask install --appdir="/Applications" ${apps[@]}
+
 echo "==> Linking dotfiles..."
 for file in "${list_of_files[@]}"; do
   if $verbose; then
