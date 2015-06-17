@@ -19,13 +19,6 @@ declare -a list_of_files=(
   ".zshrc"
 )
 
-echo "==> Fetching sources..."
-git clone git@github.com:AdrienGiboire/dotfiles.git .dotfiles &> /dev/null
-wait $!
-
-echo "==> Installing..."
-cd ~/.dotfiles
-
 echo "==> Installing Brew..."
 command -v brew >/dev/null 2>&1 || { echo >&2 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; exit 1; }
 
@@ -46,6 +39,7 @@ apps=(
   dropbox
   evernote
   firefox
+  git
   google-chrome
   google-drive
   google-hangouts
@@ -59,6 +53,17 @@ apps=(
 )
 
 brew cask install --appdir="/Applications" ${apps[@]}
+
+brew install autojump
+
+echo "==> Fetching sources..."
+cho
+
+echo "==> Fetching sources..."
+git clone git@github.com:AdrienGiboire/dotfiles.git .dotfiles &> /dev/null
+wait $!
+
+cd ~/.dotfiles
 
 echo "==> Linking dotfiles..."
 for file in "${list_of_files[@]}"; do
