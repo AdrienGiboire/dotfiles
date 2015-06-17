@@ -41,6 +41,7 @@ apps=(
   caffeine
   cheatsheet
   dash
+  divvy
   doubletwist
   dropbox
   evernote
@@ -52,7 +53,6 @@ apps=(
   iterm2
   skype
   slack
-  spectacle
   spotify
   steam
   vlc
