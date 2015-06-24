@@ -46,11 +46,6 @@ let maplocalleader = '\'
 " }}}
 
 " UI {{{
-  " Nice looking powerline symbols
-  call g:Check_defined('g:airline_left_sep', '')
-  call g:Check_defined('g:airline_right_sep', '')
-  call g:Check_defined('g:airline_branch_prefix', '')
-
   Bundle "bling/vim-airline"
 
   " Highlight current line only on focused window
