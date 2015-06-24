@@ -22,8 +22,22 @@ declare -a list_of_files=(
 echo "==> Installing Brew..."
 command -v brew >/dev/null 2>&1 || { echo >&2 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; exit 1; }
 
-echo "==> Installing Cask..."
-brew install caskroom/cask/brew-cask
+echo "==> Installing utils..."
+utils=(
+  ag
+  autojump
+  caskroom/cask/brew-cask
+  Caskroom/cask/tuntap # Has to be before openvpn
+  imagemagick
+  libevent
+  openvpn
+  postgresql
+  redis
+  tmux
+  wget
+)
+
+brew install ${utils[@]}
 
 echo "==> Installing apps..."
 apps=(
@@ -45,19 +59,28 @@ apps=(
   google-hangouts
   hipchat
   iterm2
+  pg-commander
   skype
+  sketch
   slack
   spotify
   steam
+  utorrent
   vlc
 )
 
 brew cask install --appdir="/Applications" ${apps[@]}
 
-brew install autojump
+echo "==> Installing ruby..."
+cd ~/code
+git clone https://github.com/sstephenson/ruby-build.git
+cd ruby-build
+./install.sh
 
-echo "==> Fetching sources..."
-cho
+wget -O chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz
+tar -xzvf chruby-0.3.9.tar.gz
+cd chruby-0.3.9/
+sudo make install
 
 echo "==> Fetching sources..."
 git clone git@github.com:AdrienGiboire/dotfiles.git .dotfiles &> /dev/null
