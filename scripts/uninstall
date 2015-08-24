@@ -8,6 +8,7 @@ declare -a list_of_files=(
   ".gitconfig"
   ".githelpers"
   ".jshintrc"
+  ".tmux"
   ".tmux.conf"
   ".vim"
   ".vimrc"
