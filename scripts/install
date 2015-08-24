@@ -45,7 +45,7 @@ echo "==> Installing apps..."
 apps=(
   alfred
   android-file-transfer
-  appcleaner
+  appzapper
   asepsis
   battle-net
   caffeine
