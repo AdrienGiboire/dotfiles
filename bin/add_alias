@@ -1,0 +1,115 @@
+#!/bin/sh
+
+################################################################################
+# update_alias
+#
+# In order to optimize our productivity, aliases are great for those who spend lot
+# of time in their terminal. Yet, people tend to diminish the greatness of aliases.
+# They tend to say it's too much time to create/maintain them. However, there is a lot
+# of things you enter more than once a day. These things, as fast as they might be to type,
+# would be even more faster if you used aliases.
+#
+# So, as a bearded terminal guy, I wrote this little piece of code to make alias creation fast
+# and easy.
+#
+# USAGE
+#
+# Run:
+# $ update_alias \
+#   -aa <alias_name> \
+#   -ac <alias_command> \
+#   -p <alias_file_path>
+#
+# Where:
+#   <alias_name> is the alias name
+#   <alias_command> is the alias command
+#   <alias_file_path> is the file containing the aliases. Default is "$HOME/.zshrc"
+#
+# CONTRIBUTING
+#
+# Want to contribute? Awesome! Thank you so much!
+#
+## HOW?
+#
+# 1. Fork it (https://help.github.com/articles/fork-a-repo)
+# 2. Create a feature branch (`git checkout -b my-new-feature`)
+# 3. Commit changes (`git commit -am 'Add my new feature'`)
+# 4. Push to the branch (`git push origin my-new-feature`)
+# 5. Create a Pull Request (https://help.github.com/articles/using-pull-requests)
+#
+# CHANGELOG
+#
+# v1.0.0
+#   2015-10-15
+#   * Official release
+#
+# LICENSE
+#
+# Copyright (C) 2015 Adrien Giboire, MIT License
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of
+# this software and associated documentation files (the "Software"), to deal in
+# the Software without restriction, including without limitation the rights to
+# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+# the Software, and to permit persons to whom the Software is furnished to do so,
+# subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+# FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+# COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+# IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+################################################################################
+
+function main
+{
+  echo "alias $alias_name=\"$alias_command\"" >> $path
+  source $path
+}
+
+function usage
+{
+    echo "usage: add_alias -an|--alias-name <alias_name> -ac|--alias-commad <alias_command> -p|--path <alias_file_path>"
+    echo "\t <alias_name> is the alias name"
+    echo "\t <alias_command> is the alias command"
+    echo "\t <alias_file_path> is the path to the file containing aliases"
+}
+
+### Run
+
+if [ "$1" = "" ]; then
+    usage
+    exit 1
+fi
+
+alias_name=
+alias_command=
+path="$HOME/.zshrc"
+
+while [ "$1" != "" ]; do
+    case $1 in
+  -an | --alias-name )
+      shift
+      alias_name=$1
+      ;;
+  -ac | --alias-command )
+      shift
+      alias_command=$1
+      ;;
+  -p | --path )
+      shift
+      path=$1
+      ;;
+  * )
+      usage
+      exit 1
+    esac
+    shift
+done
+
+main
