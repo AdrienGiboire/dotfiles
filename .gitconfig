@@ -17,6 +17,7 @@
   aa = add --all
   ff = merge --ff-only
   pullff = pull --ff-only
+  pullr = pull --rebase
   noff = merge --no-ff
   fa = fetch --all
   pom = push origin master
@@ -24,6 +25,8 @@
   b = branch -v
   ds = diff --stat=160,120
   dh1 = diff HEAD~1
+  rc = rebase --continue
+  ra = rebase --abort
 
     # Divergence (commits we added and commits remote added)
   div = divergence
