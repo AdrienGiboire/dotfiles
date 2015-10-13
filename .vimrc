@@ -204,10 +204,33 @@ augroup END
 
 " Remove trailing whitespaces when saving
 " Wanna know more? http://vim.wikia.com/wiki/Remove_unwanted_spaces
-" If you want to remove trailing spaces when you want, so not automatically,
-" see
-" http://vim.wikia.com/wiki/Remove_unwanted_spaces#Display_or_remove_unwanted_whitespace_with_a_script.
-autocmd BufWritePre * :%s/\s\+$//e
+function ShowSpaces(...)
+  let @/='\v(\s+$)|( +\ze\t)'
+  let oldhlsearch=&hlsearch
+  if !a:0
+    let &hlsearch=!&hlsearch
+  else
+    let &hlsearch=a:1
+  end
+  return oldhlsearch
+endfunction
+
+function TrimSpaces() range
+  let oldhlsearch=ShowSpaces(1)
+  execute a:firstline.",".a:lastline."substitute ///gec"
+  let &hlsearch=oldhlsearch
+endfunction
+
+command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
+command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
+nnoremap <leader>ss :ShowSpaces 1<CR>
+nnoremap <leader>ts m`:TrimSpaces<CR>``
+vnoremap <leader>ts :TrimSpaces<CR>
+
+autocmd FileType css :TrimSpaces<CR>
+autocmd FileType javascript :TrimSpaces<CR>
+autocmd FileType ruby :TrimSpaces<CR>
+autocmd FileType sh :TrimSpaces<CR>
 
 " }}}
 
