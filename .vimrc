@@ -227,10 +227,10 @@ nnoremap <leader>ss :ShowSpaces 1<CR>
 nnoremap <leader>ts m`:TrimSpaces<CR>``
 vnoremap <leader>ts :TrimSpaces<CR>
 
-autocmd FileType css :TrimSpaces<CR>
-autocmd FileType javascript :TrimSpaces<CR>
-autocmd FileType ruby :TrimSpaces<CR>
-autocmd FileType sh :TrimSpaces<CR>
+autocmd FileType css :TrimSpaces
+autocmd FileType javascript :TrimSpaces
+autocmd FileType ruby :TrimSpaces
+autocmd FileType sh :TrimSpaces
 
 " }}}
 
