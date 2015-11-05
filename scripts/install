@@ -63,6 +63,7 @@ apps=(
   hipchat
   iterm2
   libreoffice
+  node
   pg-commander
   skype
   sketch
