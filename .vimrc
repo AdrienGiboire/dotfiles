@@ -29,6 +29,9 @@ let maplocalleader = '\'
   " Disable the scrollbars (NERDTree)
   set guioptions-=r
   set guioptions-=L
+  " Open NERD tree when vim starts up and there is no files specified
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
   Bundle 'sheerun/vim-polyglot'
   Bundle 'junegunn/vim-easy-align'
