@@ -29,8 +29,6 @@ let maplocalleader = '\'
   " Disable the scrollbars (NERDTree)
   set guioptions-=r
   set guioptions-=L
-  " Keep NERDTree window fixed between multiple toggles
-  set winfixwidth
 
   Bundle 'sheerun/vim-polyglot'
   Bundle 'junegunn/vim-easy-align'
