@@ -32,6 +32,8 @@ let maplocalleader = '\'
   " Open NERD tree when vim starts up and there is no files specified
   autocmd StdinReadPre * let s:std_in=1
   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  " Close vim if the last window opened is nerd tree
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
   Bundle 'sheerun/vim-polyglot'
   Bundle 'junegunn/vim-easy-align'
