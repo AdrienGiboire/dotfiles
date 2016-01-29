@@ -307,21 +307,6 @@ nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
 
 " }}}
 
-" . folding {{{
-
-set foldlevelstart=1
-set foldmethod=syntax
-set foldnestmax=5
-
-" Space to toggle folds.
-nnoremap <space> za
-vnoremap <space> za
-
-" Use ,z to "focus" the current fold.
-nnoremap <leader>z zMzvzz
-
-" }}}
-
 " }}}
 
 " TEXT OBJECTS {{{
