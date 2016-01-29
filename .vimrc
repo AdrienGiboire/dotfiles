@@ -26,6 +26,7 @@ let maplocalleader = '\'
 
   Bundle 'scrooloose/nerdtree'
   nmap <C-i> :NERDTreeToggle<CR>
+  nmap <leader>m :NERDTreeFind<CR>
   " Disable the scrollbars (NERDTree)
   set guioptions-=r
   set guioptions-=L
