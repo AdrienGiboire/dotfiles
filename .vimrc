@@ -205,9 +205,11 @@ nnoremap <leader>ts m`:TrimSpaces<CR>``
 vnoremap <leader>ts :TrimSpaces<CR>
 
 autocmd FileType css :TrimSpaces
+autocmd FileType scss :TrimSpaces
 autocmd FileType javascript :TrimSpaces
 autocmd FileType ruby :TrimSpaces
 autocmd FileType sh :TrimSpaces
+autocmd FileType java :TrimSpaces
 
 " }}}
 
