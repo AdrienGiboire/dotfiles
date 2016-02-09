@@ -24,34 +24,15 @@ let maplocalleader = '\'
   Bundle "kien/ctrlp.vim"
   let g:ctrlp_working_path_mode = ''
 
-  Bundle 'scrooloose/nerdtree'
-  nmap <C-i> :NERDTreeToggle<CR>
-  nmap <leader>m :NERDTreeFind<CR>
-  " Disable the scrollbars (NERDTree)
-  set guioptions-=r
-  set guioptions-=L
-  " Open NERD tree when vim starts up and there is no files specified
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-  " Close vim if the last window opened is nerd tree
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
   Bundle 'sheerun/vim-polyglot'
   Bundle 'junegunn/vim-easy-align'
   " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
   vmap <Enter> <Plug>(EasyAlign)
-
   " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
   nmap <Leader>ea <Plug>(EasyAlign)
 " }}}
 
-" PHP {{{
-  Bundle 'joonty/vdebug'
-" }}}
-
 " UI {{{
-  Bundle "bling/vim-airline"
-
   " Highlight current line only on focused window
   augroup CursorLine
     au!
@@ -77,15 +58,7 @@ let maplocalleader = '\'
 " }}}
 
 " JS {{{
-  Bundle 'kchmck/vim-coffee-script'
   Bundle 'pangloss/vim-javascript'
-  Bundle 'alfredodeza/jacinto.vim'
-
-  Bundle 'Shutnik/jshint2.vim'
-  " Lint JavaScript files after reading it:
-  let jshint2_read = 1
-  " Lint JavaScript files after saving it:
-  let jshint2_save = 1
 " }}}
 
 " GIT {{{
