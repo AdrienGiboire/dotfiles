@@ -17,19 +17,32 @@ let maplocalleader = '\'
 " }}}
 
 " GENERAL {{{
-  Bundle "mileszs/ack.vim"
+  " sensible.vim: Defaults everyone can agree on
+  Bundle 'tpope/vim-sensible'
+
+  Bundle 'mileszs/ack.vim'
   let g:ackprg = 'ag --nogroup --nocolor --column'
   nnoremap <leader>ag :Ack!<space>
 
-  Bundle "kien/ctrlp.vim"
+  Bundle 'kien/ctrlp.vim'
   let g:ctrlp_working_path_mode = ''
 
   Bundle 'sheerun/vim-polyglot'
+
   Bundle 'junegunn/vim-easy-align'
   " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
   vmap <Enter> <Plug>(EasyAlign)
   " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
   nmap <Leader>ea <Plug>(EasyAlign)
+
+  " surround.vim: quoting/parenthesizing made simple
+  Bundle 'tpope/vim-surround'
+
+  " vinegar.vim: combine with netrw to create a delicious salad dressing
+  Bundle 'tpope/vim-vinegar'
+
+  " unimpaired.vim: pairs of handy bracket mappings
+  Bundle 'tpope/vim-unimpaired'
 " }}}
 
 " UI {{{
@@ -44,13 +57,17 @@ let maplocalleader = '\'
 " }}}
 
 " Ruby {{{
+  " rails.vim: Ruby on Rails power tools
+  Bundle 'tpope/vim-rails'
+  " bundler.vim: Lightweight support for Ruby's Bundler
+  Bundle 'tpope/vim-bundler'
   Bundle 'sunaku/vim-ruby-minitest'
   set completefunc=syntaxcomplete#Complete
 " }}}
 
 " HTML {{{
   Bundle 'plasticboy/vim-markdown'
-  Bundle 'slim-template/vim-slim.git'
+  Bundle 'slim-template/vim-slim'
 " }}}
 
 " CSS {{{
@@ -63,7 +80,12 @@ let maplocalleader = '\'
 
 " GIT {{{
   autocmd Filetype gitcommit setlocal spell textwidth=72
+
+  " fugitive.vim: a Git wrapper so awesome, it should be illegal
   Bundle 'tpope/vim-fugitive'
+
+  " rhubarb.vim: GitHub extension for fugitive.vim
+  Bundle 'tpope/vim-rhubarb'
 " }}}
 
 filetype plugin indent on
