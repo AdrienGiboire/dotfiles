@@ -20,7 +20,7 @@ declare -a list_of_files=(
   ".zshrc"
 )
 
-mkdir -p ~/code
+mkdir -p $HOME/code
 
 echo "==> Installing ruby..."
 cd ~/code
