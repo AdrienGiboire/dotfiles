@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+function join { local IFS="$1"; shift; echo "$*"; }
+
+echo "==> Installing utils..."
+utils=(
+  ag
+  autojump
+  git
+  imagemagick
+  libevent
+  node
+  openvpn
+  postgresql
+  redis
+  tmux
+  vim
+  wget
+)
+
+apt-get install -y $(join ' ' $utils)

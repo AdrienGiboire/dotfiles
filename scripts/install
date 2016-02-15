@@ -48,7 +48,7 @@ for file in "${list_of_files[@]}"; do
   ln -s ~/.dotfiles/$file ~/$file
 done
 
-source ./scripts/os_detection
+source ./scripts/os_specifics
 
 echo "==> Bootstrapping..."
 ./scripts/bootstrap
