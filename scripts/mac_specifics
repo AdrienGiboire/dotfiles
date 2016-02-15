@@ -1,0 +1,61 @@
+#!/bin/sh
+
+set -e
+
+echo "==> Installing Brew..."
+command -v brew >/dev/null 2>&1 || { echo >&2 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; exit 1; }
+
+echo "==> Installing utils..."
+utils=(
+  ag
+  autojump
+  caskroom/cask/brew-cask
+  Caskroom/cask/tuntap # Has to be before openvpn
+  imagemagick
+  libevent
+  openvpn
+  postgresql
+  redis
+  tmux
+  vim
+  wget
+)
+
+brew install ${utils[@]}
+
+echo "==> Installing apps..."
+apps=(
+  alfred
+  android-file-transfer
+  appzapper
+  asepsis
+  battle-net
+  caffeine
+  cheatsheet
+  dash
+  divvy
+  doubletwist
+  dropbox
+  evernote
+  firefox
+  git
+  google-chrome
+  google-drive
+  google-hangouts
+  hipchat
+  iterm2
+  libreoffice
+  node
+  pg-commander
+  skype
+  sketch
+  slack
+  spotify
+  steam
+  utorrent
+  vagrant
+  virtualbox
+  vlc
+)
+
+brew cask install --appdir="/Applications" ${apps[@]}
