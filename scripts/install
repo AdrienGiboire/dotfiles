@@ -20,6 +20,8 @@ declare -a list_of_files=(
   ".zshrc"
 )
 
+mkdir -p ~/code
+
 echo "==> Installing ruby..."
 cd ~/code
 git clone https://github.com/sstephenson/ruby-build.git
