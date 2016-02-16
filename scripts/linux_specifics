@@ -16,6 +16,7 @@ utils=(
   tmux
   vim
   wget
+  zsh
 )
 
 echo "==> Installing utils {$(join ' ' ${utils[@]})}"
