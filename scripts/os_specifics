@@ -2,7 +2,7 @@
 
 set -e
 
-source ./os_detection
+source ./scripts/os_detection
 
 case $OS in
   'Linux')
