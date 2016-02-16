@@ -18,5 +18,5 @@ utils=(
   wget
 )
 
-echo "==> Installing utils {$(join ' ' $utils)}"
-aptitude install -y $(join ' ' $utils)
+echo "==> Installing utils {$(join ' ' ${utils[@]})}"
+aptitude install -y $(join ' ' ${utils[@]})
