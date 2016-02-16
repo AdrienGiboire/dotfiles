@@ -64,4 +64,4 @@ cd chruby-0.3.9/
 sudo make install
 
 echo "==> Bootstrapping..."
-./scripts/bootstrap
+$HOME/.dotfiles/scripts/bootstrap
