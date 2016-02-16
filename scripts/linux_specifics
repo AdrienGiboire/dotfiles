@@ -4,7 +4,6 @@ set -e
 
 function join { local IFS="$1"; shift; echo "$*"; }
 
-echo "==> Installing utils..."
 utils=(
   silversearcher-ag
   autojump
@@ -19,4 +18,5 @@ utils=(
   wget
 )
 
-apt-get install -y $(join ' ' $utils)
+echo "==> Installing utils {$(join ' ' $utils)}"
+aptitude install -y $(join ' ' $utils)
