@@ -2,27 +2,15 @@
 
 set -e
 
-# Detect the platform (similar to $OSTYPE)
-export OS=$(uname)
+source ./os_detection
+
 case $OS in
   'Linux')
-    OS='Linux'
     source ./scripts/linux_specifics
     ;;
-  'FreeBSD')
-    OS='FreeBSD'
-    ;;
-  'WindowsNT')
-    OS='Windows'
-    ;;
-  'Darwin')
-    OS='Mac'
+  'Mac')
     source ./scripts/mac_specifics
     ;;
-  'SunOS')
-    OS='Solaris'
-    ;;
-  'AIX') ;;
   *) ;;
 esac
 

@@ -20,18 +20,18 @@ declare -a list_of_files=(
   ".zshrc"
 )
 
-mkdir -p $HOME/code
-
-echo "==> Installing ruby..."
-cd ~/code
-git clone https://github.com/sstephenson/ruby-build.git
-cd ruby-build
-./install.sh
-
-wget -O chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz
-tar -xzvf chruby-0.3.9.tar.gz
-cd chruby-0.3.9/
-sudo make install
+case $(uname) in
+  'Linux')
+    echo "==> Installing Git..."
+    aptitude install git
+    ;;
+  'Darwin')
+    echo "==> Installing Brew..."
+    command -v brew >/dev/null 2>&1 || { echo >&2 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; exit 1; }
+    brew install caskroom/cask/brew-cask Caskroom/cask/tuntap
+    brew cask install git
+    ;;
+esac
 
 echo "==> Fetching sources..."
 git clone git@github.com:AdrienGiboire/dotfiles.git .dotfiles &> /dev/null
@@ -50,6 +50,18 @@ done
 
 source ./scripts/os_specifics
 
+mkdir -p $HOME/code
+
+echo "==> Installing ruby..."
+cd ~/code
+git clone https://github.com/sstephenson/ruby-build.git
+cd ruby-build
+./install.sh
+
+wget -O chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz
+tar -xzvf chruby-0.3.9.tar.gz
+cd chruby-0.3.9/
+sudo make install
+
 echo "==> Bootstrapping..."
 ./scripts/bootstrap
-

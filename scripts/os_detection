@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+
+# Detect the platform (similar to $OSTYPE)
+export OS=$(uname)
+case $OS in
+  'Linux')
+    OS='Linux'
+    ;;
+  'FreeBSD')
+    OS='FreeBSD'
+    ;;
+  'WindowsNT')
+    OS='Windows'
+    ;;
+  'Darwin')
+    OS='Mac'
+    ;;
+  'SunOS')
+    OS='Solaris'
+    ;;
+  'AIX') ;;
+  *) ;;
+esac
