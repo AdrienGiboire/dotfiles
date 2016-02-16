@@ -6,15 +6,13 @@ function join { local IFS="$1"; shift; echo "$*"; }
 
 echo "==> Installing utils..."
 utils=(
-  ag
+  silversearcher-ag
   autojump
   git
   imagemagick
-  libevent
-  node
-  openvpn
+  libevent-dev
+  nodejs
   postgresql
-  redis
   tmux
   vim
   wget
