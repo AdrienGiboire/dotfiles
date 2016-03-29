@@ -11,13 +11,17 @@ utils=(
   autojump
   caskroom/cask/brew-cask
   Caskroom/cask/tuntap # Has to be before openvpn
+  flow
   imagemagick
   libevent
+  giflib
   openvpn
   postgresql
+  reattach-to-user-namespace
   redis
   tmux
   vim
+  watchman
   wget
 )
 
