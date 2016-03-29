@@ -2,14 +2,11 @@
   excludesfile = /Users/adrien/.gitignore
   editor = vim
   ignorecase = false
-
 [user]
   name = Adrien Giboire
   email = adrien+github@sent.com
-
 [color]
   ui = auto
-
 [alias]
   st = status
   ci = commit --verbose
@@ -54,9 +51,15 @@
   la = !git l --all
 
   pr = pull-request
-
+	d = difftool
 [merge]
   tool = vimdiff
-
+[diff]
+  tool = vimdiff
 [push]
   default = simple
+[difftool]
+  prompt = false
+[github]
+	token = 318ac7f82fedc1e5c2d0d3e75d7d34b2e7e8ff91
+	user = AdrienGiboire
