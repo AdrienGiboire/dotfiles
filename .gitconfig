@@ -51,7 +51,7 @@
   la = !git l --all
 
   pr = pull-request
-	d = difftool
+  d = difftool
 [merge]
   tool = vimdiff
 [diff]
@@ -61,5 +61,5 @@
 [difftool]
   prompt = false
 [github]
-	token = 318ac7f82fedc1e5c2d0d3e75d7d34b2e7e8ff91
-	user = AdrienGiboire
+  token = 318ac7f82fedc1e5c2d0d3e75d7d34b2e7e8ff91
+  user = AdrienGiboire

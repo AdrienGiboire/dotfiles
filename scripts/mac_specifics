@@ -31,6 +31,8 @@ echo "==> Installing apps..."
 apps=(
   alfred
   android-file-transfer
+  android-studio
+  androidtool
   appzapper
   asepsis
   battle-net
