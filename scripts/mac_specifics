@@ -11,6 +11,7 @@ utils=(
   autojump
   caskroom/cask/brew-cask
   Caskroom/cask/tuntap # Has to be before openvpn
+  chruby
   flow
   imagemagick
   libevent
@@ -19,6 +20,7 @@ utils=(
   postgresql
   reattach-to-user-namespace
   redis
+  ruby-install
   tmux
   vim
   watchman
