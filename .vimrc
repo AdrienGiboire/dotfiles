@@ -43,6 +43,25 @@ let maplocalleader = '\'
 
   " unimpaired.vim: pairs of handy bracket mappings
   Bundle 'tpope/vim-unimpaired'
+
+  Bundle 'majutsushi/tagbar'
+  " tagbar
+  nmap <leader>tt :TagbarToggle<CR>
+  let g:tagbar_type_swift = {
+    \ 'ctagstype': 'swift',
+    \ 'kinds' : [
+      \ 'n:Enums',
+      \ 't:Typealiases',
+      \ 'p:Protocols',
+      \ 's:Structs',
+      \ 'c:Classes',
+      \ 'f:Functions',
+      \ 'v:Variables',
+      \ 'e:Extensions'
+    \ ],
+    \ 'sort' : 0
+  \ }
+  set tags+=tags
 " }}}
 
 " UI {{{
@@ -63,6 +82,10 @@ let maplocalleader = '\'
   Bundle 'tpope/vim-bundler'
   Bundle 'sunaku/vim-ruby-minitest'
   set completefunc=syntaxcomplete#Complete
+" }}}
+
+" Swift {{{
+  Bundle 'keith/swift.vim'
 " }}}
 
 " HTML {{{
