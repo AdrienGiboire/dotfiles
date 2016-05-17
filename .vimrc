@@ -10,41 +10,41 @@ let maplocalleader = '\'
 " }}}
 
 " VUNDLE {{{
-  set rtp+=~/.vim/bundle/vundle/
-  call vundle#rc()
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
 
-  Bundle 'gmarik/vundle'
+  Plugin 'VundleVim/Vundle.vim'
 " }}}
 
 " GENERAL {{{
   " sensible.vim: Defaults everyone can agree on
-  Bundle 'tpope/vim-sensible'
+  Plugin 'tpope/vim-sensible'
 
-  Bundle 'mileszs/ack.vim'
+  Plugin 'mileszs/ack.vim'
   let g:ackprg = 'ag --nogroup --nocolor --column'
   nnoremap <leader>ag :Ack!<space>
 
-  Bundle 'kien/ctrlp.vim'
+  Plugin 'kien/ctrlp.vim'
   let g:ctrlp_working_path_mode = ''
 
-  Bundle 'sheerun/vim-polyglot'
+  Plugin 'sheerun/vim-polyglot'
 
-  Bundle 'junegunn/vim-easy-align'
+  Plugin 'junegunn/vim-easy-align'
   " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
   vmap <Enter> <Plug>(EasyAlign)
   " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
   nmap <Leader>ea <Plug>(EasyAlign)
 
   " surround.vim: quoting/parenthesizing made simple
-  Bundle 'tpope/vim-surround'
+  Plugin 'tpope/vim-surround'
 
   " vinegar.vim: combine with netrw to create a delicious salad dressing
-  Bundle 'tpope/vim-vinegar'
+  Plugin 'tpope/vim-vinegar'
 
   " unimpaired.vim: pairs of handy bracket mappings
-  Bundle 'tpope/vim-unimpaired'
+  Plugin 'tpope/vim-unimpaired'
 
-  Bundle 'majutsushi/tagbar'
+  Plugin 'majutsushi/tagbar'
   " tagbar
   nmap <leader>tt :TagbarToggle<CR>
   let g:tagbar_type_swift = {
@@ -72,43 +72,43 @@ let maplocalleader = '\'
     au WinLeave * setlocal nocursorline
   augroup END
 
-  Bundle 'christoomey/vim-tmux-navigator'
+  Plugin 'christoomey/vim-tmux-navigator'
 " }}}
 
 " Ruby {{{
   " rails.vim: Ruby on Rails power tools
-  Bundle 'tpope/vim-rails'
+  Plugin 'tpope/vim-rails'
   " bundler.vim: Lightweight support for Ruby's Bundler
-  Bundle 'tpope/vim-bundler'
-  Bundle 'sunaku/vim-ruby-minitest'
+  Plugin 'tpope/vim-bundler'
+  Plugin 'sunaku/vim-ruby-minitest'
   set completefunc=syntaxcomplete#Complete
 " }}}
 
 " Swift {{{
-  Bundle 'keith/swift.vim'
+  Plugin 'keith/swift.vim'
 " }}}
 
 " HTML {{{
-  Bundle 'plasticboy/vim-markdown'
-  Bundle 'slim-template/vim-slim'
+  Plugin 'plasticboy/vim-markdown'
+  Plugin 'slim-template/vim-slim'
 " }}}
 
 " CSS {{{
-  Bundle 'groenewege/vim-less'
+  Plugin 'groenewege/vim-less'
 " }}}
 
 " JS {{{
-  Bundle 'pangloss/vim-javascript'
+  Plugin 'pangloss/vim-javascript'
 " }}}
 
 " GIT {{{
   autocmd Filetype gitcommit setlocal spell textwidth=72
 
   " fugitive.vim: a Git wrapper so awesome, it should be illegal
-  Bundle 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-fugitive'
 
   " rhubarb.vim: GitHub extension for fugitive.vim
-  Bundle 'tpope/vim-rhubarb'
+  Plugin 'tpope/vim-rhubarb'
 " }}}
 
 filetype plugin indent on
@@ -337,7 +337,7 @@ nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
   vnoremap ir i[
   vnoremap ar a[
 
-  Bundle 'caigithub/a_indent'
+  Plugin 'caigithub/a_indent'
 
   " Simulate emacs' transpose-word feature, including its inverse
   " Note: Doesn't work well with words that include punctuation
@@ -439,3 +439,6 @@ nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
   map <silent> <leader>bl :exec ':e '. g:last_buffer<CR>
 
 " }}}
+
+call vundle#end()
+filetype plugin indent on
