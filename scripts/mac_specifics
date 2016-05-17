@@ -17,6 +17,7 @@ utils=(
   imagemagick
   libevent
   giflib
+  ios-sim
   openvpn
   postgresql
   reattach-to-user-namespace

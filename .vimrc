@@ -20,6 +20,9 @@ let maplocalleader = '\'
   " sensible.vim: Defaults everyone can agree on
   Plugin 'tpope/vim-sensible'
 
+  Plugin 'christoomey/vim-tmux-runner'
+  Plugin 'tpope/vim-dispatch'
+
   Plugin 'mileszs/ack.vim'
   let g:ackprg = 'ag --nogroup --nocolor --column'
   nnoremap <leader>ag :Ack!<space>
@@ -84,8 +87,10 @@ let maplocalleader = '\'
   set completefunc=syntaxcomplete#Complete
 " }}}
 
-" Swift {{{
+" iOS {{{
   Plugin 'keith/swift.vim'
+  Plugin 'gfontenot/vim-xcode'
+  Plugin 'cfdrake/ctrlp-iossim.vim'
 " }}}
 
 " HTML {{{
