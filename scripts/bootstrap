@@ -26,7 +26,7 @@ if [ ! -d "bundle/vundle" ]; then
   wait $!
 fi
 
-vim +BundleInstall +qall &> /dev/null
+vim +PluginInstall +qall &> /dev/null
 wait $!
 cd -
 
