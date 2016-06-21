@@ -12,7 +12,7 @@ utils=(
   caskroom/cask/brew-cask
   Caskroom/cask/tuntap # Has to be before openvpn
   chruby
-  ctags
+  ctags-exuberant
   flow
   imagemagick
   libevent
