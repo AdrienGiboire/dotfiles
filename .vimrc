@@ -102,7 +102,6 @@ let maplocalleader = '\'
 " iOS {{{
   Plugin 'keith/swift.vim'
   Plugin 'gfontenot/vim-xcode'
-  Plugin 'cfdrake/ctrlp-iossim.vim'
 " }}}
 
 " HTML {{{
