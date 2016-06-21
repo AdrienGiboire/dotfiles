@@ -65,6 +65,18 @@ let maplocalleader = '\'
     \ 'sort' : 0
   \ }
   set tags+=tags
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " CTAGS/CSCOPE
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Default/Generic tag file
+  set tags=tags,.tags
+
+  " Filetype specific tag files (This is used for global IDE tags)
+  autocmd FileType javascript     set tags=.tags_js,$HOME/.vim/tags/js
+  autocmd FileType html           set tags=.tags_html,$HOME/.vim/tags/html
+  autocmd FileType ruby           set tags=.tags_php,$HOME/.vim/tags/ruby
+  autocmd FileType sh             set tags=.tags_sh,$HOME/.vim/tags/sh
 " }}}
 
 " UI {{{
