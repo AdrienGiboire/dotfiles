@@ -57,7 +57,7 @@
 [diff]
   tool = vimdiff
 [push]
-  default = simple
+  default = current
 [difftool]
   prompt = false
 [github]
