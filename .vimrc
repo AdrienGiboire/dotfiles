@@ -269,8 +269,6 @@ endfunction
 command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
 command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
 nnoremap <leader>ss :ShowSpaces 1<CR>
-nnoremap <leader>ts m`:TrimSpaces<CR>``
-vnoremap <leader>ts :TrimSpaces<CR>
 
 autocmd FileType css :TrimSpaces
 autocmd FileType scss :TrimSpaces
