@@ -11,8 +11,8 @@
   st = status
   ci = commit --verbose
   co = checkout
-  di = diff
-  dc = diff --cached
+  di = !git diff --color | diff-so-fancy
+  dc = !git diff --color --cached | diff-so-fancy
   amend = commit --amend
   aa = add --all
   ff = merge --ff-only
@@ -23,8 +23,8 @@
   pom = push origin master
   pum = push upstream master
   b = branch -v
-  ds = diff --stat=160,120
-  dh1 = diff HEAD~1
+  ds = !git diff --color --stat=160,120 | diff-so-fancy
+  dh1 = !git diff --color HEAD~1 | diff-so-fancy
   rc = rebase --continue
   ra = rebase --abort
 
@@ -65,3 +65,8 @@
 [github]
   token = 318ac7f82fedc1e5c2d0d3e75d7d34b2e7e8ff91
   user = AdrienGiboire
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
