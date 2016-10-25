@@ -2,6 +2,9 @@
   excludesfile = /Users/adrien/.gitignore
   editor = vim
   ignorecase = false
+  pager = diff-so-fancy | less
+  # protect your project from Windows line endings creeping in
+  autocrlf = input
 [user]
   name = Adrien Giboire
   email = adrien+github@sent.com
@@ -27,6 +30,7 @@
   dh1 = !git diff --color HEAD~1 | diff-so-fancy
   rc = rebase --continue
   ra = rebase --abort
+  ri = rebase --interactive
 
   # Divergence (commits we added and commits remote added)
   div = divergence
@@ -45,13 +49,20 @@
   head = !git l -1
   h = !git head
   hp = "!. ~/.githelpers && show_git_head"
-  r = !GIT_NO_PAGER=1 git l -30
+  r = !GIT_NO_PAGER=1 git l -10
   ra = !git r --all
   l = "!. ~/.githelpers && pretty_git_log"
   la = !git l --all
 
   pr = pull-request
   d = difftool
+	please = push --force-with-lease
+	commend = commit --amend --no-edit
+	it = !git init && git commit -m “root” --allow-empty
+	shorty = status --short --branch
+	stsh = stash --keep-index
+	staash = stash --include-untracked
+	staaash = stash --all
 [merge]
   tool = vimdiff
 [diff]
@@ -70,3 +81,8 @@
   oldHighlight = red bold 52
   newNormal = green bold
   newHighlight = green bold 22
+[interactive]
+  diffFilter = diff-so-fancy --patch-mode | less
+[filter "ignoreDebugOctolyApiUrl"]
+	clean = sed \"s/OCTOLY_API_URL = .*/OCTOLY_API_URL = localhost:3000\\/api/\"
+	smudge = sed \"s/OCTOLY_API_URL = .*/OCTOLY_API_URL = 192.168.1.49:3002\\/api/\"

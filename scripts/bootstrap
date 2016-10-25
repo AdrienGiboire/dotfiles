@@ -22,7 +22,7 @@ fi
 
 if [ ! -d "bundle/vundle" ]; then
   echo "==> Installing Vundle (https://github.com/gmarik/vundle)..."
-  git clone https://github.com/gmarik/vundle.git bundle/vundle &> /dev/null
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim &> /dev/null
   wait $!
 fi
 

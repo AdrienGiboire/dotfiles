@@ -30,6 +30,8 @@ let maplocalleader = '\'
   Plugin 'kien/ctrlp.vim'
   let g:ctrlp_working_path_mode = ''
 
+  set path+=**
+
   Plugin 'sheerun/vim-polyglot'
 
   Plugin 'junegunn/vim-easy-align'
@@ -235,7 +237,7 @@ set wrap
 
 set visualbell
 
-set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc,node_modules,tmp
+set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc,node_modules,tmp,*/public/production
 set wildmenu
 " }}}
 
