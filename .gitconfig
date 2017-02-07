@@ -1,8 +1,7 @@
 [core]
   excludesfile = /Users/adrien/.gitignore
   editor = vim
-  ignorecase = false
-  pager = diff-so-fancy | less
+	ignorecase = false
   # protect your project from Windows line endings creeping in
   autocrlf = input
 [user]
@@ -14,8 +13,8 @@
   st = status
   ci = commit --verbose
   co = checkout
-  di = !git diff --color | diff-so-fancy
-  dc = !git diff --color --cached | diff-so-fancy
+  di = !git diff --color
+  dc = !git diff --color --cached
   amend = commit --amend
   aa = add --all
   ff = merge --ff-only
@@ -26,8 +25,8 @@
   pom = push origin master
   pum = push upstream master
   b = branch -v
-  ds = !git diff --color --stat=160,120 | diff-so-fancy
-  dh1 = !git diff --color HEAD~1 | diff-so-fancy
+  ds = !git diff --color --stat=160,120
+  dh1 = !git diff --color HEAD~1
   rc = rebase --continue
   ra = rebase --abort
   ri = rebase --interactive
@@ -81,8 +80,3 @@
   oldHighlight = red bold 52
   newNormal = green bold
   newHighlight = green bold 22
-[interactive]
-  diffFilter = diff-so-fancy --patch-mode | less
-[filter "ignoreDebugOctolyApiUrl"]
-	clean = sed \"s/OCTOLY_API_URL = .*/OCTOLY_API_URL = localhost:3000\\/api/\"
-	smudge = sed \"s/OCTOLY_API_URL = .*/OCTOLY_API_URL = 192.168.1.49:3002\\/api/\"

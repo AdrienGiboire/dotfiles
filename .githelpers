@@ -61,3 +61,4 @@ pretty_git_log() {
         less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS --chop-long-lines
       fi
 }
+
