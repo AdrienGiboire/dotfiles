@@ -116,6 +116,7 @@ let maplocalleader = '\'
 " HTML {{{
   Plugin 'plasticboy/vim-markdown'
   Plugin 'slim-template/vim-slim'
+  autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
 " }}}
 
 " CSS {{{
