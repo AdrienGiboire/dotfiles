@@ -1,218 +1,111 @@
 " be iMproved
 set nocompatible
 filetype off
+setlocal foldmethod=marker
 
 let mapleader = ","
 let maplocalleader = '\'
 
 " Utils {{{
-  source ~/.vim/functions/util.vim
+source ~/.vim/functions/util.vim
 " }}}
 
 " VUNDLE {{{
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-  Plugin 'VundleVim/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 " }}}
 
 " GENERAL {{{
-  " sensible.vim: Defaults everyone can agree on
-  Plugin 'tpope/vim-sensible'
+" sensible.vim: Defaults everyone can agree on
+Plugin 'tpope/vim-sensible'
 
-  Plugin 'christoomey/vim-tmux-runner'
-  Plugin 'tpope/vim-dispatch'
+Plugin 'christoomey/vim-tmux-runner'
 
-  Plugin 'mileszs/ack.vim'
-  let g:ackprg = 'ag --nogroup --nocolor --column'
-  nnoremap <leader>ag :Ack!<space>
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
+let g:ctrlp_working_path_mode = ''
 
-  Plugin 'kien/ctrlp.vim'
-  let g:ctrlp_working_path_mode = ''
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+map <C-n> :NERDTreeToggle<CR>
 
-  set path+=**
+Plugin 'tpope/vim-dispatch'
 
-  Plugin 'sheerun/vim-polyglot'
+Plugin 'mileszs/ack.vim'
+let g:ackprg = 'ag --nogroup --nocolor --column'
+nnoremap <leader>ag :Ack!<space>
 
-  Plugin 'junegunn/vim-easy-align'
-  " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-  vmap <Enter> <Plug>(EasyAlign)
-  " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
-  nmap <Leader>ea <Plug>(EasyAlign)
+set path+=**
 
-  " surround.vim: quoting/parenthesizing made simple
-  Plugin 'tpope/vim-surround'
+Plugin 'sheerun/vim-polyglot'
 
-  " vinegar.vim: combine with netrw to create a delicious salad dressing
-  Plugin 'tpope/vim-vinegar'
+Plugin 'junegunn/vim-easy-align'
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+nmap <Leader>ea <Plug>(EasyAlign)
 
-  " unimpaired.vim: pairs of handy bracket mappings
-  Plugin 'tpope/vim-unimpaired'
+" surround.vim: quoting/parenthesizing made simple
+Plugin 'tpope/vim-surround'
 
-  Plugin 'majutsushi/tagbar'
-  " tagbar
-  nmap <leader>tt :TagbarToggle<CR>
-  let g:tagbar_type_swift = {
-    \ 'ctagstype': 'swift',
-    \ 'kinds' : [
-      \ 'n:Enums',
-      \ 't:Typealiases',
-      \ 'p:Protocols',
-      \ 's:Structs',
-      \ 'c:Classes',
-      \ 'f:Functions',
-      \ 'v:Variables',
-      \ 'e:Extensions'
-    \ ],
-    \ 'sort' : 0
-  \ }
-  set tags+=tags
+" vinegar.vim: combine with netrw to create a delicious salad dressing
+Plugin 'tpope/vim-vinegar'
 
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " CTAGS/CSCOPE
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Default/Generic tag file
-  set tags=tags,.tags
-
-  " Filetype specific tag files (This is used for global IDE tags)
-  autocmd FileType javascript     set tags=.tags_js,$HOME/.vim/tags/js
-  autocmd FileType html           set tags=.tags_html,$HOME/.vim/tags/html
-  autocmd FileType ruby           set tags=.tags_php,$HOME/.vim/tags/ruby
-  autocmd FileType sh             set tags=.tags_sh,$HOME/.vim/tags/sh
-" }}}
+" unimpaired.vim: pairs of handy bracket mappings
+Plugin 'tpope/vim-unimpaired'
 
 " UI {{{
-  " Highlight current line only on focused window
-  augroup CursorLine
-    au!
-    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    au WinLeave * setlocal nocursorline
-  augroup END
+" Highlight current line only on focused window
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
 
-  Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-navigator'
 " }}}
 
 " Ruby {{{
-  " rails.vim: Ruby on Rails power tools
-  Plugin 'tpope/vim-rails'
-  " bundler.vim: Lightweight support for Ruby's Bundler
-  Plugin 'tpope/vim-bundler'
-  Plugin 'sunaku/vim-ruby-minitest'
-  set completefunc=syntaxcomplete#Complete
+" rails.vim: Ruby on Rails power tools
+Plugin 'tpope/vim-rails'
+" bundler.vim: Lightweight support for Ruby's Bundler
+Plugin 'tpope/vim-bundler'
+Plugin 'sunaku/vim-ruby-minitest'
+set completefunc=syntaxcomplete#Complete
 
-  Plugin 'thoughtbot/vim-rspec'
-  let g:rspec_command = "!bin/rspec {spec}"
-  map <Leader>tc :call RunCurrentSpecFile()<CR>
-  map <Leader>ts :call RunNearestSpec()<CR>
-  map <Leader>tl :call RunLastSpec()<CR>
-  map <Leader>ta :call RunAllSpecs()<CR>
-" }}}
-
-" iOS {{{
-  Plugin 'keith/swift.vim'
-  Plugin 'gfontenot/vim-xcode'
+Plugin 'thoughtbot/vim-rspec'
+let g:rspec_command = "!bin/rspec {spec}"
+map <Leader>tc :call RunCurrentSpecFile()<CR>
+map <Leader>ts :call RunNearestSpec()<CR>
+map <Leader>tl :call RunLastSpec()<CR>
+map <Leader>ta :call RunAllSpecs()<CR>
 " }}}
 
 " HTML {{{
-  Plugin 'plasticboy/vim-markdown'
-  Plugin 'slim-template/vim-slim'
-  autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
+Plugin 'plasticboy/vim-markdown'
+Plugin 'slim-template/vim-slim'
+autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
 " }}}
 
 " CSS {{{
-  Plugin 'groenewege/vim-less'
+Plugin 'groenewege/vim-less'
 " }}}
 
 " JS {{{
-  Plugin 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
 " }}}
 
 " GIT {{{
-  autocmd Filetype gitcommit setlocal spell textwidth=72
+autocmd Filetype gitcommit setlocal spell textwidth=72
 
-  " fugitive.vim: a Git wrapper so awesome, it should be illegal
-  Plugin 'tpope/vim-fugitive'
+" fugitive.vim: a Git wrapper so awesome, it should be illegal
+Plugin 'tpope/vim-fugitive'
 
-  " rhubarb.vim: GitHub extension for fugitive.vim
-  Plugin 'tpope/vim-rhubarb'
+" rhubarb.vim: GitHub extension for fugitive.vim
+Plugin 'tpope/vim-rhubarb'
 " }}}
-
-filetype plugin indent on
-set background=dark
-syntax on
-
-" Set 5 lines to the cursor - when moving vertically
-set scrolloff=5
-
-" You want to be part of the gurus? Time to get in serious stuff and stop using
-" arrow keys. Learn the Hard Way!
-noremap <left> <nop>
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <right> <nop>
-
-" Yank from current cursor position to end of line
-map Y y$
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MULTIPURPOSE TAB KEY
-" Indent if we're at the beginning of a line. Else, do completion.
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
-
-" clear highlight after search
-noremap <silent><Leader>/ :nohls<CR>
-
-" better ESC
-inoremap jk <Esc>
-
-nmap <silent> <leader>hh :set invhlsearch<CR>
-nmap <silent> <leader>ll :set invlist<CR>
-nmap <silent> <leader>nn :set invnumber<CR>
-nmap <silent> <leader>pp :set invpaste<CR>
-nmap <silent> <leader>ii :set invrelativenumber<CR>
-
-" Seriously, guys. It's not like :W is bound to anything anyway.
-command! W :w
-command! Wq :wq
-command! Q :q
-
-" Emacs bindings in command line mode
-cnoremap <c-a> <home>
-cnoremap <c-e> <end>
-
-" Make u/U behave for undo like n/N does for search
-nnoremap U <c-r>
-
-" Fast saving and closing current buffer without closing windows displaying the
-" buffer
-nmap <leader>wq :w!<cr>:Bclose<cr>
-
-set backspace=indent,eol,start
-set encoding=utf-8
-set hidden
-set laststatus=2
-set history=1000
-set incsearch
-set list
-set listchars=trail:⌴
-
-set exrc
-set secure
-
-set shell=zsh\ -l
-
-" Don't redraw while executing macros
-set nolazyredraw
 
 " _ backups {{{
 set undodir=~/.vim/tmp/undo//     " undo files
@@ -222,11 +115,6 @@ set backup
 set noswapfile
 " _ }}}
 
-set noeol
-set relativenumber
-set numberwidth=4
-set ruler
-
 " White characters {{{
 set autoindent
 set tabstop=2
@@ -234,12 +122,6 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 set wrap
-" }}}
-
-set visualbell
-
-set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc,node_modules,tmp,*/public/production
-set wildmenu
 " }}}
 
 " Trailing whitespace {{{
@@ -351,9 +233,11 @@ nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
 
 " }}}
 
-" }}}
-
 " TEXT OBJECTS {{{
+
+  set foldmethod=syntax
+  set foldnestmax=3
+  set foldlevel=1
 
   " Shortcut for [] motion
   onoremap ir i[
@@ -464,5 +348,91 @@ nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
 
 " }}}
 
+" MISC {{{
+
+set background=dark
+syntax on
+
+" Set 5 lines to the cursor - when moving vertically
+set scrolloff=5
+
+" You want to be part of the gurus? Time to get in serious stuff and stop using
+" arrow keys. Learn the Hard Way!
+noremap <left> <nop>
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <right> <nop>
+
+" Yank from current cursor position to end of line
+map Y y$
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+" clear highlight after search
+noremap <silent><Leader>/ :nohls<CR>
+
+" better ESC
+inoremap jk <Esc>
+
+" Seriously, guys. It's not like :W is bound to anything anyway.
+command! W :w
+command! Wq :wq
+command! Q :q
+
+" Emacs bindings in command line mode
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+
+" Make u/U behave for undo like n/N does for search
+nnoremap U <c-r>
+
+" Fast saving and closing current buffer without closing windows displaying the
+" buffer
+nmap <leader>wq :w!<cr>:Bclose<cr>
+
+set backspace=indent,eol,start
+set encoding=utf-8
+set hidden
+set laststatus=2
+set history=1000
+set incsearch
+set list
+set listchars=trail:⌴
+
+set exrc
+set secure
+
+set shell=zsh\ -l
+
+" needed to improve vim performances with folding on and working on ruby/yaml
+" files
+set lazyredraw
+set number
+set regexpengine=1
+
+set noeol
+set ruler
+
+set visualbell
+
+set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc,node_modules,tmp,*/public/production
+set wildmenu
+
+" }}}
+
 call vundle#end()
+
 filetype plugin indent on
