@@ -16,6 +16,7 @@ utils=(
   imagemagick
   libevent
   giflib
+  git
   ios-sim
   openvpn
   postgresql
@@ -41,7 +42,6 @@ apps=(
   doubletwist
   evernote
   firefox
-  git
   google-chrome
   google-drive
   google-hangouts
