@@ -12,7 +12,6 @@ utils=(
   caskroom/cask/brew-cask
   Caskroom/cask/tuntap # Has to be before openvpn
   chruby
-  ctags-exuberant
   flow
   imagemagick
   libevent
@@ -34,33 +33,24 @@ brew install ${utils[@]}
 echo "==> Installing apps..."
 apps=(
   alfred
-  android-file-transfer
-  android-studio
-  androidtool
-  appzapper
   asepsis
   battle-net
   caffeine
-  cheatsheet
   dash
   divvy
   doubletwist
-  dropbox
   evernote
   firefox
   git
   google-chrome
   google-drive
   google-hangouts
-  hipchat
   iterm2
   libreoffice
   node
   pg-commander
   skype
-  sketch
   slack
-  spotify
   steam
   utorrent
   vagrant
