@@ -51,6 +51,7 @@ apps=(
   libreoffice
   node
   pg-commander
+  postman
   skype
   slack
   steam
