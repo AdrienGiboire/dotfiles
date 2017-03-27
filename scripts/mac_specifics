@@ -38,6 +38,7 @@ apps=(
   battle-net
   caffeine
   dash
+  dashlane
   divvy
   doubletwist
   evernote
@@ -46,12 +47,14 @@ apps=(
   google-drive
   google-hangouts
   iterm2
+  java
   libreoffice
   node
   pg-commander
   skype
   slack
   steam
+  telegram
   utorrent
   vagrant
   virtualbox
