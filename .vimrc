@@ -363,7 +363,6 @@ nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
 
 " MISC {{{
 
-set background=dark
 syntax on
 
 " Set 5 lines to the cursor - when moving vertically
