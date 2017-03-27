@@ -107,13 +107,24 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rhubarb'
 " }}}
 
-" _ backups {{{
+" BACKUPS {{{
+"
 set undodir=~/.vim/tmp/undo//     " undo files
 set backupdir=~/.vim/tmp/backup// " backups
 set directory=~/.vim/tmp/swap//   " swap files
+set viewdir=~/.vim/tmp/views//    " view files
+
+" silently create directories if they don't exist
+silent execute '!mkdir -p $HOME/.vim/tmp/undo'
+silent execute '!mkdir -p $HOME/.vim/tmp/backup'
+silent execute '!mkdir -p $HOME/.vim/tmp/swap'
+
+au BufWinLeave \* silent! mkview  " make vim save view (state) (folds, cursor, etc)
+au BufWinEnter \* silent! loadview " make vim load view (state) (folds, cursor, etc)
+
 set backup
 set noswapfile
-" _ }}}
+" }}}
 
 " White characters {{{
 set autoindent
