@@ -29,7 +29,7 @@ case $(uname) in
     echo "==> Installing Brew..."
     command -v brew >/dev/null 2>&1 || { echo >&2 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; exit 1; }
     brew install caskroom/cask/brew-cask Caskroom/cask/tuntap
-    brew cask install git
+    brew install git
     ;;
 esac
 
