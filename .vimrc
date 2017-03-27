@@ -6,7 +6,7 @@ setlocal foldmethod=marker
 let mapleader = ","
 let maplocalleader = '\'
 
-" Utils {{{
+" UTILS {{{
 source ~/.vim/functions/util.vim
 " }}}
 
@@ -56,6 +56,8 @@ Plugin 'tpope/vim-vinegar'
 " unimpaired.vim: pairs of handy bracket mappings
 Plugin 'tpope/vim-unimpaired'
 
+" }}}
+
 " UI {{{
 " Highlight current line only on focused window
 augroup CursorLine
@@ -67,7 +69,7 @@ augroup END
 Plugin 'christoomey/vim-tmux-navigator'
 " }}}
 
-" Ruby {{{
+" RUBY {{{
 " rails.vim: Ruby on Rails power tools
 Plugin 'tpope/vim-rails'
 " bundler.vim: Lightweight support for Ruby's Bundler
@@ -126,7 +128,7 @@ set backup
 set noswapfile
 " }}}
 
-" White characters {{{
+" WHITE CHARACTERS {{{
 set autoindent
 set tabstop=2
 set softtabstop=2
@@ -135,7 +137,7 @@ set expandtab
 set wrap
 " }}}
 
-" Trailing whitespace {{{
+" TRAILING WHITESPACE {{{
 " Only shown when not in insert mode so I don't go insane.
 augroup trailing
     au!
@@ -175,7 +177,7 @@ autocmd FileType java :TrimSpaces
 
 " }}}
 
-" . searching {{{
+" SEARCHING {{{
 
 " sane regexes
 nnoremap / /\v
@@ -206,7 +208,7 @@ nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
 " }}}
 
-" Navigation & UI {{{
+" NAVIGATION & UI {{{
 
 " Begining & End of line in Normal mode
 noremap H ^
@@ -273,7 +275,7 @@ nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
 
 " }}}
 
-" Buffer Handling {{{
+" BUFFER HANDLING {{{
 
   " Visit http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
   " to learn more about :Bclose
@@ -447,3 +449,5 @@ set wildmenu
 call vundle#end()
 
 filetype plugin indent on
+
+" vim: foldmethod=marker foldmarker={{{,}}} foldlevel=0
