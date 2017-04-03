@@ -19,7 +19,6 @@
   aa = add --all
   ff = merge --ff-only
   pullff = pull --ff-only
-  pullr = pull --rebase
   noff = merge --no-ff
   fa = fetch --all
   pom = push origin master
@@ -68,6 +67,7 @@
   tool = vimdiff
 [pull]
   default = current
+	rebase = true
 [push]
   default = current
 [difftool]
