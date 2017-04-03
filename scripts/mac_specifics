@@ -56,6 +56,7 @@ apps=(
   slack
   steam
   telegram
+  tunnelblick
   utorrent
   vagrant
   virtualbox
