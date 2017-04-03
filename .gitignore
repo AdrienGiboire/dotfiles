@@ -1,4 +1,4 @@
 .vim/.netrwhist
 .vim/bundle
 .vim/tmp
-bin/.DS_Store
+.DS_Store
