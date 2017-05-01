@@ -23,7 +23,7 @@ declare -a list_of_files=(
 case $(uname) in
   'Linux')
     echo "==> Installing Git..."
-    aptitude install git
+    apt-get install git
     ;;
   'Darwin')
     echo "==> Installing Brew..."
