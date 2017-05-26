@@ -249,7 +249,7 @@ nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
 " TEXT OBJECTS {{{
 
   set foldmethod=syntax
-  set foldnestmax=3
+  set foldnestmax=5
   set foldlevel=1
 
   " Shortcut for [] motion
@@ -403,6 +403,10 @@ inoremap jk <Esc>
 command! W :w
 command! Wq :wq
 command! Q :q
+
+" Why a command used so much needs more keystroke than a barely known command?
+nnoremap ; :
+nnoremap : ;
 
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
