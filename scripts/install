@@ -57,12 +57,17 @@ declare -a list_of_files=(
 
 case $(uname) in
   'Linux')
-    echo "==> Installing Git..."
-    apt-get install git
+    command -v git >/dev/null 2>&1 || {
+      echo "==> Installing Git..."
+      apt-get install git
+    }
     ;;
   'Darwin')
-    echo "==> Installing Brew..."
-    command -v brew >/dev/null 2>&1 || { echo >&2 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; exit 1; }
+    command -v brew >/dev/null 2>&1 || {
+      echo "==> Installing Brew..."
+      echo >&2 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      exit 1
+    }
     brew install caskroom/cask/brew-cask Caskroom/cask/tuntap
     brew install git
     ;;
