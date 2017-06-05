@@ -2,8 +2,15 @@
 
 set -e
 
-echo "==> Installing Brew..."
-command -v brew >/dev/null 2>&1 || { echo >&2 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; exit 1; }
+mkdir -p $HOME/code
+
+echo "==> Installing ruby..."
+brew install ruby-install
+ruby-install ruby
+brew install chruby
+
+echo "==> Installing gems..."
+gem install xcpretty
 
 echo "==> Installing utils..."
 utils=(
