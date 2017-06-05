@@ -1,7 +1,7 @@
 ## Install
 
 ```
-curl -fsSL https://raw.github.com/AdrienGiboire/dotfiles/master/scripts/install
+curl -fsSL https://raw.github.com/AdrienGiboire/dotfiles/master/scripts/install | bash
 ```
 
 ### Update
