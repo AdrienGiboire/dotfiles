@@ -71,7 +71,7 @@ case $(uname) in
 esac
 
 echo "==> Fetching sources..."
-[ ! -d $HOME_DIRECTORY/.dotfiles ] && git clone git@github.com:AdrienGiboire/dotfiles.git $HOME_DIRECTORY/.dotfiles &> /dev/null
+[ ! -d $HOME_DIRECTORY/.dotfiles ] && git clone https://github.com/AdrienGiboire/dotfiles.git $HOME_DIRECTORY/.dotfiles &> /dev/null
 wait $!
 
 cd $HOME_DIRECTORY/.dotfiles
