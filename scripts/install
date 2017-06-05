@@ -1,6 +1,41 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
+
+HOME_DIRECTORY=$HOME
+
+usage () {
+  echo "Infos -- Usage: ./scripts/install [options]"
+  echo "         Options: -d (default: $HOME_DIRECTORY) dotfiles root directory"
+  exit 1
+}
+
+# Parse the options
+while getopts ':d:h' opt
+do
+  case $opt in
+    d)
+      echo "Before: $HOME_DIRECTORY"
+      HOME_DIRECTORY=$OPTARG
+      echo "After: $HOME_DIRECTORY"
+      exit 1
+      ;;
+    h)
+      usage
+      exit 1
+      ;;
+    \?)
+      echo "Error -- Invalid option: -$OPTARG" >&2
+      usage
+      exit 1
+      ;;
+    :)
+      echo "Error -- Option -$OPTARG requires an argument."
+      usage
+      exit 1
+      ;;
+  esac
+done
 
 declare -a list_of_files=(
   ".bundler-exec.sh"
@@ -34,10 +69,10 @@ case $(uname) in
 esac
 
 echo "==> Fetching sources..."
-git clone git@github.com:AdrienGiboire/dotfiles.git .dotfiles &> /dev/null
+git clone git@github.com:AdrienGiboire/dotfiles.git $HOME_DIRECTORY/.dotfiles &> /dev/null
 wait $!
 
-cd ~/.dotfiles
+cd $HOME_DIRECTORY/.dotfiles
 
 echo "==> Linking dotfiles..."
 for file in "${list_of_files[@]}"; do
@@ -45,20 +80,10 @@ for file in "${list_of_files[@]}"; do
     echo "====> Linking $file..."
   fi
 
-  ln -s ~/.dotfiles/$file ~/$file
+  ln -s $HOME_DIRECTORY/.dotfiles/$file $HOME_DIRECTORY/$file
 done
 
 source ./scripts/os_specifics
 
-mkdir -p $HOME/code
-
-echo "==> Installing ruby..."
-brew install ruby-install
-ruby-install ruby
-brew install chruby
-
-echo "==> Installing gems..."
-gem install xcpretty
-
 echo "==> Bootstrapping..."
-$HOME/.dotfiles/scripts/bootstrap
+$HOME_DIRECTORY/.dotfiles/scripts/bootstrap
