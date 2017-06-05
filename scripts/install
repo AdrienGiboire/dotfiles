@@ -59,7 +59,7 @@ case $(uname) in
   'Linux')
     command -v git >/dev/null 2>&1 || {
       echo "==> Installing Git..."
-      apt-get install git
+      sudo apt-get install git
     }
     ;;
   'Darwin')

@@ -20,4 +20,4 @@ utils=(
 )
 
 echo "==> Installing utils {$(join ' ' ${utils[@]})}"
-apt-get install -y $(join ' ' ${utils[@]})
+sudo apt-get install -y $(join ' ' ${utils[@]})
