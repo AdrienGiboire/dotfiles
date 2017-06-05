@@ -1,6 +1,49 @@
 #!/bin/bash
 
-set -e
+set -ev
+
+HOME_DIRECTORY=$HOME
+
+usage () {
+  echo "Infos -- Usage: ./scripts/uninstall [options]"
+  echo "         Options: -d (default: $HOME_DIRECTORY) dotfiles root directory"
+  exit 1
+}
+
+# Parse the options
+while getopts ':d:h' opt
+do
+  case $opt in
+    d)
+      echo "Before: $HOME_DIRECTORY"
+      HOME_DIRECTORY=$OPTARG
+      echo "After: $HOME_DIRECTORY"
+      exit 1
+      ;;
+    h)
+      usage
+      exit 1
+      ;;
+    \?)
+      echo "Error -- Invalid option: -$OPTARG" >&2
+      usage
+      exit 1
+      ;;
+    :)
+      echo "Error -- Option -$OPTARG requires an argument."
+      usage
+      exit 1
+      ;;
+    *)
+      [ ! -d $HOME_DIRECTORY ] && {
+        echo "Could not automatically find '.dotfiles' directory."
+        echo "Try again by providing the path to it using the -d option."
+        usage
+        exit 1
+      }
+      ;;
+  esac
+done
 
 declare -a list_of_files=(
   ".bundler-exec.sh"
