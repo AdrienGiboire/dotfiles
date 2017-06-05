@@ -15,10 +15,7 @@ while getopts ':d:h' opt
 do
   case $opt in
     d)
-      echo "Before: $HOME_DIRECTORY"
       HOME_DIRECTORY=$OPTARG
-      echo "After: $HOME_DIRECTORY"
-      exit 1
       ;;
     h)
       usage

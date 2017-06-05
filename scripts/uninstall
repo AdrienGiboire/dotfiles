@@ -3,6 +3,7 @@
 set -e
 
 HOME_DIRECTORY=$HOME
+VERBOSE=false
 
 usage () {
   echo "Infos -- Usage: ./scripts/uninstall [options]"
@@ -11,14 +12,14 @@ usage () {
 }
 
 # Parse the options
-while getopts ':d:h' opt
+while getopts ':d:vh' opt
 do
   case $opt in
     d)
-      echo "Before: $HOME_DIRECTORY"
       HOME_DIRECTORY=$OPTARG
-      echo "After: $HOME_DIRECTORY"
-      exit 1
+      ;;
+    v)
+      VERBOSE=true
       ;;
     h)
       usage
@@ -73,11 +74,11 @@ fi
 echo "==> Deleting files..."
 
 for file in "${list_of_files[@]}"; do
-  if $verbose; then
+  if $VERBOSE; then
     echo "====> Deleting $file..."
   fi
 
-  rm -fr "$file"
+  rm -fr $HOME_DIRECTORY/$file
 done
 
 echo "==> Done Uninstalling..."
