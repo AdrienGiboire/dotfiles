@@ -81,12 +81,9 @@ Plugin 'tpope/vim-bundler'
 Plugin 'sunaku/vim-ruby-minitest'
 set completefunc=syntaxcomplete#Complete
 
-Plugin 'thoughtbot/vim-rspec'
-let g:rspec_command = "!bin/rspec {spec}"
-map <Leader>tc :call RunCurrentSpecFile()<CR>
-map <Leader>ts :call RunNearestSpec()<CR>
-map <Leader>tl :call RunLastSpec()<CR>
-map <Leader>ta :call RunAllSpecs()<CR>
+noremap <Leader>ta :execute ":!bundle exec rspec spec"<CR>
+noremap <Leader>tc :execute ":!bundle exec rspec ". expand('%')<CR>
+noremap <Leader>ts :execute ":!bundle exec rspec ". expand('%') .":". line('.')<CR>
 " }}}
 
 " HTML {{{
