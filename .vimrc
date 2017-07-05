@@ -81,9 +81,9 @@ Plugin 'tpope/vim-bundler'
 Plugin 'sunaku/vim-ruby-minitest'
 set completefunc=syntaxcomplete#Complete
 
-noremap <Leader>ta :execute ":!bundle exec rspec spec"<CR>
-noremap <Leader>tc :execute ":!bundle exec rspec ". expand('%')<CR>
-noremap <Leader>ts :execute ":!bundle exec rspec ". expand('%') .":". line('.')<CR>
+nnoremap <Leader>ta :execute ":!bundle exec rspec spec"<CR>
+nnoremap <Leader>tc :execute ":!bundle exec rspec ". expand('%')<CR>
+nnoremap <Leader>ts :execute ":!bundle exec rspec ". expand('%') .":". line('.')<CR>
 " }}}
 
 " HTML {{{
@@ -212,8 +212,8 @@ nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 " NAVIGATION & UI {{{
 
 " Begining & End of line in Normal mode
-noremap H ^
-noremap L g_
+nnoremap H ^
+nnoremap L g_
 
 " more natural movement with wrap on
 nnoremap j gj
