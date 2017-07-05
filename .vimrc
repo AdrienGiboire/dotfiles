@@ -66,6 +66,10 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
+" Set up a 80 columns guideline
+highlight ColorColumn ctermbg=darkgrey guibg=darkgrey
+set colorcolumn=80
+
 Plugin 'christoomey/vim-tmux-navigator'
 " }}}
 
