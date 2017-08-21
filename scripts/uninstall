@@ -57,13 +57,8 @@ declare -a list_of_files=(
   ".tmux.conf"
   ".vim"
   ".vimrc"
-  ".zlogin"
-  ".zlogout"
-  ".zprezto"
-  ".zpreztorc"
-  ".zprofile"
-  ".zshenv"
-  ".zshrc"
+  "ze-best-zsh-config/.zsh"
+  "ze-best-zsh-config/.zshrc"
 )
 
 if [ "$#" -gt 0 ] && [ "$1" = "-v" ]; then

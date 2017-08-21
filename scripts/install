@@ -44,13 +44,8 @@ declare -a list_of_files=(
   ".tmux"
   ".vim"
   ".vimrc"
-  ".zlogin"
-  ".zlogout"
-  ".zprezto"
-  ".zpreztorc"
-  ".zprofile"
-  ".zshenv"
-  ".zshrc"
+  "ze-best-zsh-config/.zsh"
+  "ze-best-zsh-config/.zshrc"
 )
 
 case $(uname) in
