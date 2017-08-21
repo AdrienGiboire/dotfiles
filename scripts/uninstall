@@ -52,6 +52,7 @@ declare -a list_of_files=(
   ".gitconfig"
   ".githelpers"
   ".jshintrc"
+  ".pryrc"
   ".tmux"
   ".tmux.conf"
   ".vim"
