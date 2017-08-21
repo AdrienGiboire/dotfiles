@@ -57,8 +57,8 @@ declare -a list_of_files=(
   ".tmux.conf"
   ".vim"
   ".vimrc"
-  "ze-best-zsh-config/.zsh"
-  "ze-best-zsh-config/.zshrc"
+  ".zsh"
+  ".zshrc"
 )
 
 if [ "$#" -gt 0 ] && [ "$1" = "-v" ]; then

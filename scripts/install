@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
 set -e
 
@@ -75,10 +75,10 @@ cd $HOME_DIRECTORY/.dotfiles
 echo "==> Linking dotfiles..."
 for file in "${list_of_files[@]}"; do
   if $verbose; then
-    echo "====> Linking $file..."
+    echo "====> Linking ${file:t}..."
   fi
 
-  ln -s $HOME_DIRECTORY/.dotfiles/$file $HOME_DIRECTORY/$file
+  ln -s $HOME_DIRECTORY/.dotfiles/$file $HOME_DIRECTORY/${file:t}
 done
 
 source ./scripts/os_specifics
