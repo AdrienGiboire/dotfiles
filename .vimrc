@@ -1,61 +1,126 @@
+" Vundle Stuff {{{
+
 " be iMproved
-set nocompatible
-filetype off
+set nocompatible " Required by Vundle
+filetype off     " Required by Vundle
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" bundles
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'caigithub/a_indent'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-runner' " A simple, vimscript only, command runner for sending commands from vim to tmux.
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'groenewege/vim-less'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'lmeijvogel/vim-yaml-helper' " Helper methods for Yaml navigation in vim
+Plugin 'mileszs/ack.vim'
+Plugin 'nanotech/jellybeans.vim' " Color
+Plugin 'neoclide/vim-jsx-improve' " Syntax and indent plugin for React JSX.
+Plugin 'pangloss/vim-javascript'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'scrooloose/nerdtree'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'slim-template/vim-slim'
+Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tpope/vim-bundler' " Lightweight support for Ruby's Bundler
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-fugitive' " a Git wrapper so awesome, it should be illegal
+Plugin 'tpope/vim-rails' " Ruby on Rails power tools
+Plugin 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
+Plugin 'tpope/vim-surround' " quoting/parenthesizing made simple
+Plugin 'tpope/vim-unimpaired' " pairs of handy bracket mappings
+Plugin 'tpope/vim-vinegar' " combine with netrw to create a delicious salad dressing
+
+call vundle#end()
+filetype plugin indent on
+
+" }}}
+
+" GENERAL {{{
+
 setlocal foldmethod=marker
+colorscheme jellybeans
 
 let mapleader = ","
 let maplocalleader = '\'
 
-" UTILS {{{
 source ~/.vim/functions/util.vim
-" }}}
 
-" VUNDLE {{{
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" RSpec.vim mappings
+" map <Leader>t :call RunCurrentSpecFile()<CR>
+" map <Leader>s :call RunNearestSpec()<CR>
+" map <Leader>l :call RunLastSpec()<CR>
+" map <Leader>a :call RunAllSpecs()<CR>
 
-Plugin 'VundleVim/Vundle.vim'
-" }}}
-
-" GENERAL {{{
-" sensible.vim: Defaults everyone can agree on
-Plugin 'tpope/vim-sensible'
-
-Plugin 'christoomey/vim-tmux-runner'
-
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tacahiroy/ctrlp-funky'
-let g:ctrlp_working_path_mode = ''
-
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 map <C-n> :NERDTreeToggle<CR>
 
-Plugin 'tpope/vim-dispatch'
-
-Plugin 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 nnoremap <leader>ag :Ack!<space>
 
 set path+=**
 
-Plugin 'sheerun/vim-polyglot'
-
-Plugin 'junegunn/vim-easy-align'
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>ea <Plug>(EasyAlign)
 
-" surround.vim: quoting/parenthesizing made simple
-Plugin 'tpope/vim-surround'
 
-" vinegar.vim: combine with netrw to create a delicious salad dressing
-Plugin 'tpope/vim-vinegar'
+" }}}
 
-" unimpaired.vim: pairs of handy bracket mappings
-Plugin 'tpope/vim-unimpaired'
+" PLUGINS CONFIGURATION {{{
+" Xuyuanp/nerdtree-git-plugin
+" caigithub/a_indent
+" christoomey/vim-tmux-navigator
+" christoomey/vim-tmux-runner
 
+" ctrlpvim/ctrlp.vim
+let g:ctrlp_working_path_mode = ''
+
+" groenewege/vim-less
+" junegunn/vim-easy-align
+
+" lmeijvogel/vim-yaml-helper
+let g:vim_yaml_helper#auto_display_path = 1
+
+" mileszs/ack.vim
+" nanotech/jellybeans.vim
+" neoclide/vim-jsx-improve
+" pangloss/vim-javascript
+" plasticboy/vim-markdown
+" scrooloose/nerdtree
+" sheerun/vim-polyglot
+" slim-template/vim-slim
+
+" tacahiroy/ctrlp-funky
+nnoremap <Leader>fu :CtrlPFunky<CR>
+" Narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky '.expand('<cword>')<CR>
+
+" thoughtbot/vim-rspec
+" tpope/vim-bundler
+" tpope/vim-dispatch
+" tpope/vim-fugitive
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gl :Glog<CR>
+nnoremap <Leader>gdel :Gdelete<CR>
+nnoremap <Leader>gmov :Gmove<CR>
+
+" tpope/vim-rails
+" tpope/vim-rhubarb
+" tpope/vim-surround
+" tpope/vim-unimpaired
+" tpope/vim-vinegar
 " }}}
 
 " UI {{{
@@ -66,48 +131,27 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
-" Set up a 80 columns guideline
-highlight ColorColumn ctermbg=darkgrey guibg=darkgrey
-set colorcolumn=80
+set statusline=%f " Path to the file
+set statusline+=%= " Swich to the right side
+set statusline+=%l " Current line
+set statusline+=/ " Separator
+set statusline+=%L " Total lines
 
-Plugin 'christoomey/vim-tmux-navigator'
-" }}}
-
-" RUBY {{{
-" rails.vim: Ruby on Rails power tools
-Plugin 'tpope/vim-rails'
-" bundler.vim: Lightweight support for Ruby's Bundler
-Plugin 'tpope/vim-bundler'
-Plugin 'sunaku/vim-ruby-minitest'
-set completefunc=syntaxcomplete#Complete
-
-nnoremap <Leader>ta :execute ":!bundle exec rspec spec"<CR>
-nnoremap <Leader>tc :execute ":!bundle exec rspec ". expand('%')<CR>
-nnoremap <Leader>ts :execute ":!bundle exec rspec ". expand('%') .":". line('.')<CR>
 " }}}
 
 " HTML {{{
-Plugin 'plasticboy/vim-markdown'
-Plugin 'slim-template/vim-slim'
 autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
 " }}}
 
 " CSS {{{
-Plugin 'groenewege/vim-less'
 " }}}
 
 " JS {{{
-Plugin 'pangloss/vim-javascript'
 " }}}
 
 " GIT {{{
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
-" fugitive.vim: a Git wrapper so awesome, it should be illegal
-Plugin 'tpope/vim-fugitive'
-
-" rhubarb.vim: GitHub extension for fugitive.vim
-Plugin 'tpope/vim-rhubarb'
 " }}}
 
 " BACKUPS {{{
@@ -259,7 +303,6 @@ nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
   vnoremap ir i[
   vnoremap ar a[
 
-  Plugin 'caigithub/a_indent'
 
   " Simulate emacs' transpose-word feature, including its inverse
   " Note: Doesn't work well with words that include punctuation
@@ -379,6 +422,12 @@ noremap <right> <nop>
 " Yank from current cursor position to end of line
 map Y y$
 
+" Use system clipboard
+noremap y "*y
+noremap Y "*Y
+noremap p "*p
+noremap P "*P
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
@@ -418,7 +467,7 @@ nnoremap U <c-r>
 
 " Fast saving and closing current buffer without closing windows displaying the
 " buffer
-nmap <leader>wq :w!<cr>:Bclose<cr>
+nnoremap <leader>wq :w!<cr>:Bclose<cr>
 
 set backspace=indent,eol,start
 set encoding=utf-8
@@ -450,8 +499,6 @@ set wildmenu
 
 " }}}
 
-call vundle#end()
-
-filetype plugin indent on
+noremap <C-s> <ESC>:w<CR>
 
 " vim: foldmethod=marker foldmarker={{{,}}} foldlevel=0
