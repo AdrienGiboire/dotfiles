@@ -423,10 +423,8 @@ noremap <right> <nop>
 map Y y$
 
 " Use system clipboard
-noremap y "*y
-noremap Y "*Y
-noremap p "*p
-noremap P "*P
+noremap <c-c> "*y
+noremap <c-v> "*p
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
