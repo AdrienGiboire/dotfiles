@@ -12,6 +12,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " bundles
+Plugin 'AdrienGiboire/vim-todo'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'caigithub/a_indent'
 Plugin 'christoomey/vim-tmux-navigator'
