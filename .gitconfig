@@ -13,6 +13,7 @@
   st = status
   ci = commit --verbose
   co = checkout
+  cpk = cherry-pick
   di = !git diff --color
   dc = !git diff --color --cached
   amend = commit --amend
