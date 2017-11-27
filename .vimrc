@@ -77,6 +77,8 @@ nmap <Leader>ea <Plug>(EasyAlign)
 " }}}
 
 " PLUGINS CONFIGURATION {{{
+" todo
+nnoremap <Leader>td :e ~/ownCloud/todo.todo<CR>
 " Xuyuanp/nerdtree-git-plugin
 " caigithub/a_indent
 " christoomey/vim-tmux-navigator
