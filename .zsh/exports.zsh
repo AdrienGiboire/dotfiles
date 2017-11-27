@@ -11,7 +11,6 @@ export EDITOR='vim'
 export LESS='--ignore-case --raw-control-chars'
 # CTAGS Sorting in Vim is better behaved with this in place
 export LC_COLLATE=C
-export HOMEBREW_GITHUB_API_TOKEN=$(cat ~/.gh_api_token)
 
 # COMPILATION FLAGS
 # This resolves issues install the mysql, postgres, and other gems with native
