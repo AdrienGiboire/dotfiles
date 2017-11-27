@@ -73,7 +73,6 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>ea <Plug>(EasyAlign)
 
-
 " }}}
 
 " PLUGINS CONFIGURATION {{{
@@ -134,9 +133,12 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
-set statusline=%f " Path to the file
-set statusline+=%= " Swich to the right side
-set statusline+=%l " Current line
+set statusline=%F%m%r%h%w\  "fullpath and status modified sign
+set statusline+=\ %y "filetype
+set statusline+=\ %{fugitive#statusline()}
+" this line below pushes everything below it to the right hand side
+set statusline+=%=
+set statusline+=\%l
 set statusline+=/ " Separator
 set statusline+=%L " Total lines
 
@@ -231,8 +233,12 @@ autocmd FileType java :TrimSpaces
 nnoremap / /\v
 vnoremap / /\v
 
+" If the 'ignorecase' option is on, the case of normal letters is ignored.
+" 'smartcase' can be set to ignore case when the pattern contains lowercase
+" letters only.
 set ignorecase
 set smartcase
+
 set showmatch
 set gdefault
 set hlsearch
@@ -262,11 +268,9 @@ nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 noremap H ^
 noremap L g_
 
-" more natural movement with wrap on
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
+" more natural movement with wrap on  but don't remap when it's called with a count
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " Easy splitted window navigation
 noremap <C-h>  <C-w>h
@@ -296,111 +300,111 @@ nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
 
 " TEXT OBJECTS {{{
 
-  " Shortcut for [] motion
-  onoremap ir i[
-  onoremap ar a[
-  vnoremap ir i[
-  vnoremap ar a[
+" Shortcut for [] motion
+onoremap ir i[
+onoremap ar a[
+vnoremap ir i[
+vnoremap ar a[
 
 
-  " Simulate emacs' transpose-word feature, including its inverse
-  " Note: Doesn't work well with words that include punctuation
-  nnoremap <Leader><Leader>l /\<<CR>yiw?\<<CR>viwp/\<<CR>viwp:noh<CR>
-  nnoremap <Leader><Leader>h ?\w\><CR>yiw/\<<CR>viwp?\w\><CR>viwp:noh<CR>
+" Simulate emacs' transpose-word feature, including its inverse
+" Note: Doesn't work well with words that include punctuation
+nnoremap <Leader><Leader>l /\<<CR>yiw?\<<CR>viwp/\<<CR>viwp:noh<CR>
+nnoremap <Leader><Leader>h ?\w\><CR>yiw/\<<CR>viwp?\w\><CR>viwp:noh<CR>
 
-  " find git's inline diffs more easily
-  nnoremap <Leader>fd /<<<<<<\_.\{-}>>>>>>.*<CR>
+" find git's inline diffs more easily
+nnoremap <Leader>fd /<<<<<<\_.\{-}>>>>>>.*<CR>
 
-  " * and # for selected text, trying to keep the search literal (in case of
-  " filenames, for example.)
-  xnoremap * y/\V<c-r>=escape(@", '/\')<cr><cr>
-  xnoremap # y?\V<c-r>=escape(@", '?\')<cr><cr>
+" * and # for selected text, trying to keep the search literal (in case of
+" filenames, for example.)
+xnoremap * y/\V<c-r>=escape(@", '/\')<cr><cr>
+xnoremap # y?\V<c-r>=escape(@", '?\')<cr><cr>
 
 " }}}
 
 " BUFFER HANDLING {{{
 
-  " Visit http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
-  " to learn more about :Bclose
+" Visit http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
+" to learn more about :Bclose
 
-  " Delete buffer while keeping window layout (don't close buffer's windows).
-  " Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
-  if v:version < 700 || exists('loaded_bclose') || &cp
-    finish
+" Delete buffer while keeping window layout (don't close buffer's windows).
+" Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
+if v:version < 700 || exists('loaded_bclose') || &cp
+  finish
+endif
+let loaded_bclose = 1
+if !exists('bclose_multiple')
+  let bclose_multiple = 1
+endif
+
+" Display an error message.
+function! s:Warn(msg)
+  echohl ErrorMsg
+  echomsg a:msg
+  echohl NONE
+endfunction
+
+" Command ':Bclose' executes ':bd' to delete buffer in current window.
+" The window will show the alternate buffer (Ctrl-^) if it exists,
+" or the previous buffer (:bp), or a blank buffer if no previous.
+" Command ':Bclose!' is the same, but executes ':bd!' (discard changes).
+" An optional argument can specify which buffer to close (name or number).
+function! s:Bclose(bang, buffer)
+  if empty(a:buffer)
+    let btarget = bufnr('%')
+  elseif a:buffer =~ '^\d\+$'
+    let btarget = bufnr(str2nr(a:buffer))
+  else
+    let btarget = bufnr(a:buffer)
   endif
-  let loaded_bclose = 1
-  if !exists('bclose_multiple')
-    let bclose_multiple = 1
+  if btarget < 0
+    call s:Warn('No matching buffer for '.a:buffer)
+    return
   endif
-
-  " Display an error message.
-  function! s:Warn(msg)
-    echohl ErrorMsg
-    echomsg a:msg
-    echohl NONE
-  endfunction
-
-  " Command ':Bclose' executes ':bd' to delete buffer in current window.
-  " The window will show the alternate buffer (Ctrl-^) if it exists,
-  " or the previous buffer (:bp), or a blank buffer if no previous.
-  " Command ':Bclose!' is the same, but executes ':bd!' (discard changes).
-  " An optional argument can specify which buffer to close (name or number).
-  function! s:Bclose(bang, buffer)
-    if empty(a:buffer)
-      let btarget = bufnr('%')
-    elseif a:buffer =~ '^\d\+$'
-      let btarget = bufnr(str2nr(a:buffer))
+  if empty(a:bang) && getbufvar(btarget, '&modified')
+    call s:Warn('No write since last change for buffer '.btarget.' (use :Bclose!)')
+    return
+  endif
+  " Numbers of windows that view target buffer which we will delete.
+  let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
+  if !g:bclose_multiple && len(wnums) > 1
+    call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
+    return
+  endif
+  let wcurrent = winnr()
+  for w in wnums
+    execute w.'wincmd w'
+    let prevbuf = bufnr('#')
+    if prevbuf > 0 && buflisted(prevbuf) && prevbuf != w
+      buffer #
     else
-      let btarget = bufnr(a:buffer)
+      bprevious
     endif
-    if btarget < 0
-      call s:Warn('No matching buffer for '.a:buffer)
-      return
-    endif
-    if empty(a:bang) && getbufvar(btarget, '&modified')
-      call s:Warn('No write since last change for buffer '.btarget.' (use :Bclose!)')
-      return
-    endif
-    " Numbers of windows that view target buffer which we will delete.
-    let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
-    if !g:bclose_multiple && len(wnums) > 1
-      call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
-      return
-    endif
-    let wcurrent = winnr()
-    for w in wnums
-      execute w.'wincmd w'
-      let prevbuf = bufnr('#')
-      if prevbuf > 0 && buflisted(prevbuf) && prevbuf != w
-        buffer #
+    if btarget == bufnr('%')
+      " Numbers of listed buffers which are not the target to be deleted.
+      let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != btarget')
+      " Listed, not target, and not displayed.
+      let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
+      " Take the first buffer, if any (could be more intelligent).
+      let bjump = (bhidden + blisted + [-1])[0]
+      if bjump > 0
+        execute 'buffer '.bjump
       else
-        bprevious
+        execute 'enew'.a:bang
       endif
-      if btarget == bufnr('%')
-        " Numbers of listed buffers which are not the target to be deleted.
-        let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != btarget')
-        " Listed, not target, and not displayed.
-        let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
-        " Take the first buffer, if any (could be more intelligent).
-        let bjump = (bhidden + blisted + [-1])[0]
-        if bjump > 0
-          execute 'buffer '.bjump
-        else
-          execute 'enew'.a:bang
-        endif
-      endif
-    endfor
-    execute 'bdelete'.a:bang.' '.btarget
-    let g:last_buffer = expand('%:p')
-    execute wcurrent.'wincmd w'
-  endfunction
-  command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
-  nnoremap <silent> <Leader>bd :Bclose<CR>
+    endif
+  endfor
+  execute 'bdelete'.a:bang.' '.btarget
+  let g:last_buffer = expand('%:p')
+  execute wcurrent.'wincmd w'
+endfunction
+command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
+nnoremap <silent> <Leader>bd :Bclose<CR>
 
-  " Save last closed buffer
-  au! BufDelete * let g:last_buffer = expand('%:p')
-  " Open last closed buffer with `,bl` mapping
-  map <silent> <leader>bl :exec ':e '. g:last_buffer<CR>
+" Save last closed buffer
+au! BufDelete * let g:last_buffer = expand('%:p')
+" Open last closed buffer with `,bl` mapping
+map <silent> <leader>bl :exec ':e '. g:last_buffer<CR>
 
 " }}}
 
@@ -417,6 +421,8 @@ noremap <left> <nop>
 noremap <up> <nop>
 noremap <down> <nop>
 noremap <right> <nop>
+
+noremap K <nop>
 
 " Yank from current cursor position to end of line
 map Y y$
@@ -479,7 +485,10 @@ set shell=zsh\ -l
 " needed to improve vim performances with folding on and working on ruby/yaml
 " files
 set lazyredraw
+
 set number
+set relativenumber
+
 set regexpengine=1
 
 set noeol
@@ -488,7 +497,35 @@ set ruler
 set visualbell
 
 set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc,node_modules,tmp,*/public/production
+set wildmode=full
 set wildmenu
+
+" assume the /g flag on :s substitutions to replace all matches in a line
+set gdefault
+
+" When a file has been detected to have been changed outside of Vim and it has
+" not been changed inside of Vim, automatically read it again.  When the file
+" has been deleted this is not done.
+set autoread
+
+" Every wrapped line will continue visually indented (same amount of space as
+" the beginning of that line), thus preserving horizontal blocks of text.
+set breakindent
+
+set tags=./.tags;
+
+" make the completion menu a bit more readable
+highlight PmenuSel ctermbg=white ctermfg=black
+highlight Pmenu ctermbg=black ctermfg=white
+
+" so it's clear which paren I'm on and which is matched
+highlight MatchParen cterm=none ctermbg=none ctermfg=yellow
+
+" make copy/paste from system clip easier
+vnoremap <silent><leader>y "*y
+vnoremap <silent><leader>p "*p
+
+set completeopt-=preview
 
 " }}}
 
