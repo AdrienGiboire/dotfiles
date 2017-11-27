@@ -296,10 +296,6 @@ nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
 
 " TEXT OBJECTS {{{
 
-  set foldmethod=syntax
-  set foldnestmax=5
-  set foldlevel=1
-
   " Shortcut for [] motion
   onoremap ir i[
   onoremap ar a[
@@ -424,10 +420,6 @@ noremap <right> <nop>
 
 " Yank from current cursor position to end of line
 map Y y$
-
-" Use system clipboard
-noremap <c-c> "*y
-noremap <c-v> "*p
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
