@@ -530,7 +530,8 @@ set completeopt-=preview
 " }}}
 
 noremap <C-s> <ESC>:w<CR>
-noremap <silent><leader>rc :VtrSendCommandToRunner rc
-noremap <silent><leader>rp :VtrSendLinesToRunner
+noremap <silent><leader>rc :VtrSendCommandToRunner rc<CR>
+noremap <silent><leader>rp :VtrSendLinesToRunner<CR>
+noremap <silent><leader>rd :VtrSendCtrlD<CR>
 
 " vim: foldmethod=marker foldmarker={{{,}}} foldlevel=0
