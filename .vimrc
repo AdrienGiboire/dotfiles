@@ -286,10 +286,6 @@ nnoremap <leader>h <C-w>s<C-w>j
 vnoremap < <gv
 vnoremap > >gv
 
-" Tweak window height with a fast double button press
-nnoremap -- <C-w>-
-nnoremap ++ <C-w>+
-
 " Jump to paragraph ends
 vnoremap g{ :exe "norm m`gv``k".v:count1."{j"<CR>``j``
 vnoremap g} :exe "norm m`gv``j".v:count1."}k"<CR>``k``
