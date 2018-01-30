@@ -54,7 +54,7 @@
   l = "!. ~/.githelpers && pretty_git_log"
   la = !git l --all
 
-  pr = pull-request
+  pr = "!. ~/.githelpers && pull_request"
   d = difftool
 	please = push --force-with-lease
 	commend = commit --amend --no-edit

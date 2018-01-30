@@ -62,3 +62,9 @@ pretty_git_log() {
       fi
 }
 
+pull_request() {
+  git symbolic-ref HEAD | 
+  sed -e "s/^refs\/heads\///" | 
+  awk '{printf "https://github.com/octoly/octoly/compare/%s?expand=1",$1}' |
+  xargs open
+}
