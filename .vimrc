@@ -13,7 +13,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " bundles
 Plugin 'AdrienGiboire/vim-todo'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'caigithub/a_indent'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'christoomey/vim-tmux-runner' " A simple, vimscript only, command runner for sending commands from vim to tmux.
@@ -26,7 +25,6 @@ Plugin 'nanotech/jellybeans.vim' " Color
 Plugin 'neoclide/vim-jsx-improve' " Syntax and indent plugin for React JSX.
 Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'scrooloose/nerdtree'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'slim-template/vim-slim'
 Plugin 'tacahiroy/ctrlp-funky'
@@ -34,7 +32,6 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-bundler' " Lightweight support for Ruby's Bundler
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-fugitive' " a Git wrapper so awesome, it should be illegal
-Plugin 'tpope/vim-rails' " Ruby on Rails power tools
 Plugin 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
 Plugin 'tpope/vim-surround' " quoting/parenthesizing made simple
 Plugin 'tpope/vim-unimpaired' " pairs of handy bracket mappings
@@ -61,8 +58,6 @@ source ~/.vim/functions/util.vim
 " map <Leader>l :call RunLastSpec()<CR>
 " map <Leader>a :call RunAllSpecs()<CR>
 
-map <C-n> :NERDTreeToggle<CR>
-
 let g:ackprg = 'ag --nogroup --nocolor --column'
 nnoremap <leader>ag :Ack!<space>
 
@@ -77,8 +72,7 @@ nmap <Leader>ea <Plug>(EasyAlign)
 
 " PLUGINS CONFIGURATION {{{
 " todo
-nnoremap <Leader>td :e ~/ownCloud/todo.todo<CR>
-" Xuyuanp/nerdtree-git-plugin
+nnoremap <Leader>td :e ~/code/todo.todo<CR>
 " caigithub/a_indent
 " christoomey/vim-tmux-navigator
 " christoomey/vim-tmux-runner
@@ -97,7 +91,6 @@ let g:vim_yaml_helper#auto_display_path = 1
 " neoclide/vim-jsx-improve
 " pangloss/vim-javascript
 " plasticboy/vim-markdown
-" scrooloose/nerdtree
 " sheerun/vim-polyglot
 " slim-template/vim-slim
 
@@ -118,7 +111,6 @@ nnoremap <Leader>gl :Glog<CR>
 nnoremap <Leader>gdel :Gdelete<CR>
 nnoremap <Leader>gmov :Gmove<CR>
 
-" tpope/vim-rails
 " tpope/vim-rhubarb
 " tpope/vim-surround
 " tpope/vim-unimpaired

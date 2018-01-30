@@ -56,7 +56,6 @@
 
   pr = "!. ~/.githelpers && pull_request"
   d = difftool
-	please = push --force-with-lease
 	commend = commit --amend --no-edit
 	it = !git init && git commit -m “root” --allow-empty
 	shorty = status --short --branch

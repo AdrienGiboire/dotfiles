@@ -55,5 +55,5 @@ function update_current_branch {
 }
 
 function todo {
-  vim ~/ownCloud/todo.todo;
+  vim ~/code/todo.todo;
 }
