@@ -22,9 +22,8 @@ alias rc="drails c"
 
 # }}}
 
-alias pgstart="postgres -D /usr/local/var/postgres"
-alias dyndblocal_start="java -Djava.library.path=~/.aws/dynamodb_local_2015-04-27_1.0/DynamoDBLocal_lib -jar ~/.aws/dynamodb_local_2015-04-27_1.0/DynamoDBLocal.jar -port 5678"
-alias fd="fake_dynamo"
+alias pgstart="postgres -D /usr/local/var/postgresql"
+alias start="./start.rb --bind 0.0.0.0 --port 3002 --no-restart-redis --no-restart-dynamo --no-restart-sidekiq"
 
 alias wr="which ruby"
 alias rescue_tunnelblick="sudo kextunload -b net.sf.tuntaposx.tap && sudo kextunload -b net.sf.tuntaposx.tun"
@@ -36,8 +35,12 @@ alias pgcli_staging="PGPASSWORD=jol4ev7pe8hyash3jea9hod9 psql -h  octoly-staging
 
 alias octoly='tmux -f ~/.tmux/octoly.conf a'
 alias partitio='tmux -f ~/.tmux/partitio.conf a'
-alias evc='cd ~/.dotfiles && vim .vimrc'
 
 alias config='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-# vim: foldmarker={{{,}}} foldmethod=marker foldlevel=0:
+alias clean_locales='rm config/locales/de-DE.yml config/locales/en-US.yml config/locales/fr-FR.yml config/locales/es-ES.yml config/locales/it-IT.yml; drake phraseapp:download'
+
+alias vim='nvim'
+alias vi='nvim'
+alias n='nvim'
+alias nt='nvim +terminal'
