@@ -1,5 +1,8 @@
 .vim/.netrwhist
 .vim/bundle
 .vim/tmp
+.config/nvim/.netrwhist
+.config/nvim/pack
+.config/nvim/tmp
 .DS_Store
 ze-fucking-best-zsh-conf-ever-for-me

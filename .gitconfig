@@ -1,6 +1,6 @@
 [core]
   excludesfile = /Users/adrien/.gitignore
-  editor = vim
+  editor = nvim
 	ignorecase = false
   # protect your project from Windows line endings creeping in
   autocrlf = input
@@ -63,9 +63,9 @@
 	staash = stash --include-untracked
 	staaash = stash --all
 [merge]
-  tool = vimdiff
+  tool = nvimdiff
 [diff]
-  tool = vimdiff
+  tool = nvimdiff
 [pull]
   default = current
 [push]
