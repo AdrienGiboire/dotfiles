@@ -1,11 +1,11 @@
 #!/bin/sh
 
 now=`date +'%Y%m%d'`
-plans_path="$HOME/ownCloud/.plan"
-current_plan_path="$plans_path/$now"
+plans_path="$HOME/Documents/dotplans"
+current_plan_path="$plans_path/$now.todo"
 
 if [ ! -f $current_plan_path ]; then
   touch $current_plan_path
 fi
 
-vim $current_plan_path
+nvim $current_plan_path
