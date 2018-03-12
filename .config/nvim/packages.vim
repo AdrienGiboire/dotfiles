@@ -1,7 +1,7 @@
 runtime macros/matchit.vim
 
-command! PackUpdate packadd minpac | source $MYVIMRC | redraw | call minpac#update()
-command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
+command! PackUpdate call minpac#update()
+command! PackClean  call minpac#clean()
 
 packadd minpac
 call minpac#init({'verbose': 0})
@@ -20,7 +20,9 @@ call minpac#add('mileszs/ack.vim')
 call minpac#add('nanotech/jellybeans.vim') " Color
 call minpac#add('nelstrom/vim-textobj-rubyblock') " A custom text object for selecting ruby blocks
 call minpac#add('neoclide/vim-jsx-improve') " Syntax and indent plugin for React JSX.
+call minpac#add('Olical/vim-enmasse')
 call minpac#add('pangloss/vim-javascript')
+call minpac#add('godlygeek/tabular')
 call minpac#add('plasticboy/vim-markdown')
 call minpac#add('tacahiroy/ctrlp-funky')
 call minpac#add('thoughtbot/vim-rspec')
@@ -28,9 +30,13 @@ call minpac#add('tpope/vim-bundler') " Lightweight support for Ruby's Bundler
 call minpac#add('tpope/vim-dispatch')
 call minpac#add('tpope/vim-fugitive') " a Git wrapper so awesome, it should be illegal
 call minpac#add('tpope/vim-rails')
+call minpac#add('tpope/vim-markdown')
+call minpac#add('tpope/vim-liquid')
+call minpac#add('tpope/vim-rake')
 call minpac#add('tpope/vim-repeat') " enable repeating supported plugin maps with '.'
 call minpac#add('tpope/vim-rhubarb') " GitHub extension for fugitive.vim
 call minpac#add('tpope/vim-surround') " quoting/parenthesizing made simple
 call minpac#add('tpope/vim-unimpaired') " pairs of handy bracket mappings
 call minpac#add('tpope/vim-vinegar') " combine with netrw to create a delicious salad dressing
 call minpac#add('vim-ruby/vim-ruby') " Vim/Ruby Configuration Files
+call minpac#add('slim-template/vim-slim')
