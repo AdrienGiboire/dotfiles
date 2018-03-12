@@ -36,11 +36,35 @@ set scrolloff=5 " Set 5 lines to the cursor - when moving vertically
 set secure
 set shell=zsh\ -l
 set shiftwidth=2
+let &showbreak='↪ '
 set softtabstop=2
 set tabstop=2
-set tags=./.tags;
 set visualbell t_vb=
-set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc,node_modules,tmp,*/public/production
+
+set wildignore=**/.svn/**
+set wildignore+=**/CVS/**
+set wildignore+=**/.git/**
+set wildignore+=**/.hg/**
+set wildignore+=**/*.o
+set wildignore+=**/*.a
+set wildignore+=**/*.class
+set wildignore+=**/*.mo
+set wildignore+=**/*.la
+set wildignore+=**/*.so
+set wildignore+=**/*.obj
+set wildignore+=**/*.swp
+set wildignore+=**/*.jpg
+set wildignore+=**/*.png
+set wildignore+=**/*.xpm
+set wildignore+=**/*.gif
+set wildignore+=**/.DS_Store
+set wildignore+=**/*.aux
+set wildignore+=**/*.out
+set wildignore+=**/*.toc
+set wildignore+=**/node_modules/**
+set wildignore+=**/tmp/**
+set wildignore+=**/public/production/**
+
 set wildmenu
 set wildmode=full
 set wrap
