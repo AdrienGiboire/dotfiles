@@ -1,0 +1,94 @@
+#!/bin/sh
+.git/hooks/ctags >/dev/null 2>&1 &
+
+previous_ref=$1
+current_ref=$2
+flag=$3
+
+[ $flag -eq 0 ] && exit
+
+function clone_database() {
+  echo "Cloning database 'octoly_$pg_cleaned_default' into 'octoly_$pg_cleaned_branch'..."
+
+  db_owner=`cat config/database.yml | grep -e 'username' |  cut -d ':' -f2-`
+  clone_db=true
+
+  if psql -lqt | cut -d \| -f 1 | grep -qw octoly_$pg_cleaned_branch; then
+    while true ; do
+      read -p "Database 'octoly_$pg_cleaned_branch' already exists, do you want to reset it to 'octoly_$pg_cleaned_default'? (y/N) " answer </dev/tty
+      [ -z $answer ] && answer='n'
+
+      case ${answer:0:1} in
+        y|Y )
+          echo "Killing psql processes linked to 'octoly_$pg_cleaned_branch'..."
+          psql -tc "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'octoly_$pg_cleaned_branch' AND pid <> pg_backend_pid();" -d postgres -U $db_owner
+
+          echo "Dropping database..."
+          psql -tc "DROP DATABASE octoly_$pg_cleaned_branch;" -d postgres -U $db_owner
+          break
+          ;;
+        n|N )
+          clone_db=false
+          break
+          ;;
+        * )
+          echo 'Please answer yes (y) or no (n).';;
+      esac
+    done
+  fi
+
+  if $clone_db; then
+    echo "Killing psql processes linked to 'octoly_$pg_cleaned_default'..."
+    psql -tc "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'octoly_$pg_cleaned_default' AND pid <> pg_backend_pid();" -d postgres -U $db_owner
+
+    echo "Creating database..."
+    psql -tc "CREATE DATABASE octoly_$pg_cleaned_branch WITH TEMPLATE octoly_$pg_cleaned_default OWNER $db_owner;" -d postgres -U $db_owner
+  fi
+
+  echo 'All done here. Happy hacking!'
+}
+
+default=`git config octoly.default-database-suffix`
+pg_cleaned_default=`echo $default | sed 's/-/_/g'`
+gc_cleaned_default=`echo $default | sed 's/_/-/g'`
+[ -z $default ] &&
+  echo 'No default branch set up in your git config.' &&
+  echo 'Run `git config octoly.default-database-suffix BRANCH_NAME` to continue.' &&
+  echo 'Example: git config octoly.default-database-suffix development' &&
+  exit
+
+branch=`git symbolic-ref HEAD 2>/dev/null | sed 's/refs\/heads\///'`
+if [ -n "$branch" ]; then
+  pg_cleaned_branch=`echo $branch | sed 's/-/_/g'`
+  gc_cleaned_branch=`echo $branch | sed 's/_/-/g'`
+  echo "Checking configuration for database behaviour on checkout to '$branch'..."
+
+  if [ $branch != $default ]; then
+    isolate_db=`git config --bool branch.$gc_cleaned_branch.isolate-database`
+    if [ -z $isolate_db ]; then
+      echo 'No configuration found for current branch database behaviour.'
+      while true ; do
+        read -p 'Do you want to isolate the database for this branch? (y/N) ' answer </dev/tty
+        [ -z $answer ] && answer='n'
+
+        case ${answer:0:1} in
+          y|Y )
+            git config --bool branch.$gc_cleaned_branch.isolate-database true
+            clone_database
+            break
+            ;;
+          n|N )
+            git config --bool branch.$gc_cleaned_branch.isolate-database false
+            break
+            ;;
+          * )
+            echo 'Please answer yes (y) or no (n).';;
+        esac
+      done
+
+    else
+      echo 'Nothing to do. Happy hacking!'
+    fi
+  fi
+fi
+
