@@ -14,12 +14,6 @@ inoremap jk <Esc>
 nnoremap ; :
 nnoremap : ;
 
-" RSpec.vim mappings
-noremap <Leader>rc :call RunCurrentSpecFile()<CR>
-noremap <Leader>rn :call RunNearestSpec()<CR>
-noremap <Leader>rl :call RunLastSpec()<CR>
-noremap <Leader>ra :call RunAllSpecs()<CR>
-
 let g:ackprg = 'ag --nogroup --nocolor --column'
 nnoremap <leader>ag :Ack!<space>
 
