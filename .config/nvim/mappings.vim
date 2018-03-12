@@ -18,7 +18,8 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 nnoremap <leader>ag :Ack!<space>
 
 " todo
-nnoremap <Leader>td :e ~/code/todo.todo<CR>
+"nnoremap <Leader>td :e ~/code/todo.todo<CR>
+nnoremap <Leader>td :e ~/Documents/dotplans/
 
 " ctrlpvim/ctrlp.vim
 let g:ctrlp_working_path_mode = ''
@@ -87,10 +88,19 @@ vnoremap <silent><leader>p "*p
 
 noremap <C-s> <ESC>:w<CR>
 
-" TERMINAL MODE {{{
-tnoremap jk <C-\><C-n>
-tnoremap <C-h> <c-\><c-n><c-w>h
-tnoremap <C-j> <c-\><c-n><c-w>j
-tnoremap <C-k> <c-\><c-n><c-w>k
-tnoremap <C-l> <c-\><c-n><c-w>l
-" }}}
+nnoremap <leader>ls :buffers<CR>:buffer<Space>
+
+nnoremap <leader>u yypVr-
+nnoremap <leader>U yypVr=
+
+" windows
+nnoremap <silent> <C-w>i :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <C-w>u :exe "resize " . (winheight(0) * 3/2)<CR>
+
+nnoremap <leader>s vip:sort<cr>
+
+nnoremap <leader>t :tabe<cr>
+
+iab <expr> tts strftime("%T")
+iab <expr> dts strftime("%a %d %b %Y")
+
