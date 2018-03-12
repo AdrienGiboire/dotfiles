@@ -35,3 +35,6 @@ command -v brew >/dev/null 2>&1 && [[ -s `brew --prefix`/etc/autojump.sh ]] && .
 
 # vim: foldmarker={{{,}}} foldmethod=marker foldlevel=0:
 export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
+
+# added by travis gem
+[ -f /Users/adrien/.travis/travis.sh ] && source /Users/adrien/.travis/travis.sh

@@ -20,6 +20,13 @@ function extract {
   fi
 }
 
+function c {
+  cd ~/code
+  if [ 1 -le $# ]; then
+    cd $1
+  fi
+}
+
 function deploy {
   local current_branch=`git rev-parse --abbrev-ref HEAD`
   local target_branch=$1

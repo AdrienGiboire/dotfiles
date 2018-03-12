@@ -25,7 +25,7 @@ export LANG=en_US.UTF-8
 
 # PATH
 export PATH="/usr/local/bin:$PATH"
-export PATH="$PATH:$HOME/.dotfiles/bin"
+export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:/usr/local/share/npm/bin"
 
 # vim: foldmarker={{{,}}} foldmethod=marker foldlevel=0:
