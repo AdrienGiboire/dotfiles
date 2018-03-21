@@ -7,7 +7,8 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='3;33'
 
-export EDITOR='vim'
+export EDITOR='nvim'
+export HOMEBREW_EDITOR='nvim'
 export LESS='--ignore-case --raw-control-chars'
 # CTAGS Sorting in Vim is better behaved with this in place
 export LC_COLLATE=C
@@ -27,5 +28,6 @@ export LANG=en_US.UTF-8
 export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:/usr/local/share/npm/bin"
+export PATH="/usr/local/sbin:$PATH"
 
 # vim: foldmarker={{{,}}} foldmethod=marker foldlevel=0:
