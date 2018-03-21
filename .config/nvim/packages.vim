@@ -1,7 +1,7 @@
 runtime macros/matchit.vim
 
-command! PackUpdate call minpac#update()
-command! PackClean  call minpac#clean()
+command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
+command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
 packadd minpac
 call minpac#init({'verbose': 0})
@@ -40,3 +40,6 @@ call minpac#add('tpope/vim-unimpaired') " pairs of handy bracket mappings
 call minpac#add('tpope/vim-vinegar') " combine with netrw to create a delicious salad dressing
 call minpac#add('vim-ruby/vim-ruby') " Vim/Ruby Configuration Files
 call minpac#add('slim-template/vim-slim')
+call minpac#add('junegunn/goyo.vim') " Distraction-free writing in Vim
+call minpac#add('Shutnik/jshint2.vim')
+call minpac#add('jlevye/vim-geeknote')

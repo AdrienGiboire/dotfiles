@@ -31,15 +31,15 @@ nnoremap <Leader>fU :execute 'CtrlPFunky '.expand('<cword>')<CR>
 
 " tpope/vim-fugitive
 nnoremap <Leader>ga :Gw<CR>
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gl :Glog<CR>
-nnoremap <Leader>gpo :Gpush<CR>
-nnoremap <Leader>gpr :Git pullr<CR>
+nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gdel :Gdelete<CR>
+nnoremap <Leader>gdi :Gdiff<CR>
+nnoremap <Leader>gl :Glog<CR>
 nnoremap <Leader>gmov :Gmove<CR>
+nnoremap <Leader>gpo :Gpush<CR>
+nnoremap <Leader>gpr :Git pullr<CR>i
+nnoremap <Leader>gs :Gstatus<CR>
 
 " Simulate emacs' transpose-word feature, including its inverse
 " Note: Doesn't work well with words that include punctuation
