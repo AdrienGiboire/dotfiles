@@ -57,7 +57,6 @@
 	commend = commit --amend --no-edit
 	it = !git init && git commit -m “root” --allow-empty
 	shorty = status --short --branch
-	stsh = stash --keep-index
 	staash = stash --include-untracked
 	ctags = !.git/hooks/ctags
 [merge]
