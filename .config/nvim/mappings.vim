@@ -17,10 +17,6 @@ nnoremap : ;
 let g:ackprg = 'ag --nogroup --nocolor --column'
 nnoremap <leader>ag :Ack!<space>
 
-" todo
-"nnoremap <Leader>td :e ~/code/todo.todo<CR>
-nnoremap <Leader>td :e ~/Documents/dotplans/
-
 " ctrlpvim/ctrlp.vim
 let g:ctrlp_working_path_mode = ''
 
