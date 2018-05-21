@@ -3,3 +3,4 @@ command! W :w
 command! Wq :wq
 command! Q :q
 
+command! Coctoly :tcd ~/code/octoly
