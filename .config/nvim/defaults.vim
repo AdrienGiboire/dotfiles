@@ -17,7 +17,7 @@ set expandtab
 set exrc
 " Assume the /g flag on :s substitutions to replace all matches in a line
 set gdefault
-set hidden
+set nohidden
 set history=1000
 set inccommand=split
 set incsearch
@@ -75,3 +75,14 @@ highlight Pmenu ctermbg=black ctermfg=white
 
 " so it's clear which paren I'm on and which is matched
 highlight MatchParen cterm=none ctermbg=none ctermfg=yellow
+
+augroup netrw_buf_hidden_fix
+  autocmd!
+
+  " Set all non-netrw buffers to bufhidden=hide
+  autocmd BufWinEnter *
+        \  if &ft != 'netrw'
+        \|     set bufhidden=hide
+        \| endif
+
+augroup end
