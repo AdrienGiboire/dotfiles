@@ -7,6 +7,7 @@ set autoread
 
 " Every wrapped line will continue visually indented (same amount of space as
 " the beginning of that line), thus preserving horizontal blocks of text.
+let &showbreak='↪ '
 set backspace=indent,eol,start
 set breakindent
 set completeopt-=preview
@@ -36,7 +37,6 @@ set scrolloff=5 " Set 5 lines to the cursor - when moving vertically
 set secure
 set shell=zsh\ -l
 set shiftwidth=2
-let &showbreak='↪ '
 set softtabstop=2
 set tabstop=2
 set visualbell t_vb=
