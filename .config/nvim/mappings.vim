@@ -77,14 +77,14 @@ inoremap <s-tab> <c-n>
 " Fast saving and closing current buffer without closing windows displaying the
 " buffer
 nnoremap <leader>wq :w!<cr>:Bclose<cr>
+nnoremap <leader>ls :buffers<CR>:buffer<Space>
+nnoremap <leader>bc :Bclose<CR>
 
 " make copy/paste from system clip easier
 vnoremap <silent><leader>y "*y
 vnoremap <silent><leader>p "*p
 
 noremap <C-s> <ESC>:w<CR>
-
-nnoremap <leader>ls :buffers<CR>:buffer<Space>
 
 nnoremap <leader>u yypVr-
 nnoremap <leader>U yypVr=
@@ -99,4 +99,3 @@ nnoremap <leader>t :tabe<cr>
 
 iab <expr> tts strftime("%T")
 iab <expr> dts strftime("%a %d %b %Y")
-
