@@ -64,3 +64,10 @@ function update_current_branch {
 function todo {
   vim ~/code/todo.todo;
 }
+
+function octo-resume-copy-db {
+  filename=$1
+  size=$(stat -f%z $filename)
+  aws s3api get-object --bucket octoly-common --key octoly_production_semi_anonymised.sqlc --range "bytes=$size-" /dev/stdout | pv >> $filename
+  echo "Download completed. Check $filename"
+}
