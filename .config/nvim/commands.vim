@@ -3,4 +3,5 @@ command! W :w
 command! Wq :wq
 command! Q :q
 
+command! Cnvim :tcd ~/.config/nvim
 command! Coctoly :tcd ~/code/octoly
