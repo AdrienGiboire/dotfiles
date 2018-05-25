@@ -43,3 +43,14 @@ call minpac#add('slim-template/vim-slim')
 call minpac#add('junegunn/goyo.vim') " Distraction-free writing in Vim
 call minpac#add('Shutnik/jshint2.vim')
 call minpac#add('jlevye/vim-geeknote')
+
+" orgmode dependencies
+call minpac#add('vim-scripts/utl.vim')
+call minpac#add('vim-scripts/taglist.vim')
+call minpac#add('majutsushi/tagbar')
+call minpac#add('tpope/vim-speeddating')
+call minpac#add('chrisbra/NrrwRgn')
+call minpac#add('mattn/calendar-vim')
+call minpac#add('inkarkat/vim-SyntaxRange')
+call minpac#add('jceb/vim-orgmode')
+
