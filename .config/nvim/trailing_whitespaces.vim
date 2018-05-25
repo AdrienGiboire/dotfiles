@@ -1,3 +1,9 @@
+" Avoid installing twice
+if exists('g:loaded_trailing_whitespaces')
+    finish
+endif
+let g:loaded_trailing_whitespaces = 1
+
 " Only shown when not in insert mode so I don't go insane.
 augroup trailing
     au!
