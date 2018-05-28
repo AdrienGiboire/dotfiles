@@ -14,8 +14,8 @@
   ci = commit --verbose
   co = checkout
   cpk = cherry-pick
-  di = !git diff --color
-  dc = !git diff --color --cached
+  di = diff --color
+  dc = diff --color --cached
   amend = commit --amend
   aa = add --all
   ff = merge --ff-only
@@ -54,11 +54,11 @@
 
   pr = "!. ~/.githelpers && pull_request"
   d = difftool
-	commend = commit --amend --no-edit
-	it = !git init && git commit -m “root” --allow-empty
-	shorty = status --short --branch
-	staash = stash --include-untracked
-	ctags = !.git/hooks/ctags
+  commend = commit --amend --no-edit
+  it = !git init && git commit -m "root" --allow-empty
+  shorty = status --short --branch
+  staash = stash --include-untracked
+  ctags = !.git/hooks/ctags
 [merge]
   tool = nvimdiff
 [diff]
