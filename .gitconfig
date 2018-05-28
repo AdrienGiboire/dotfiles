@@ -59,6 +59,8 @@
   shorty = status --short --branch
   staash = stash --include-untracked
   ctags = !.git/hooks/ctags
+
+  m = merge --no-edit
 [merge]
   tool = nvimdiff
 [diff]
