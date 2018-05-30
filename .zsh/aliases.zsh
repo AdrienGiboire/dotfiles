@@ -22,7 +22,7 @@ alias rc="drails c"
 # }}}
 
 alias pgstart="brew services start postgresql"
-alias start="./start.rb --bind 0.0.0.0 --port 3002 --no-restart-redis --no-restart-dynamo"
+alias start="./start.rb -b 0.0.0.0 --port 3002 --no-restart-redis --no-restart-dynamo"
 
 alias wr="which ruby"
 alias rescue_tunnelblick="sudo kextunload -b net.sf.tuntaposx.tap && sudo kextunload -b net.sf.tuntaposx.tun"
