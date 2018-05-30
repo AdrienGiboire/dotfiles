@@ -10,6 +10,7 @@
 source ~/.zsh/colors.zsh
 source ~/.zsh/aliases.zsh
 source ~/.zsh/bindkeys.zsh
+source ~/.zsh/completion.zsh
 source ~/.zsh/exports.zsh
 source ~/.zsh/functions.zsh
 source ~/.zsh/functions/rails.zsh
@@ -20,6 +21,10 @@ source ~/.zsh/setopts.zsh
 
 # Disable auto-correct
 unsetopt correct_all
+
+# init completion
+
+autoload -U compinit && compinit
 
 # BUNDLER EXEC {{{
 
@@ -33,7 +38,7 @@ command -v brew >/dev/null 2>&1 && [[ -s `brew --prefix`/etc/autojump.sh ]] && .
 
 # }}}
 
-# vim: foldmarker={{{,}}} foldmethod=marker foldlevel=0:
-
 # added by travis gem
 [ -f /Users/adrien/.travis/travis.sh ] && source /Users/adrien/.travis/travis.sh
+
+# vim: foldmarker={{{,}}} foldmethod=marker foldlevel=0:
