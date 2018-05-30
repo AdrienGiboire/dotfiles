@@ -43,6 +43,8 @@ call minpac#add('slim-template/vim-slim')
 call minpac#add('junegunn/goyo.vim') " Distraction-free writing in Vim
 call minpac#add('Shutnik/jshint2.vim')
 call minpac#add('jlevye/vim-geeknote')
+call minpac#add('terryma/vim-multiple-cursors')
+let g:multi_cursor_exit_from_insert_mode=0
 
 " orgmode dependencies
 call minpac#add('vim-scripts/utl.vim')
