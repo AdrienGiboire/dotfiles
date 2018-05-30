@@ -4,7 +4,7 @@ command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
 packadd minpac
-call minpac#init({'verbose': 0})
+call minpac#init({'verbose': 3})
 
 call minpac#add('AdrienGiboire/vim-todo')
 call minpac#add('caigithub/a_indent')
