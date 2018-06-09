@@ -25,7 +25,7 @@
   fa = fetch --all
   pom = push origin master
   pum = push upstream master
-  b = branch -v
+  b = !git branch -v | more
   ds = !git diff --color --stat=160,120
   dh1 = !git diff --color HEAD~1
   rc = rebase --continue
