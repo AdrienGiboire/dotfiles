@@ -44,7 +44,7 @@ alias vi='nvim'
 alias n='nvim'
 alias nt='nvim +terminal'
 
-alias web-ext-sign='web-ext sign --api-key user:6364965:835 --api-secret46f252c86675e20a2d5ab3d989bb16686b277fd6c7e38658f73168867487dc37'
+alias web-ext-sign='web-ext sign --api-key user:6364965:835 --api-secret 46f252c86675e20a2d5ab3d989bb16686b277fd6c7e38658f73168867487dc37'
 
 alias todo='nvim ~/code/notes/todo.todo'
 alias journal='nvim ~/code/notes/journal.md'
