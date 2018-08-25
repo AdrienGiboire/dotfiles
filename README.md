@@ -17,3 +17,11 @@ config checkout
 config config status.showUntrackedFiles no
 ```
 
+## To Install Minpac for Neovim
+
+```
+git clone https://github.com/k-takata/minpac.git \
+  ~/.config/nvim/pack/minpac/opt/minpac
+
+nvim --headless +PackUpdate +q
+```
