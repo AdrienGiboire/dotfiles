@@ -27,8 +27,6 @@ export LANG=en_US.UTF-8
 # PATH
 export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
-export PATH="$PATH:/usr/local/share/npm/bin"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/code/flutter/bin:$PATH"
 
 # vim: foldmarker={{{,}}} foldmethod=marker foldlevel=0:
