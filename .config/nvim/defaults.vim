@@ -35,7 +35,7 @@ set relativenumber
 set ruler
 set scrolloff=5 " Set 5 lines to the cursor - when moving vertically
 set secure
-set shell=zsh\ -l
+set shell=fish
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
@@ -64,6 +64,7 @@ set wildignore+=**/*.toc
 set wildignore+=**/node_modules/**
 set wildignore+=**/tmp/**
 set wildignore+=**/public/production/**
+set wildignore+=**/public/packs/**
 
 set wildmenu
 set wildmode=full

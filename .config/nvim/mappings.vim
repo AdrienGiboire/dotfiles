@@ -8,7 +8,7 @@ cnoremap <c-e> <end>
 " Make u/U behave for undo like n/N does for search
 nnoremap U <c-r>
 
-inoremap jk <Esc>
+inoremap <silent>jk <Esc>
 
 " Why a command used so much needs more keystroke than a barely known command?
 nnoremap ; :

@@ -15,6 +15,7 @@ call minpac#add('kana/vim-textobj-entire')
 call minpac#add('kana/vim-textobj-indent')
 call minpac#add('kana/vim-textobj-syntax')
 call minpac#add('kana/vim-textobj-line')
+call minpac#add('kassio/neoterm')
 call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('mileszs/ack.vim')
 call minpac#add('nanotech/jellybeans.vim') " Color
@@ -43,6 +44,7 @@ call minpac#add('slim-template/vim-slim')
 call minpac#add('junegunn/goyo.vim') " Distraction-free writing in Vim
 call minpac#add('Shutnik/jshint2.vim')
 call minpac#add('jlevye/vim-geeknote')
+call minpac#add('dag/vim-fish')
 call minpac#add('terryma/vim-multiple-cursors')
 let g:multi_cursor_exit_from_insert_mode=0
 
