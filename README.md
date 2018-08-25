@@ -1,12 +1,19 @@
 ## Install
 
 ```
-curl -fsSL https://raw.github.com/AdrienGiboire/dotfiles/master/scripts/install | bash
-```
-
-### Update
-```
-cd ~
-./.dotfiles/scripts/update
+git clone --bare https://github.com/AdrienGiboire/dotfiles.git $HOME/.dotfiles
+function config
+   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
+end
+mkdir -p .config-backup
+config checkout
+if test (count argv) = 0
+  echo "Checked out config."
+else
+    echo "Backing up pre-existing dot files."
+    config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+end
+config checkout
+config config status.showUntrackedFiles no
 ```
 
