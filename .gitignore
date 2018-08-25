@@ -4,3 +4,10 @@ config/secrets.yml
 node_modules
 public/packs
 .DS_Store
+.config/alacritty/
+.config/configstore/
+.config/gtk-2.0/
+.config/htop/
+.config/nvim/pack/
+.config/nvim/tmp/
+
