@@ -11,3 +11,4 @@ public/packs
 .config/nvim/pack/
 .config/nvim/tmp/
 
+.DS_Store
