@@ -2,21 +2,32 @@
 
 * Unix based OS
 * Fish shell
+```
+sudo apt-get install fish
+chsh -s /usr/bin/fish
+# log out; log back in
+```
+* Git
+```
+sudo apt-get install git
+```
+* NeoVim
+```
+sudo apt-get install neovim
+```
 
 ## Install
+
+To clean this:
+
+```
+rm -fr .bash_history .bash_logout  .bashrc .bundler-exec.sh .config/ .dotfiles/ .git_template/ .gitconfig .githelpers .gitignore .jshintrc .profile .pryrc  .ssh/ README.md bin/ scripts/
+```
 
 ```
 git clone --bare https://github.com/AdrienGiboire/dotfiles.git $HOME/.dotfiles
 function config
-   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
-end
-mkdir -p .config-backup
-config checkout
-if test (count argv) = 0
-  echo "Checked out config."
-else
-    echo "Backing up pre-existing dot files."
-    config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $argv
 end
 config checkout
 config config status.showUntrackedFiles no
