@@ -24,3 +24,9 @@ wget -O ruby-install-0.7.0.tar.gz https://github.com/postmodern/ruby-install/arc
 tar -xzvf ruby-install-0.7.0.tar.gz
 cd ruby-install-0.7.0/
 sudo make install
+
+cd /tmp
+wget -O chruby-fish-0.8.1.tar.gz https://github.com/JeanMertz/chruby-fish/archive/v0.8.1.tar.gz
+tar -xzvf chruby-fish-0.8.1.tar.gz
+cd chruby-fish-0.8.1/
+sudo make install
