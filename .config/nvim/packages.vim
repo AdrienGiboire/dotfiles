@@ -47,6 +47,8 @@ call minpac#add('jlevye/vim-geeknote')
 call minpac#add('dag/vim-fish')
 call minpac#add('terryma/vim-multiple-cursors')
 let g:multi_cursor_exit_from_insert_mode=0
+call minpac#add('lmeijvogel/vim-yaml-helper')
+call minpac#add('easymotion/vim-easymotion')
 
 " orgmode dependencies
 call minpac#add('vim-scripts/utl.vim')
