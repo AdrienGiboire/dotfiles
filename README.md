@@ -1,3 +1,8 @@
+## Prerequisites
+
+* Unix based OS
+* Fish shell
+
 ## Install
 
 ```
