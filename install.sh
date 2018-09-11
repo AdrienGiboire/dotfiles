@@ -12,3 +12,5 @@ else
 end
 config checkout
 config config status.showUntrackedFiles no
+
+curl -L https://raw.githubusercontent.com/postmodern/chruby/master/scripts/setup.sh | bash
