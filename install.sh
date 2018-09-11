@@ -1,6 +1,6 @@
 git clone --bare https://github.com/adriengiboire/dotfiles.git $HOME/.dotfiles
 function config
-   /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv
+   /usr/bin/git --git-dir=$HOME/.config/ --work-tree=$HOME $argv
 end
 mkdir -p .config-backup
 config checkout
