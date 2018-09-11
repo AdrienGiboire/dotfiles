@@ -30,3 +30,7 @@ wget -O chruby-fish-0.8.1.tar.gz https://github.com/JeanMertz/chruby-fish/archiv
 tar -xzvf chruby-fish-0.8.1.tar.gz
 cd chruby-fish-0.8.1/
 sudo make install
+
+git clone https://github.com/k-takata/minpac.git \
+  ~/.config/nvim/pack/minpac/opt/minpac
+nvim --headless +PackUpdate +q
