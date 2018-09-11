@@ -1,7 +1,6 @@
 ## Prerequisites
 
 * Unix based OS
-* A Nerd Font https://nerdfonts.com/#downloads
 * Fish shell
 ```
 sudo apt-get install fish
