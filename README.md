@@ -17,6 +17,10 @@ omf install bobthefish
 ```
 sudo apt-get install git
 ```
+* Various utils
+```
+sudo apt-get install exuberant-ctags silversearcher-ag
+```
 * NeoVim
 ```
 sudo apt-get install neovim
