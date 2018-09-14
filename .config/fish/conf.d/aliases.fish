@@ -5,6 +5,7 @@ alias ..='cd ..'
 alias ...='..;..'
 
 alias less='less --quiet'
+alias grep='grep --color=auto'
 
 # Rails {{{
 
