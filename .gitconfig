@@ -1,7 +1,7 @@
 [core]
   excludesfile = /Users/adrien/.gitignore
   editor = nvim
-	ignorecase = false
+  ignorecase = false
   # protect your project from Windows line endings creeping in
   autocrlf = input
 [user]
