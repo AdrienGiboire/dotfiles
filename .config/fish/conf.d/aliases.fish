@@ -35,7 +35,7 @@ alias pgcli_staging="set PGPASSWORD jol4ev7pe8hyash3jea9hod9; and psql -h  octol
 alias octoly='tmux -f ~/.tmux/octoly.conf a'
 alias partitio='tmux -f ~/.tmux/partitio.conf a'
 
-alias config="/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 alias clean_locales='rm config/locales/de-DE.yml config/locales/en-US.yml config/locales/fr-FR.yml config/locales/es-ES.yml config/locales/it-IT.yml; drake phraseapp:download'
 
