@@ -50,3 +50,6 @@ alias web-ext-sign='web-ext sign --api-key user:6364965:835 --api-secret 46f252c
 
 alias todo='nvim ~/code/notes/todo.todo'
 alias journal='nvim ~/code/notes/journal.md'
+
+alias python='python3'
+alias pip='pip3'
