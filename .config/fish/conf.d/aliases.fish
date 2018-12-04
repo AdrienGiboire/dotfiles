@@ -40,8 +40,8 @@ alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 alias clean_locales='rm config/locales/de-DE.yml config/locales/en-US.yml config/locales/fr-FR.yml config/locales/es-ES.yml config/locales/it-IT.yml; drake phraseapp:download'
 
-# alias vim='nvim'
-# alias vi='nvim'
+alias vim='nvim'
+alias vi='nvim'
 alias pvim='vim -u ~/code/essential.vim'
 alias n='nvim'
 alias nt='nvim +terminal'
