@@ -42,8 +42,10 @@ call minpac#add('tpope/vim-vinegar') " combine with netrw to create a delicious 
 call minpac#add('vim-ruby/vim-ruby') " Vim/Ruby Configuration Files
 call minpac#add('slim-template/vim-slim')
 call minpac#add('junegunn/goyo.vim') " Distraction-free writing in Vim
-call minpac#add('Shutnik/jshint2.vim')
 call minpac#add('jlevye/vim-geeknote')
+call minpac#add('w0rp/ale')
+let g:ale_fixers = ['eslint']
+let g:ale_fix_on_save = 1
 call minpac#add('dag/vim-fish')
 call minpac#add('terryma/vim-multiple-cursors')
 let g:multi_cursor_exit_from_insert_mode=0
