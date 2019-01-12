@@ -53,3 +53,6 @@ alias journal='nvim ~/code/notes/journal.md'
 
 alias python='python3'
 alias pip='pip3'
+
+alias list_hosts='cat ~/.ssh/config | grep "^host" | cut -d " " -f2'
+alias restart_riot='/Users/adrien/code/matrix-docker-ansible-deploy; and ansible-playbook -i inventory/hosts setup.yml --tags=start --ask-sudo-pass'
