@@ -71,8 +71,8 @@ set wildmode=full
 set wrap
 
 " make the completion menu a bit more readable
-highlight PmenuSel ctermbg=white ctermfg=black
-highlight Pmenu ctermbg=black ctermfg=white
+" highlight PmenuSel ctermbg=white ctermfg=black
+" highlight Pmenu ctermbg=black ctermfg=white
 
 " so it's clear which paren I'm on and which is matched
 highlight MatchParen cterm=none ctermbg=none ctermfg=yellow

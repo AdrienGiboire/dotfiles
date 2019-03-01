@@ -13,5 +13,3 @@ set statusline+=%=
 set statusline+=\%l:%c
 set statusline+=/ " Separator
 set statusline+=%L " Total lines
-
-colorscheme jellybeans
