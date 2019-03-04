@@ -10,5 +10,7 @@ public/packs
 .config/htop/
 .config/nvim/pack/
 .config/nvim/tmp/
+.config/nvim/.netrwhist
+.ssh/*
 
 .DS_Store
