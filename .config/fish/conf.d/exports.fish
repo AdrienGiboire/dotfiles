@@ -26,10 +26,5 @@ export LANG=en_US.UTF-8
 # PATH
 export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
-export PATH="/usr/local/sbin:$PATH"
-
-if test -d "$HOME/adb-fastboot/platform-tools"
- export PATH="$HOME/adb-fastboot/platform-tools:$PATH"
-end
 
 # vim: foldmarker={{{,}}} foldmethod=marker foldlevel=0:
