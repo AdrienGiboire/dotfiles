@@ -1,18 +1,6 @@
 ## Prerequisites
 
 * Unix based OS
-* Fish shell
-```
-sudo apt-get install fish
-chsh -s /usr/bin/fish
-# log out; log back in
-```
-* Oh My Fish
-```
-sudo apt-get install curl
-curl -L https://get.oh-my.fish | fish
-omf install bobthefish
-```
 * Git
 ```
 sudo apt-get install git
