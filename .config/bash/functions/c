@@ -1,0 +1,8 @@
+#!/bin/bash
+
+c () {
+  cd ~/code
+  if [[ 1 -le "$#" ]]; then
+    cd ${1}
+  fi
+}
