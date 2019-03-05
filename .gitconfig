@@ -5,8 +5,8 @@
   # protect your project from Windows line endings creeping in
   autocrlf = input
 [user]
-  name = Adrien Giboire
-  email = adrien+github@sent.com
+  name = Adrien
+  email = github@adrien.sent.com
 [color]
   ui = auto
 [alias]
@@ -80,4 +80,4 @@
   newNormal = green bold
   newHighlight = green bold 22
 [init]
-	templatedir = ~/.git_template
+  templatedir = ~/.git_template
