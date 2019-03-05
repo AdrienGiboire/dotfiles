@@ -35,7 +35,6 @@ set relativenumber
 set ruler
 set scrolloff=5 " Set 5 lines to the cursor - when moving vertically
 set secure
-set shell=fish
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
