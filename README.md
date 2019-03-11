@@ -24,7 +24,7 @@ rm -fr .bash_history .bash_logout .bash_profile .bashrc .bundler-exec.sh .config
 
 ```
 git clone --bare https://github.com/AdrienGiboire/dotfiles.git $HOME/.dotfiles
-alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@"
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 config checkout
 config config status.showUntrackedFiles no
 ```
