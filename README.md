@@ -19,7 +19,7 @@ sudo apt-get install neovim
 To clean this:
 
 ```
-rm -fr .bash_history .bash_logout .bash_profile .bashrc .bundler-exec.sh .config/ .dotfiles/ .git_template/ .gitconfig .githelpers .gitignore .jshintrc .profile .pryrc .ssh/ .tmux.conf README.md bin/ scripts/
+rm -fr .bash_history .bash_logout .bash_profile .bashrc .bundler-exec.sh .config/ .dotfiles/ .git_template/ .gitconfig .githelpers .gitignore .jshintrc .profile .pryrc .ssh/ .tmux.conf README.md bin/ scripts/ install
 ```
 
 ```
