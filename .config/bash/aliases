@@ -29,8 +29,6 @@ alias wr="which ruby"
 alias rescue_tunnelblick="sudo kextunload -b net.sf.tuntaposx.tap; and sudo kextunload -b net.sf.tuntaposx.tun"
 alias clean_xcode="rm -rf ~/Library/Developer/Xcode/DerivedData/; and rm -rf ~/Library/Caches/com.apple.dt.Xcode"
 
-alias reload=". ~/.zshrc"
-
 alias pgcli_staging="set PGPASSWORD jol4ev7pe8hyash3jea9hod9; and psql -h  octoly-staging.c7qtiwv4d8mv.us-east-1.rds.amazonaws.com -U octolyrds -d octoly_production"
 
 alias octoly='tmux -f ~/.tmux/octoly.conf a'
