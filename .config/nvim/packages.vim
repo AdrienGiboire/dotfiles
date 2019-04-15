@@ -22,6 +22,7 @@ call minpac#add('nelstrom/vim-textobj-rubyblock') " A custom text object for sel
 call minpac#add('neoclide/vim-jsx-improve') " Syntax and indent plugin for React JSX.
 call minpac#add('Olical/vim-enmasse')
 call minpac#add('pangloss/vim-javascript')
+call minpac#add('kchmck/vim-coffee-script')
 call minpac#add('leafgarland/typescript-vim')
 call minpac#add('plasticboy/vim-markdown')
 call minpac#add('SirVer/ultisnips')
@@ -31,8 +32,9 @@ call minpac#add('thoughtbot/vim-rspec')
 call minpac#add('tpope/vim-bundler') " Lightweight support for Ruby's Bundler
 call minpac#add('tpope/vim-dispatch')
 call minpac#add('tpope/vim-fugitive') " a Git wrapper so awesome, it should be illegal
-call minpac#add('tpope/vim-rails')
 call minpac#add('tpope/vim-markdown')
+call minpac#add('tpope/vim-obsession')
+call minpac#add('tpope/vim-rails')
 call minpac#add('tpope/vim-rake')
 call minpac#add('tpope/vim-repeat') " enable repeating supported plugin maps with '.'
 call minpac#add('tpope/vim-rhubarb') " GitHub extension for fugitive.vim
