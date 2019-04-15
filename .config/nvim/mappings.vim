@@ -100,5 +100,8 @@ nnoremap <leader>t :tabe<cr>
 iab <expr> tts strftime("%T")
 iab <expr> dts strftime("%a %d %b %Y")
 
-" Allow saving of files as sudo when I forgot to start vim using sudo.
+" Allow saving of files as sudo when I forget to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
+
+nnoremap <leader>cc :set nonumber<CR>:set norelativenumber<CR>:set nolist<CR>
+nnoremap <leader>cr :set number<CR>:set relativenumber<CR>:set list<CR>
