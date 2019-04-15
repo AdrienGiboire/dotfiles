@@ -53,4 +53,15 @@ alias python='python3'
 alias pip='pip3'
 
 alias list_hosts='cat ~/.ssh/config | grep "^host" | cut -d " " -f2'
+
 alias restart_riot='/Users/adrien/code/matrix-docker-ansible-deploy; and ansible-playbook -i inventory/hosts setup.yml --tags=start --ask-sudo-pass'
+
+alias reload='source ~/.bashrc'
+
+alias dc="docker-compose"
+alias dcr="dc run"
+alias dcw="dcr web"
+alias dcb="dcw bash"
+alias dcc="dcw rails console"
+alias dcm="dcw rake db:migrate"
+alias tz_update='dcr --rm web bundle; dcr --rm web bundle exec rake db:migrate'
