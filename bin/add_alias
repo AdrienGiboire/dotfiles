@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ################################################################################
 # update_alias
@@ -66,50 +66,43 @@
 #
 ################################################################################
 
-function main
-{
-  echo "alias $alias_name=\"$alias_command\"" >> $path
-  source $path
-}
-
-function usage
-{
-    echo "usage: add_alias -an|--alias-name <alias_name> -ac|--alias-commad <alias_command> -p|--path <alias_file_path>"
-    echo "\t <alias_name> is the alias name"
-    echo "\t <alias_command> is the alias command"
-    echo "\t <alias_file_path> is the path to the file containing aliases"
+add_alias_usage () {
+  echo "usage: add_alias -an|--alias-name <alias_name> -ac|--alias-commad <alias_command> -p|--path <alias_file_path>"
+  echo "\t <alias_name> is the alias name"
+  echo "\t <alias_command> is the alias command"
+  echo "\t <alias_file_path> is the path to the file containing aliases"
 }
 
 ### Run
 
 if [ "$1" = "" ]; then
-    usage
-    exit 1
+  add_alias_usage
+  exit 1
 fi
 
 alias_name=
 alias_command=
-path="$HOME/.zshrc"
+path="$HOME/.config/bash/aliases"
 
 while [ "$1" != "" ]; do
-    case $1 in
-  -an | --alias-name )
+  case $1 in
+    -an | --alias-name )
       shift
       alias_name=$1
       ;;
-  -ac | --alias-command )
+    -ac | --alias-command )
       shift
       alias_command=$1
       ;;
-  -p | --path )
+    -p | --path )
       shift
       path=$1
       ;;
-  * )
-      usage
+    * )
+      add_alias_usage
       exit 1
-    esac
-    shift
+  esac
+  shift
 done
 
-main
+echo "alias $alias_name=\"$alias_command\"" >> $path
