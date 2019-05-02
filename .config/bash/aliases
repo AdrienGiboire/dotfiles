@@ -1,6 +1,5 @@
 # Long, full, colorized output, add file type indicator, and put sizes in human readable format
-alias ls='ls -laGFh'
-alias l='ls'
+alias l='ls -AFglh'
 alias ..='cd ..'
 alias ...='..;..'
 
