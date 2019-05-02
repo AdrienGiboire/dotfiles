@@ -1,4 +1,12 @@
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
+MYFILES=`ls -F $HOME/bin | grep "\/"`
+for FOLDER in $MYFILES; do
+  PATH="$HOME/bin/$FOLDER:$PATH"
+  echo "Adding $FOLDER"
+done
+
+export PATH
+
 # vim: ft=sh
