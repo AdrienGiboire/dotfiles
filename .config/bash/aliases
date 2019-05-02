@@ -9,13 +9,13 @@ alias grep='grep --color=auto'
 # Rails {{{
 
 alias be='bundle exec'
-alias drake="set RAILS_ENV development; and bin/rake"
-alias prake="set RAILS_ENV production; and bin/rake"
-alias trake="set RAILS_ENV test; and bin/rake"
-alias drails="set INCLUDE_LIVERELOAD t; and set LES_VRAIS_BARBUS t; and set RAILS_ENV development; and bin/rails"
-alias prails="set RAILS_ENV production; and bin/rails"
-alias trails="set RAILS_ENV test; and bin/rails"
-alias reset_db="drake db:drop; and drake db:create; and drake db:migrate; and drake db:seed"
+alias drake="set RAILS_ENV development && bin/rake"
+alias prake="set RAILS_ENV production && bin/rake"
+alias trake="set RAILS_ENV test && bin/rake"
+alias drails="set INCLUDE_LIVERELOAD t && set LES_VRAIS_BARBUS t && set RAILS_ENV development && bin/rails"
+alias prails="set RAILS_ENV production && bin/rails"
+alias trails="set RAILS_ENV test && bin/rails"
+alias reset_db="drake db:drop && drake db:create && drake db:migrate && drake db:seed"
 alias rs="drails s"
 alias rc="drails c"
 
@@ -25,10 +25,10 @@ alias pgstart="brew services start postgresql"
 alias start="./start.rb -b 0.0.0.0 --port 3002 --no-restart-redis --no-restart-dynamo"
 
 alias wr="which ruby"
-alias rescue_tunnelblick="sudo kextunload -b net.sf.tuntaposx.tap; and sudo kextunload -b net.sf.tuntaposx.tun"
-alias clean_xcode="rm -rf ~/Library/Developer/Xcode/DerivedData/; and rm -rf ~/Library/Caches/com.apple.dt.Xcode"
+alias rescue_tunnelblick="sudo kextunload -b net.sf.tuntaposx.tap && sudo kextunload -b net.sf.tuntaposx.tun"
+alias clean_xcode="rm -rf ~/Library/Developer/Xcode/DerivedData/ && rm -rf ~/Library/Caches/com.apple.dt.Xcode"
 
-alias pgcli_staging="set PGPASSWORD jol4ev7pe8hyash3jea9hod9; and psql -h  octoly-staging.c7qtiwv4d8mv.us-east-1.rds.amazonaws.com -U octolyrds -d octoly_production"
+alias pgcli_staging="set PGPASSWORD jol4ev7pe8hyash3jea9hod9 && psql -h  octoly-staging.c7qtiwv4d8mv.us-east-1.rds.amazonaws.com -U octolyrds -d octoly_production"
 
 alias octoly='tmux -f ~/.tmux/octoly.conf a'
 alias partitio='tmux -f ~/.tmux/partitio.conf a'
@@ -53,7 +53,7 @@ alias pip='pip3'
 
 alias list_hosts='cat ~/.ssh/config | grep "^host" | cut -d " " -f2'
 
-alias restart_riot='/Users/adrien/code/matrix-docker-ansible-deploy; and ansible-playbook -i inventory/hosts setup.yml --tags=start --ask-sudo-pass'
+alias restart_riot='/Users/adrien/code/matrix-docker-ansible-deploy && ansible-playbook -i inventory/hosts setup.yml --tags=start --ask-sudo-pass'
 
 alias reload='source ~/.bashrc'
 
