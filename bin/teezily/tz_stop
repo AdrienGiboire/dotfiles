@@ -1,0 +1,12 @@
+#!/bin/bash -i
+
+shopt -s expand_aliases
+
+c catalog
+dc down
+
+c product-manager
+dc down
+
+c teezily
+dc down
