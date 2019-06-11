@@ -1,5 +1,5 @@
 [core]
-  excludesfile = /Users/adrien/.gitignore
+	excludesfile = /home/dev/.gitignore
   editor = nvim
   ignorecase = false
   # protect your project from Windows line endings creeping in
@@ -7,6 +7,7 @@
 [user]
   name = Adrien
   email = github@adrien.sent.com
+	signingkey = 6AEE3B0147923AF2
 [color]
   ui = auto
 [alias]
@@ -49,8 +50,8 @@
   head = !git l -1
   h = !git head
   hp = "!. ~/.githelpers && show_git_head"
+  l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   r = !GIT_NO_PAGER=1 git l -10
-  l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches
 
   pr = "!. ~/.githelpers && pull_request"
   d = difftool
