@@ -57,10 +57,13 @@ alias restart_riot='/Users/adrien/code/matrix-docker-ansible-deploy && ansible-p
 
 alias reload='source ~/.bashrc'
 
+alias ducks='du -cks * | sort -rn | head'
+
 alias dc="docker-compose"
 alias dcr="dc run"
 alias dcw="dcr web"
 alias dcb="dcw bash"
 alias dcc="dcw rails console"
 alias dcm="dcw rake db:migrate"
-alias tz_update='dcr --rm web bundle; dcr --rm web bundle exec rake db:migrate'
+alias cube-s="dcw bin/kubectl-staging"
+alias tz="tmux -f ~/.config/tmux/teezily.conf attach"

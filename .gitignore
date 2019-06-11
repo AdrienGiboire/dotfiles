@@ -12,5 +12,7 @@ public/packs
 .config/nvim/tmp/
 .config/nvim/.netrwhist
 .ssh/*
+.kube
+/kubectl-*
 
 .DS_Store
