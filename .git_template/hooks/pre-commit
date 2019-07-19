@@ -5,7 +5,7 @@ hits = []
 
 checks = {
   '\.(rb|haml)$' => ['binding\.pry', 'byebug'],
-  '\.js(.jsx)?(.erb)?$' => ['debugger', 'console\.*'],
+  '\.js(.jsx)?(.erb)?$' => ['debugger', 'console\.(log|debug|error|info|warn)'],
 }
 
 # Find the names of all the filenames that have been (A)dded (C)opied or (M)odified
