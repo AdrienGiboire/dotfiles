@@ -1,0 +1,21 @@
+#!/bin/bash
+
+deploy () {
+  git staash
+
+  # if we have a name for the branch to deploy AND an env to deploy to
+  if [[ 2 -le $# ]]; then
+    git co ${1}
+    git merge ${2}
+    git push
+    be cap ${1} deploy
+    git co -
+  elif [[ 1 -le $# ]]; then
+    git co ${1}
+    git push
+    be cap ${1} deploy
+    git co -
+  else
+    echo "Usage: deploy <to> [<from>]"
+  fi
+}
