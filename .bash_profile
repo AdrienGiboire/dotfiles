@@ -40,6 +40,6 @@ shopt -s globstar
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 
 # Git completion
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
+if [ -f ~/.config/bash/completions/git-completion.bash ]; then
+  . ~/.config/bash/completions/git-completion.bash
 fi
