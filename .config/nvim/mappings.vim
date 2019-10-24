@@ -20,11 +20,6 @@ nnoremap <leader>ag :Ack!<space>
 " ctrlpvim/ctrlp.vim
 let g:ctrlp_working_path_mode = ''
 
-" tacahiroy/ctrlp-funky
-nnoremap <Leader>fu :CtrlPFunky<CR>
-" Narrow the list down with a word under cursor
-nnoremap <Leader>fU :execute 'CtrlPFunky '.expand('<cword>')<CR>
-
 " tpope/vim-fugitive
 nnoremap <Leader>ga :Gw<CR>
 nnoremap <Leader>gb :Gblame<CR>
@@ -95,7 +90,7 @@ nnoremap <silent> <C-w>u :exe "resize " . (winheight(0) * 3/2)<CR>
 
 nnoremap <leader>s vip:sort<cr>
 
-nnoremap <leader>t :tabe<cr>
+"nnoremap <leader>t :tabe<cr>
 
 iab <expr> tts strftime("%T")
 iab <expr> dts strftime("%a %d %b %Y")
@@ -105,3 +100,10 @@ cmap w!! w !sudo tee > /dev/null %
 
 nnoremap <leader>cc :set nonumber<CR>:set norelativenumber<CR>:set nolist<CR>
 nnoremap <leader>cr :set number<CR>:set relativenumber<CR>:set list<CR>
+
+" tags {{{
+" Instead of :tag jumping to first match definition, it jumps to the
+" definition if there is only one match. Else, it displays a list of all
+" matching tags.
+nnoremap <C-]> g<C-]>
+" }}}

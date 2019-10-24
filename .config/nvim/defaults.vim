@@ -9,6 +9,7 @@ set autoread
 " the beginning of that line), thus preserving horizontal blocks of text.
 let &showbreak='↪ '
 set backspace=indent,eol,start
+set backupcopy=yes
 set breakindent
 set completeopt-=preview
 set display+=lastline
@@ -33,11 +34,13 @@ set number
 set regexpengine=1
 set relativenumber
 set ruler
+set rtp+=/usr/local/opt/fzf
 set scrolloff=5 " Set 5 lines to the cursor - when moving vertically
 set secure
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
+set tags^=./.git/tags
 set visualbell t_vb=
 
 set wildignore=**/.svn/**
@@ -67,6 +70,7 @@ set wildignore+=**/public/packs/**
 
 set wildmenu
 set wildmode=full
+set wildignorecase
 set wrap
 
 " make the completion menu a bit more readable

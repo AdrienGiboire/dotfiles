@@ -19,49 +19,27 @@
   dc = diff --color --cached
   amend = commit --amend
   aa = add --all
-  ff = merge --ff-only
-  pullr = !git pull --rebase origin $(git rev-parse --abbrev-ref HEAD)
-  pullff = pull --ff-only
-  noff = merge --no-ff
+  pullr = "!. ~/.githelpers && git_pullr"
   fa = fetch --all
   pom = push origin master
   pum = push upstream master
-  b = !git branch -v | more
-  ds = !git diff --color --stat=160,120
-  dh1 = !git diff --color HEAD~1
+  b = !git branch -v
+  rb = !git checkout master && git pull --rebase && git checkout - && git rebase --interactive master
   rc = rebase --continue
   ra = rebase --abort
   ri = rebase --interactive
 
-  # Divergence (commits we added and commits remote added)
-  div = divergence
-
-  # Goodness (summary of diff lines added/removed/total)
-  gn = goodness
-  gnc = goodness --cached
-
-  # Fancy logging.
-  #   h = head
-  #   hp = head with path
-  #   r = recent commits, only current branch
-  #   ra = recent commits, all reachable refs
-  #   l = all commits, only current branch
-  #   la = all commits, all reachable refs
-  head = !git l -1
-  h = !git head
-  hp = "!. ~/.githelpers && show_git_head"
-  l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   r = !GIT_NO_PAGER=1 git l -10
+  l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
   pr = "!. ~/.githelpers && pull_request"
   d = difftool
   commend = commit --amend --no-edit
-  it = !git init && git commit -m "root" --allow-empty
-  shorty = status --short --branch
   staash = stash --include-untracked
   ctags = !.git/hooks/ctags
 
-  m = merge --no-edit
+  tags = "for-each-ref --sort=taggerdate --format='%(color:green)%(subject)%(color:reset), tagged: %(color:yellow)%(refname:short)%(color:reset)\n%(taggerdate)\n%(taggername) %(taggeremail)\n\n%(contents:body)\n' refs/tags"
+
 [merge]
   tool = nvimdiff
 [diff]

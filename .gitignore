@@ -16,3 +16,7 @@ public/packs
 /kubectl-*
 
 .DS_Store
+.local.vim
+.ignore
+
+tags
