@@ -55,3 +55,17 @@ git_pullr() {
 
   git pull --rebase $remote $(git rev-parse --abbrev-ref HEAD)
 }
+
+git_rebase() {
+  default_branch='master'
+
+  if [[ ! -z ${1} ]]; then
+    default_branch=${1}
+  fi
+
+  git staash &&
+    git checkout $default_branch &&
+    git pullr &&
+    git checkout - &&
+    git rebase $default_branch
+}

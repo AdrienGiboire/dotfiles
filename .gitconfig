@@ -24,7 +24,7 @@
   pom = push origin master
   pum = push upstream master
   b = !git branch -v
-  rb = !git checkout master && git pull --rebase && git checkout - && git rebase --interactive master
+  rb = "!. ~/.githelpers && git_rebase"
   rc = rebase --continue
   ra = rebase --abort
   ri = rebase --interactive
