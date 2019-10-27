@@ -12,7 +12,7 @@ git clone --bare https://github.com/adriengiboire/dotfiles.git $HOME/.dotfiles
 
 mkdir -p .config-backup
 config checkout
-if test 0 -le $#
+if [ 0 -le $# ]; then
   echo "Checked out config."
 else
   echo "Backing up pre-existing dot files."
