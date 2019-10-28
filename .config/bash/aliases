@@ -67,3 +67,6 @@ alias dcc="dcw rails console"
 alias dcm="dcw rake db:migrate"
 alias cube-s="dcw bin/kubectl-staging"
 alias tz="tmux -f ~/.config/tmux/teezily.conf attach"
+
+# for ubuntu (and more?), remap caps lock to ctrl
+alias nocaps="setxkbmap -option ctrl:nocaps"
