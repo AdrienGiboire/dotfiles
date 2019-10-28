@@ -49,3 +49,8 @@ curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
 sudo apt install nodejs
 mkdir ~/.npm-global
 npm config set prefix '~/.npm-global'
+
+# fzf {{{
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+# }}}
