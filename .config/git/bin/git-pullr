@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+remote='origin'
+
+if [[ ! -z ${1} ]]; then
+  remote=${1}
+fi
+
+git pull --rebase $remote $(git rev-parse --abbrev-ref HEAD)

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+default_branch='master'
+
+if [[ ! -z ${1} ]]; then
+  default_branch=${1}
+fi
+
+git staash &&
+  git checkout $default_branch &&
+  git pullr &&
+  git checkout - &&
+  git rebase $default_branch

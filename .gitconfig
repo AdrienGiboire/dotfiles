@@ -19,12 +19,10 @@
   dc = diff --color --cached
   amend = commit --amend
   aa = add --all
-  pullr = "!. ~/.githelpers && git_pullr"
   fa = fetch --all
   pom = push origin master
   pum = push upstream master
   b = !git branch -v
-  rb = "!. ~/.githelpers && git_rebase"
   rc = rebase --continue
   ra = rebase --abort
   ri = rebase --interactive
@@ -32,7 +30,6 @@
   r = !GIT_NO_PAGER=1 git l -10
   l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
-  pr = "!. ~/.githelpers && pull_request"
   d = difftool
   commend = commit --amend --no-edit
   staash = stash --include-untracked
