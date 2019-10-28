@@ -107,3 +107,7 @@ nnoremap <leader>cr :set number<CR>:set relativenumber<CR>:set list<CR>
 " matching tags.
 nnoremap <C-]> g<C-]>
 " }}}
+
+" netrw {{{
+nnoremap <silent>- :edit %:p:h<CR>
+" }}}
