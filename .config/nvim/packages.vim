@@ -92,10 +92,6 @@ nnoremap <silent> <C-p> :Files<CR>
 
 call minpac#add('lmeijvogel/vim-yaml-helper')
 
-call minpac#add('flowtype/vim-flow')
-let g:flow#errjmp = 1
-let g:flow#autoclose = 1
-
 call minpac#add('k-takata/minpac', { 'type': 'opt' })
 call minpac#add('machakann/vim-highlightedyank')
 
@@ -110,6 +106,9 @@ endif
 call minpac#add('neoclide/vim-jsx-improve') " syntax and indent plugin for react jsx.
 call minpac#add('pangloss/vim-javascript')
 call minpac#add('posva/vim-vue')
+
+call minpac#add('flowtype/vim-flow')
+let g:flow#errjmp = 1
 " }}}
 
 call minpac#add('olical/vim-enmasse')
