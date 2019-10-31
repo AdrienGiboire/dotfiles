@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+git init
+echo ${PWD##*/} > README.md
+git aa
+git ci -m'root commit'
