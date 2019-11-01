@@ -150,7 +150,7 @@ bindsym $mod+Shift+Ctrl+8 move container to workspace $ws18
 bindsym $mod+Shift+Ctrl+9 move container to workspace $ws19
 
 # move focused container to workspace, move to workspace
-bindsym $mod+$alt+1 move container to workspace $ws1; workspace $ws1  
+bindsym $mod+$alt+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+$alt+2 move container to workspace $ws2; workspace $ws2
 bindsym $mod+$alt+3 move container to workspace $ws3; workspace $ws3
 bindsym $mod+$alt+4 move container to workspace $ws4; workspace $ws4
