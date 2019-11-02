@@ -81,6 +81,12 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
+# move workspaces in outputs
+bindsym $mod+Ctrl+Shift+h move workspace to output left
+bindsym $mod+Ctrl+Shift+j move workspace to output down
+bindsym $mod+Ctrl+Shift+k move workspace to output up
+bindsym $mod+Ctrl+Shift+l move workspace to output right
+
 # toggle split orientation
 bindsym $mod+BackSpace split toggle
 
