@@ -8,7 +8,12 @@ cnoremap <c-e> <end>
 " Make u/U behave for undo like n/N does for search
 nnoremap U <c-r>
 
-inoremap <silent>jk <Esc>
+inoremap <silent> <buffer> jk <Esc>
+augroup neovim_terminal
+  autocmd!
+  autocmd TermOpen * set nonumber norelativenumber
+  autocmd TermOpen * startinsert
+augroup ENDJ
 
 " Why a command used so much needs more keystroke than a barely known command?
 nnoremap ; :
