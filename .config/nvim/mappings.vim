@@ -9,11 +9,6 @@ cnoremap <c-e> <end>
 nnoremap U <c-r>
 
 inoremap <silent> <buffer> jk <Esc>
-augroup neovim_terminal
-  autocmd!
-  autocmd TermOpen * set nonumber norelativenumber
-  autocmd TermOpen * startinsert
-augroup ENDJ
 
 " Why a command used so much needs more keystroke than a barely known command?
 nnoremap ; :

@@ -90,3 +90,9 @@ augroup netrw_buf_hidden_fix
         \| endif
 
 augroup end
+
+augroup neovim_terminal
+  autocmd!
+  autocmd TermOpen * set nonumber norelativenumber
+  autocmd TermOpen * startinsert
+augroup END
