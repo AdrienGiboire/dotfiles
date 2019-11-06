@@ -18,10 +18,10 @@ set $terminal_path /usr/bin/st
 
 # Color values are defined in ~/.Xresources-regolith
 # These are the labels which define each i3 workspace.
-set_from_resource $ws1  i3-wm.workspace.01.name "1"
-set_from_resource $ws2  i3-wm.workspace.02.name "2"
-set_from_resource $ws3  i3-wm.workspace.03.name "3"
-set_from_resource $ws4  i3-wm.workspace.04.name "4"
+set_from_resource $ws1  i3-wm.workspace.01.name "1: communication"
+set_from_resource $ws2  i3-wm.workspace.02.name "2: social"
+set_from_resource $ws3  i3-wm.workspace.03.name "3: work"
+set_from_resource $ws4  i3-wm.workspace.04.name "4: www"
 set_from_resource $ws5  i3-wm.workspace.05.name "5"
 set_from_resource $ws6  i3-wm.workspace.06.name "6"
 set_from_resource $ws7  i3-wm.workspace.07.name "7"
@@ -277,15 +277,15 @@ bar {
   strip_workspace_numbers yes
 
   colors {
-      background $i3-wm.bar.background.color
-      statusline $i3-wm.bar.statusline.color
-      separator  $i3-wm.bar.separator.color
+    background $i3-wm.bar.background.color
+    statusline $i3-wm.bar.statusline.color
+    separator  $i3-wm.bar.separator.color
 
-#                        BORDER  BACKGROUND TEXT
-      focused_workspace  $i3-wm.bar.workspace.focused.border.color      $i3-wm.bar.workspace.focused.background.color   $i3-wm.bar.workspace.focused.text.color
-      active_workspace   $i3-wm.bar.workspace.active.border.color       $i3-wm.bar.workspace.active.background.color    $i3-wm.bar.workspace.active.text.color
-      inactive_workspace $i3-wm.bar.workspace.inactive.border.color     $i3-wm.bar.workspace.inactive.background.color  $i3-wm.bar.workspace.inactive.text.color
-      urgent_workspace   $i3-wm.bar.workspace.urgent.border.color       $i3-wm.bar.workspace.urgent.background.color    $i3-wm.bar.workspace.urgent.text.color
+#     BORDER  BACKGROUND TEXT
+    focused_workspace  $i3-wm.bar.workspace.focused.border.color      $i3-wm.bar.workspace.focused.background.color   $i3-wm.bar.workspace.focused.text.color
+    active_workspace   $i3-wm.bar.workspace.active.border.color       $i3-wm.bar.workspace.active.background.color    $i3-wm.bar.workspace.active.text.color
+    inactive_workspace $i3-wm.bar.workspace.inactive.border.color     $i3-wm.bar.workspace.inactive.background.color  $i3-wm.bar.workspace.inactive.text.color
+    urgent_workspace   $i3-wm.bar.workspace.urgent.border.color       $i3-wm.bar.workspace.urgent.background.color    $i3-wm.bar.workspace.urgent.text.color
   }
 }
 
