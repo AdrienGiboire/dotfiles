@@ -1,7 +1,9 @@
-export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/.config/git/bin:$PATH"
-export PATH="$HOME/.npm-global/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
+#!/usr/bin/env bash
+
+PATH="/usr/local/bin:$PATH"
+PATH="$HOME/.config/git/bin:$PATH"
+PATH="$HOME/.npm-global/bin:$PATH"
+PATH="$HOME/bin:$PATH"
 
 MYFILES=`ls -F $HOME/bin | grep "\/"`
 for FOLDER in $MYFILES; do
