@@ -11,9 +11,7 @@ call minpac#add('tpope/vim-fugitive')
 
 " Jellybeans {{{
 call minpac#add('nanotech/jellybeans.vim')
-set t_Co=256
 set background=dark
-colorscheme jellybeans
 " }}}
 
 " FZF {{{
