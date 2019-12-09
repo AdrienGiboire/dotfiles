@@ -6,8 +6,14 @@ command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 packadd minpac
 call minpac#init({'verbose': 3})
 
+call minpac#add('AdrienGiboire/vim-todo')
+call minpac#add('tpope/vim-fugitive')
+call minpac#add('k-takata/minpac', { 'type': 'opt' })
+call minpac#add('machakann/vim-highlightedyank')
+call minpac#add('olical/vim-enmasse')
+call minpac#add('plasticboy/vim-markdown')
+
 " theme {{{
-"call minpac#add('nanotech/jellybeans.vim')
 call minpac#add('taniarascia/new-moon.vim')
 
 set t_8f=^[[38;2;%lu;%lu;%lum        " set foreground color
@@ -17,9 +23,6 @@ set termguicolors                    " Enable GUI colors for the terminal to get
 
 colorscheme new-moon
 " }}}
-
-call minpac#add('AdrienGiboire/vim-todo')
-call minpac#add('tpope/vim-fugitive')
 
 " FZF {{{
 call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
@@ -95,11 +98,6 @@ autocmd VimEnter * command! -bang -nargs=? -complete=dir Files
 nnoremap <silent> <C-p> :Files<CR>
 " }}}
 
-call minpac#add('lmeijvogel/vim-yaml-helper')
-
-call minpac#add('k-takata/minpac', { 'type': 'opt' })
-call minpac#add('machakann/vim-highlightedyank')
-
 " ack {{{
 call minpac#add('mileszs/ack.vim')
 if executable('ag')
@@ -107,19 +105,37 @@ if executable('ag')
 endif
 " }}}
 
-" JavaScript {{{
-call minpac#add('neoclide/vim-jsx-improve') " syntax and indent plugin for react jsx.
+" javascript {{{
 call minpac#add('pangloss/vim-javascript')
+let g:javascript_plugin_flow = 1
+augroup javascript_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+augroup END
+
 call minpac#add('posva/vim-vue')
 
-call minpac#add('flowtype/vim-flow')
-let g:flow#errjmp = 1
+" tagbar {{{
+let g:tagbar_type_javascript = {
+      \ 'ctagstype': 'javascript',
+      \ 'kinds': [
+      \ 'A:Array/Arrays',
+      \ 'P:Property/Properties',
+      \ 'T:Tag/Tags',
+      \ 'O:Object/Objects',
+      \ 'G:Generator/Generators',
+      \ 'F:Function/Functions',
+      \ 'C:Class/Classes',
+      \ 'M:Method/Methods',
+      \ 'V:Variable/Variables',
+      \ 'I:Import/Imports',
+      \ 'E:Export/Exports',
+      \ 'S:StyledComponent/StyledComponents'
+      \ ]}
+" }}}
 " }}}
 
-call minpac#add('olical/vim-enmasse')
-call minpac#add('plasticboy/vim-markdown')
-
-" Ruby {{{
+" ruby {{{
 call minpac#add('tpope/vim-rails')
 call minpac#add('tpope/vim-rake')
 call minpac#add('vim-ruby/vim-ruby') " Vim/Ruby Configuration Files
@@ -128,11 +144,11 @@ call minpac#add('vim-ruby/vim-ruby') " Vim/Ruby Configuration Files
 call minpac#add('tpope/vim-markdown')
 call minpac#add('tpope/vim-repeat') " enable repeating supported plugin maps with '.'
 
-" Surround - quoting/parenthesizing made simple {{{
+" surround - quoting/parenthesizing made simple {{{
 call minpac#add('tpope/vim-surround')
 " }}}
 
-" Multiple Cursors {{{
+" multiple cursors {{{
 call minpac#add('terryma/vim-multiple-cursors')
 let g:multi_cursor_exit_from_insert_mode=0
 " }}}
@@ -145,32 +161,11 @@ call minpac#add('jiangmiao/auto-pairs')
 call minpac#add('majutsushi/tagbar')
 let g:tagbar_show_linebumbers = 1
 nnoremap <silent> <C-t> :TagbarToggle<CR>
-
-let g:tagbar_type_javascript = {
-  \ 'ctagstype': 'javascript',
-  \ 'kinds': [
-  \ 'A:Array/Arrays',
-  \ 'P:Property/Properties',
-  \ 'T:Tag/Tags',
-  \ 'O:Object/Objects',
-  \ 'G:Generator/Generators',
-  \ 'F:Function/Functions',
-  \ 'C:Class/Classes',
-  \ 'M:Method/Methods',
-  \ 'V:Variable/Variables',
-  \ 'I:Import/Imports',
-  \ 'E:Export/Exports',
-  \ 'S:StyledComponent/StyledComponents'
-  \ ]}
 " }}}
 
-" Indent Guides {{{
+" indent guides {{{
 call minpac#add('nathanaelkane/vim-indent-guides')
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
-" }}}
-
-" Svelte {{{
-call minpac#add('evanleck/vim-svelte')
 " }}}
