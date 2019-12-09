@@ -6,13 +6,20 @@ command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 packadd minpac
 call minpac#init({'verbose': 3})
 
+" theme {{{
+"call minpac#add('nanotech/jellybeans.vim')
+call minpac#add('taniarascia/new-moon.vim')
+
+set t_8f=^[[38;2;%lu;%lu;%lum        " set foreground color
+set t_8b=^[[48;2;%lu;%lu;%lum        " set background color
+set t_Co=256                         " Enable 256 colors
+set termguicolors                    " Enable GUI colors for the terminal to get truecolor
+
+colorscheme new-moon
+" }}}
+
 call minpac#add('AdrienGiboire/vim-todo')
 call minpac#add('tpope/vim-fugitive')
-
-" Jellybeans {{{
-call minpac#add('nanotech/jellybeans.vim')
-set background=dark
-" }}}
 
 " FZF {{{
 call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
@@ -159,5 +166,11 @@ let g:tagbar_type_javascript = {
 
 " Indent Guides {{{
 call minpac#add('nathanaelkane/vim-indent-guides')
+let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+" }}}
+
+" Svelte {{{
+call minpac#add('evanleck/vim-svelte')
 " }}}

@@ -8,6 +8,7 @@ set autoread
 " Every wrapped line will continue visually indented (same amount of space as
 " the beginning of that line), thus preserving horizontal blocks of text.
 let &showbreak='↪ '
+"set background=dark
 set backspace=indent,eol,start
 set backupcopy=yes
 set breakindent
@@ -29,7 +30,6 @@ set listchars=tab:▸\ ,eol:¬,trail:⌴
 set modelines=5
 set noeol
 set nojoinspaces
-set number
 set number
 set regexpengine=1
 set relativenumber
@@ -73,12 +73,14 @@ set wildmode=full
 set wildignorecase
 set wrap
 
+" highlight {{{
 " make the completion menu a bit more readable
-" highlight PmenuSel ctermbg=white ctermfg=black
-" highlight Pmenu ctermbg=black ctermfg=white
+highlight PmenuSel ctermbg=white ctermfg=black
+highlight Pmenu ctermbg=black ctermfg=white
 
 " so it's clear which paren I'm on and which is matched
 highlight MatchParen cterm=none ctermbg=none ctermfg=yellow
+" }}}
 
 augroup netrw_buf_hidden_fix
   autocmd!
@@ -88,7 +90,6 @@ augroup netrw_buf_hidden_fix
         \  if &ft != 'netrw'
         \|     set bufhidden=hide
         \| endif
-
 augroup end
 
 augroup neovim_terminal
