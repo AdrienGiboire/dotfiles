@@ -1,9 +1,20 @@
 #!/usr/bin/env bash
 
 PATH="/usr/local/bin:$PATH"
-PATH="$HOME/.config/git/bin:$PATH"
-PATH="$HOME/.npm-global/bin:$PATH"
-PATH="$HOME/bin:$PATH"
+
+if [ -d "$HOME/adb-fastboot/platform-tools" ]; then
+  PATH="$HOME/adb-fastboot/platform-tools:$PATH"
+fi
+
+if [ -d "$HOME/.config/git/bin" ]; then
+  PATH="$HOME/.config/git/bin:$PATH"
+fi
+if [ -d "$HOME/.npm-global/bin" ]; then
+  PATH="$HOME/.npm-global/bin:$PATH"
+fi
+if [ -d "$HOME/bin" ]; then
+  PATH="$HOME/bin:$PATH"
+fi
 
 MYFILES=`ls -F $HOME/bin | grep "\/"`
 for FOLDER in $MYFILES; do
