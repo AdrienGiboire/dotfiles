@@ -13,7 +13,7 @@ call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('olical/vim-enmasse')
 call minpac#add('plasticboy/vim-markdown')
 
-" theme {{{
+" THEME {{{
 call minpac#add('taniarascia/new-moon.vim')
 
 set t_8f=^[[38;2;%lu;%lu;%lum        " set foreground color
