@@ -11,6 +11,7 @@
 [color]
   ui = auto
 [alias]
+  arc = !git aa && git rc
   st = status
   ci = commit --verbose
   co = checkout
