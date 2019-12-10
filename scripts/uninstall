@@ -3,23 +3,19 @@
 set -e
 
 HOME_DIRECTORY=$HOME
-VERBOSE=false
 
-usage () {
+function usage {
   echo "Infos -- Usage: ./scripts/uninstall [options]"
   echo "         Options: -d (default: $HOME_DIRECTORY) dotfiles root directory"
   exit 1
 }
 
 # Parse the options
-while getopts ':d:vh' opt
+while getopts ':dh' opt
 do
   case $opt in
     d)
       HOME_DIRECTORY=$OPTARG
-      ;;
-    v)
-      VERBOSE=true
       ;;
     h)
       usage
@@ -47,34 +43,27 @@ do
 done
 
 declare -a list_of_files=(
-  ".bundler-exec.sh"
+  ".bash_profile"
+  ".bashrc"
+  ".config"
   ".dotfiles"
   ".gitconfig"
   ".githelpers"
+  ".gitignore"
+  ".git_template"
   ".jshintrc"
   ".pryrc"
-  ".tmux"
-  ".tmux.conf"
-  ".vim"
-  ".vimrc"
-  ".zsh"
-  ".zshrc"
+  "bin"
+  "README.md"
+  "scripts"
 )
 
-if [ "$#" -gt 0 ] && [ "$1" = "-v" ]; then
-  verbose=true
-else
-  verbose=false
-fi
 
 echo "==> Deleting files..."
 
 for file in "${list_of_files[@]}"; do
-  if $VERBOSE; then
-    echo "====> Deleting $file..."
-  fi
-
+  echo "====> Deleting $file..."
   rm -fr $HOME_DIRECTORY/$file
 done
 
-echo "==> Done Uninstalling..."
+echo "==> Done Uninstalling."

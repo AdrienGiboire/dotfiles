@@ -1,39 +1,9 @@
-## Prerequisites
+# Written for Ubuntu
 
-* Unix based OS
-* Git
-```
-sudo apt-get install git
-```
-* Various utils
-```
-sudo apt-get install exuberant-ctags silversearcher-ag
-```
-* NeoVim
-```
-sudo apt-get install neovim
-```
+Accepts PR for more support if you are willing to.
 
-## Install
-
-To clean this:
+# How To Install
 
 ```
-rm -fr .bash_history .bash_logout .bash_profile .bashrc .bundler-exec.sh .config/ .dotfiles/ .git_template/ .gitconfig .githelpers .gitignore .jshintrc .profile .pryrc .ssh/ .tmux.conf README.md bin/ scripts/ install
-```
-
-```
-git clone --bare https://github.com/AdrienGiboire/dotfiles.git $HOME/.dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-config checkout
-config config status.showUntrackedFiles no
-```
-
-## To Install Minpac for Neovim
-
-```
-git clone https://github.com/k-takata/minpac.git \
-  ~/.config/nvim/pack/minpac/opt/minpac
-
-nvim --headless +PackUpdate +q
+curl -fsSL https://raw.github.com/AdrienGiboire/dotfiles/master/scripts/install | bash
 ```
