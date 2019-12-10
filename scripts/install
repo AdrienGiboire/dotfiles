@@ -30,7 +30,7 @@ sudo apt-get install -y $(join ' ' ${utils[@]})
 # }}}
 
 # FETCH SOURCES {{{
-git clone --bare https://github.com/adriengiboire/dotfiles.git $HOME/.dotfiles
+git clone --bare git@github.com:AdrienGiboire/dotfiles.git $HOME/.dotfiles
 
 mkdir -p $HOME/.config-backup
 config checkout
