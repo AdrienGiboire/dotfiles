@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+DEVICE_NAME=$1
+VOLUME_PATH=`sudo lsblk -o MOUNTPOINT,LABEL | ag $DEVICE_NAME | cut -d ' ' -f1`
+
+if [ ! -e "$VOLUME_PATH" ]; then
+  echo "Pas de volume de sauvegarde s'appelant '$DEVICE_NAME'"
+  exit
+fi
+
+rsync -av --stats --progress $HOME/ownCloud/ $VOLUME_PATH/ownCloud
