@@ -1,4 +1,5 @@
-"vim: ft=vim;fm=marker;fl=0;fc=3
+" vim: filetype=vim foldmethod=marker foldlevel=0 foldcolumn=3
+
 " GENERAL SETTINGS {{{
 set nocompatible
 filetype plugin indent on
@@ -14,39 +15,67 @@ set autoread
 " Every wrapped line will continue visually indented (same amount of space as
 " the beginning of that line), thus preserving horizontal blocks of text.
 let &showbreak='↪ '
-"set background=dark
+
 set backspace=indent,eol,start
-set backupcopy=yes
 set breakindent
 set completeopt-=preview
+set cmdheight=2
 set display+=lastline
 set encoding=utf-8
 set expandtab
 set exrc
+
 " Assume the /g flag on :s substitutions to replace all matches in a line
 set gdefault
-set nohidden
+
 set history=1000
 set inccommand=split
 set incsearch
 set laststatus=2
-set lazyredraw " needed to improve vim performances with folding on and working on ruby/yaml files
+
+" needed to improve vim performances with folding on and working on ruby/yaml files
+set lazyredraw
+
 set list
 set listchars=tab:▸\ ,eol:¬,trail:⌴
 set modelines=5
+
+" so servers (for CoC) have issues with backup files
+set nobackup
+
 set noeol
+set nohidden
 set nojoinspaces
+set noswapfile
+
+" so servers (for CoC) have issues with backup files
+set nowritebackup
+
 set number
 set regexpengine=1
 set relativenumber
 set ruler
 set rtp+=/usr/local/opt/fzf
-set scrolloff=5 " Set 5 lines to the cursor - when moving vertically
+
+" Set 5 lines to the cursor - when moving vertically
+set scrolloff=5
+
 set secure
 set shiftwidth=2
+
+" don't give |ins-completion-menu| messages
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
 set softtabstop=2
 set tabstop=2
 set tags^=./.git/tags
+
+" prevent bad experience for diagnostic messages when it's default 4000
+set updatetime=300
+
 set visualbell t_vb=
 
 set wildignore=**/.svn/**
@@ -144,7 +173,6 @@ set termguicolors                    " Enable GUI colors for the terminal to get
 
 colorscheme new-moon
 " }}}
-
 " FZF {{{2
 call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
 call minpac#add('junegunn/fzf.vim')
@@ -220,14 +248,12 @@ nnoremap <silent> <C-p> :Files<CR>
 nmap <leader>bl :Buffers<CR>
 nmap <leader>t :Tags<CR>
 " }}}
-
 " ACK/AG {{{2
 call minpac#add('mileszs/ack.vim')
 let g:ackprg = 'ag --nogroup --nocolor --column'
 nnoremap <leader>ag :Ack!<space>
 nnoremap <M-k> :Ack! "\b<cword>\b"<CR>
 " }}}
-
 " JavaScript {{{2
 call minpac#add('pangloss/vim-javascript')
 let g:javascript_plugin_flow = 1
@@ -238,7 +264,6 @@ augroup END
 
 call minpac#add('posva/vim-vue')
 "}}}
-
 " tagbar {{{2
 let g:tagbar_type_javascript = {
       \ 'ctagstype': 'javascript',
@@ -257,32 +282,26 @@ let g:tagbar_type_javascript = {
       \ 'S:StyledComponent/StyledComponents'
       \ ]}
 " }}}
-
 " ruby {{{2
 call minpac#add('tpope/vim-rails')
 call minpac#add('tpope/vim-rake')
 call minpac#add('vim-ruby/vim-ruby') " Vim/Ruby Configuration Files
 " }}}
-
 " surround - quoting/parenthesizing made simple {{{2
 call minpac#add('tpope/vim-surround')
 " }}}
-
 " multiple cursors {{{2
 call minpac#add('terryma/vim-multiple-cursors')
 let g:multi_cursor_exit_from_insert_mode=0
 " }}}
-
 " auto-pairs - insert or delete brackets, parens, quotes in pair {{{2
 call minpac#add('jiangmiao/auto-pairs')
 " }}}
-
 " tagbar {{{2
 call minpac#add('majutsushi/tagbar')
 let g:tagbar_show_linebumbers = 1
 nnoremap <silent> <C-t> :TagbarToggle<CR>
 " }}}
-
 " indent guides {{{2
 call minpac#add('nathanaelkane/vim-indent-guides')
 let g:indent_guides_auto_colors = 0
@@ -295,23 +314,6 @@ iab @@p adrien@sent.com
 iab rtfm Read The Fantastic Manual
 iab tts strftime("%T")
 iab dts strftime("%a %d %b %Y")
-" }}}
-" BACKUPS {{{1
-set undodir=~/.config/nvim/tmp/undo//     " undo files
-set backupdir=~/.config/nvim/tmp/backup// " backups
-set directory=~/.config/nvim/tmp/swap//   " swap files
-set viewdir=~/.config/nvim/tmp/views//    " view files
-
-" silently create directories if they don't exist
-silent execute '!mkdir -p $HOME/.config/nvim/tmp/undo'
-silent execute '!mkdir -p $HOME/.config/nvim/tmp/backup'
-silent execute '!mkdir -p $HOME/.config/nvim/tmp/swap'
-
-au BufWinLeave \* silent! mkview  " make vim save view (state) (folds, cursor, etc)
-au BufWinEnter \* silent! loadview " make vim load view (state) (folds, cursor, etc)
-
-set backup
-set noswapfile
 " }}}
 " BUFFERS {{{1
 " Bclose {{{2
