@@ -7,7 +7,7 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 
 export EDITOR='nvim'
 export HOMEBREW_EDITOR='nvim'
-export LESS='--ignore-case --raw-control-chars'
+export LESS='-F -X --ignore-case --raw-control-chars'
 # CTAGS Sorting in Vim is better behaved with this in place
 export LC_COLLATE=C
 
@@ -24,7 +24,7 @@ export LANG=en_US.UTF-8
 
 # fzf + ag configuration
 if _has fzf && _has ag; then
-  export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+  export FZF_DEFAULT_COMMAND='ag --nocolor --nogroup --column --path-to-ignore ~/.ignore'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_DEFAULT_OPTS='

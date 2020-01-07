@@ -28,7 +28,7 @@
   ra = rebase --abort
   ri = rebase --interactive
 
-  r = !GIT_NO_PAGER=1 git l -10
+  r = !git l -10
   l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
   d = difftool
