@@ -1,8 +1,9 @@
 #!/bin/bash
 
-set -e
+set -o nounset    # error when referencing undefined variable
+set -o errexit    # exit when command fails
 
-RUBY_VERSION=2.5.3
+RUBY_VERSION=2.6.5
 CHRUBY_VERSION=0.3.9
 RUBY_INSTALL_VERSION=0.7.0
 
@@ -10,7 +11,7 @@ function config {
   git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
 }
 
-# DEPENDENCIES {{{
+# DEPENDENCIES {{{1
 function join { local IFS="$1"; shift; echo "$*"; }
 
 utils=(
@@ -19,7 +20,6 @@ utils=(
   imagemagick
   libevent-dev
   make
-  nodejs
   postgresql
   silversearcher-ag
   wget
@@ -29,7 +29,7 @@ echo "==> Installing utils {$(join ' ' ${utils[@]})}"
 sudo apt-get install -y $(join ' ' ${utils[@]})
 # }}}
 
-# FETCH SOURCES {{{
+# FETCH SOURCES {{{1
 git clone --bare git@github.com:AdrienGiboire/dotfiles.git $HOME/.dotfiles
 
 mkdir -p $HOME/.config-backup
@@ -44,7 +44,7 @@ config checkout
 config config status.showUntrackedFiles no
 # }}}
 
-# RUBY {{{
+# RUBY {{{1
 # install ruby-install
 command -v ruby-install >/dev/null 2>&1 || {
   cd /tmp
@@ -74,19 +74,20 @@ command -v chruby >/dev/null 2>&1 || {
 echo "ruby-$RUBY_VERSION" > $HOME/.ruby-version
 # }}}
 
-# NODEJS {{{
-curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
-sudo apt install nodejs
+# NODEJS {{{1
+if [ ! -x "$(command -v node)" ]; then
+  curl --fail -LSs https://install-node.now.sh/latest | sh
+fi
 [ -d $HOME/.npm-global ] || mkdir $HOME/.npm-global
 npm config set prefix "$HOME/.npm-global"
 # }}}
 
-# FZF {{{
+# FZF {{{1
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 # }}}
 
-# VIM {{{
+# VIM {{{1
 mkdir ~/Applications
 cd ~/Applications
 curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
