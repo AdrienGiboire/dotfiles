@@ -143,29 +143,118 @@ packadd minpac
 call minpac#init({'verbose': 3})
 
 call minpac#add('AdrienGiboire/vim-todo')
-" Fugitive {{{2
 call minpac#add('tpope/vim-fugitive')
-nnoremap <Leader>ga :Gw<CR>
-nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gc :Gcommit<CR>
-nnoremap <Leader>gdel :Gdelete<CR>
-nnoremap <Leader>gdi :Gdiff<CR>
-nnoremap <Leader>gl :Glog<CR>
-nnoremap <Leader>gmov :Gmove<CR>
-nnoremap <Leader>gpo :Gpush<CR>
-nnoremap <Leader>gpr :Git pullr<CR>i
-nnoremap <Leader>gs :Gstatus<CR>
-" }}}
 call minpac#add('tpope/vim-markdown')
 call minpac#add('tpope/vim-repeat') " enable repeating supported plugin maps with '.'
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('k-takata/minpac', { 'type': 'opt' })
 call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('olical/vim-enmasse')
-
-" THEME {{{2
 call minpac#add('taniarascia/new-moon.vim')
+call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
+call minpac#add('junegunn/fzf.vim')
+call minpac#add('mileszs/ack.vim')
+call minpac#add('pangloss/vim-javascript')
+call minpac#add('tpope/vim-rails')
+call minpac#add('tpope/vim-rake')
+call minpac#add('vim-ruby/vim-ruby')
+call minpac#add('tpope/vim-surround')
+call minpac#add('terryma/vim-multiple-cursors')
+call minpac#add('jiangmiao/auto-pairs')
+call minpac#add('majutsushi/tagbar')
+call minpac#add('nathanaelkane/vim-indent-guides')
+" }}}
+" MAPPINGS {{{1
+let mapleader = "\<Space>"
+let maplocalleader = '\' " better ESC
 
+" Emacs bindings in command line mode
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+
+" Make u/U behave for undo like n/N does for search
+nnoremap U <c-r>
+
+inoremap jk <Esc>
+
+" Why a command used so much needs more keystroke than a barely known command?
+nnoremap ; :
+nnoremap : ;
+
+" * and # for selected text, trying to keep the search literal (in case of
+" filenames, for example.)
+xnoremap * y/\V<c-r>=escape(@", '/\')<cr><cr>
+xnoremap # y?\V<c-r>=escape(@", '?\')<cr><cr>
+
+" You want to be part of the gurus? Time to get in serious stuff and stop using
+" arrow keys. Learn the Hard Way!
+noremap <left> <nop>
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <right> <nop>
+
+noremap K <nop>
+
+" Yank from current cursor position to end of line
+map Y y$
+
+" Indent if we're at the beginning of a line. Else, do completion.
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+" Fast saving and closing current buffer without closing windows displaying
+" the buffer
+nnoremap <leader>wq :w!<cr>:Bclose<cr>
+nnoremap <leader>bc :Bclose<CR>
+
+" make copy/paste from system clip easier
+vnoremap <leader>y "*y
+vnoremap <leader>p "*p
+
+noremap <C-s> <ESC>:w<CR>
+
+nnoremap <leader>u yypVr-
+nnoremap <leader>U yypVr=
+
+" windows
+nnoremap <<C-w>i :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <<C-w>u :exe "resize " . (winheight(0) * 3/2)<CR>
+
+" Allow saving of files as sudo when I forget to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
+" tags {{{2
+" Instead of :tag jumping to first match definition, it jumps to the
+" definition if there is only one match. Else, it displays a list of all
+" matching tags.
+nnoremap <C-]> g<C-]>
+" }}}
+" netrw {{{2
+nnoremap - :edit %:p:h<CR>
+" }}}
+" }}}
+" PLUGINS SETTINGS {{{1
+" Fugitive {{{2
+nnoremap <leader>ga :Gw<CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gdel :Gdelete<CR>
+nnoremap <leader>gdi :Gdiff<CR>
+nnoremap <leader>gl :Glog<CR>
+nnoremap <leader>gmov :Gmove<CR>
+nnoremap <leader>gpo :Gpush<CR>
+nnoremap <leader>gpr :Git pullr<CR>i
+nnoremap <leader>gs :Gstatus<CR>
+" }}}
+" THEME {{{2
 set t_8f=^[[38;2;%lu;%lu;%lum        " set foreground color
 set t_8b=^[[48;2;%lu;%lu;%lum        " set background color
 set t_Co=256                         " Enable 256 colors
@@ -427,88 +516,6 @@ autocmd BufNewFile,BufRead *.rb set filetype=ruby
 
 " Git {{{2
 autocmd Filetype gitcommit setlocal spell textwidth=72
-" }}}
-" }}}
-" MAPPINGS {{{1
-let mapleader = "\<Space>"
-let maplocalleader = '\' " better ESC
-
-" Emacs bindings in command line mode
-cnoremap <c-a> <home>
-cnoremap <c-e> <end>
-
-" Make u/U behave for undo like n/N does for search
-nnoremap U <c-r>
-
-inoremap <silent>jk <Esc>
-
-" Why a command used so much needs more keystroke than a barely known command?
-nnoremap ; :
-nnoremap : ;
-
-" * and # for selected text, trying to keep the search literal (in case of
-" filenames, for example.)
-xnoremap * y/\V<c-r>=escape(@", '/\')<cr><cr>
-xnoremap # y?\V<c-r>=escape(@", '?\')<cr><cr>
-
-" You want to be part of the gurus? Time to get in serious stuff and stop using
-" arrow keys. Learn the Hard Way!
-noremap <left> <nop>
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <right> <nop>
-
-noremap K <nop>
-
-" Yank from current cursor position to end of line
-map Y y$
-
-" Indent if we're at the beginning of a line. Else, do completion.
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
-
-" Fast saving and closing current buffer without closing windows displaying
-" the buffer
-nnoremap <leader>wq :w!<cr>:Bclose<cr>
-nnoremap <leader>bc :Bclose<CR>
-
-" make copy/paste from system clip easier
-vnoremap <silent><leader>y "*y
-vnoremap <silent><leader>p "*p
-
-noremap <C-s> <ESC>:w<CR>
-
-nnoremap <leader>u yypVr-
-nnoremap <leader>U yypVr=
-
-" windows
-nnoremap <silent> <C-w>i :exe "resize " . (winheight(0) * 2/3)<CR>
-nnoremap <silent> <C-w>u :exe "resize " . (winheight(0) * 3/2)<CR>
-
-nnoremap <leader>s vip:sort<cr>
-
-" Allow saving of files as sudo when I forget to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
-
-nnoremap <leader>cc :set nonumber<CR>:set norelativenumber<CR>:set nolist<CR>
-nnoremap <leader>cr :set number<CR>:set relativenumber<CR>:set list<CR>
-
-" tags {{{2
-" Instead of :tag jumping to first match definition, it jumps to the
-" definition if there is only one match. Else, it displays a list of all
-" matching tags.
-nnoremap <C-]> g<C-]>
-" }}}
-" netrw {{{2
-nnoremap <silent>- :edit %:p:h<CR>
 " }}}
 " }}}
 " NAVIGATION {{{1
