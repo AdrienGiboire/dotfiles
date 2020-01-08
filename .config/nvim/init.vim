@@ -24,6 +24,7 @@ set display+=lastline
 set encoding=utf-8
 set expandtab
 set exrc
+set foldlevel=1
 
 " Assume the /g flag on :s substitutions to replace all matches in a line
 set gdefault
@@ -40,22 +41,17 @@ set list
 set listchars=tab:▸\ ,eol:¬,trail:⌴
 set modelines=5
 
-" so servers (for CoC) have issues with backup files
 set nobackup
-
 set noeol
 set nohidden
 set nojoinspaces
 set noswapfile
-
-" so servers (for CoC) have issues with backup files
 set nowritebackup
 
 set number
 set regexpengine=1
 set relativenumber
 set ruler
-set rtp+=/usr/local/opt/fzf
 
 " Set 5 lines to the cursor - when moving vertically
 set scrolloff=5
@@ -71,10 +67,6 @@ set signcolumn=yes
 
 set softtabstop=2
 set tabstop=2
-set tags^=./.git/tags
-
-" prevent bad experience for diagnostic messages when it's default 4000
-set updatetime=300
 
 set visualbell t_vb=
 
@@ -100,22 +92,11 @@ set wildignore+=**/*.out
 set wildignore+=**/*.toc
 set wildignore+=**/node_modules/**
 set wildignore+=**/tmp/**
-set wildignore+=**/public/production/**
-set wildignore+=**/public/packs/**
 
 set wildmenu
 set wildmode=full
 set wildignorecase
 set wrap
-
-" highlight {{{
-" make the completion menu a bit more readable
-highlight PmenuSel ctermbg=white ctermfg=black
-highlight Pmenu ctermbg=black ctermfg=white
-
-" so it's clear which paren I'm on and which is matched
-highlight MatchParen cterm=none ctermbg=none ctermfg=yellow
-" }}}
 
 augroup netrw_buf_hidden_fix
   autocmd!
@@ -263,8 +244,7 @@ set termguicolors                    " Enable GUI colors for the terminal to get
 colorscheme new-moon
 " }}}
 " FZF {{{2
-call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
-call minpac#add('junegunn/fzf.vim')
+set rtp+=/usr/local/opt/fzf
 
 if has('nvim') || has('gui_running')
   let $FZF_DEFAULT_OPTS .= ' --inline-info'
@@ -333,18 +313,11 @@ endfunction
 autocmd VimEnter * command! -bang -nargs=? -complete=dir Files
       \ call s:with_agignore(<bang>0, <q-args>)
 
-nnoremap <silent> <C-p> :Files<CR>
-nmap <leader>bl :Buffers<CR>
-nmap <leader>t :Tags<CR>
-" }}}
-" ACK/AG {{{2
-call minpac#add('mileszs/ack.vim')
-let g:ackprg = 'ag --nogroup --nocolor --column'
-nnoremap <leader>ag :Ack!<space>
-nnoremap <M-k> :Ack! "\b<cword>\b"<CR>
+nnoremap <C-p> :Files<CR>
+nnoremap <leader>bl :Buffers<CR>
+nnoremap <leader>t :Tags<CR>
 " }}}
 " JavaScript {{{2
-call minpac#add('pangloss/vim-javascript')
 let g:javascript_plugin_flow = 1
 augroup javascript_folding
     au!
@@ -371,28 +344,19 @@ let g:tagbar_type_javascript = {
       \ 'S:StyledComponent/StyledComponents'
       \ ]}
 " }}}
-" ruby {{{2
-call minpac#add('tpope/vim-rails')
-call minpac#add('tpope/vim-rake')
-call minpac#add('vim-ruby/vim-ruby') " Vim/Ruby Configuration Files
-" }}}
-" surround - quoting/parenthesizing made simple {{{2
-call minpac#add('tpope/vim-surround')
-" }}}
 " multiple cursors {{{2
-call minpac#add('terryma/vim-multiple-cursors')
 let g:multi_cursor_exit_from_insert_mode=0
 " }}}
-" auto-pairs - insert or delete brackets, parens, quotes in pair {{{2
-call minpac#add('jiangmiao/auto-pairs')
+" ACK/AG {{{2
+let g:ackprg = 'ag --nogroup --nocolor --column --path-to-ignore ~/.ignore'
+nnoremap <leader>ag :Ack!<space>
+nnoremap <M-k> :Ack! "\b<cword>\b"<CR>
 " }}}
 " tagbar {{{2
-call minpac#add('majutsushi/tagbar')
 let g:tagbar_show_linebumbers = 1
-nnoremap <silent> <C-t> :TagbarToggle<CR>
+nnoremap <C-t> :TagbarToggle<CR>
 " }}}
 " indent guides {{{2
-call minpac#add('nathanaelkane/vim-indent-guides')
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
@@ -482,7 +446,7 @@ function! s:Bclose(bang, buffer)
   execute wcurrent.'wincmd w'
 endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
-nnoremap <silent> <Leader>bd :Bclose<CR>
+nnoremap <leader>bd :Bclose<CR>
 " }}}
 " }}}
 " COMMANDS {{{1
@@ -524,8 +488,8 @@ noremap <c-a> ^
 noremap <c-e> g_
 
 " more natural movement with wrap on  but don't remap when it's called with a count
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+noremap <expr>j (v:count == 0 ? 'gj' : 'j')
+noremap <expr>k (v:count == 0 ? 'gk' : 'k')
 
 " Easy splitted window navigation
 noremap <C-h>  <C-w>h
@@ -546,17 +510,6 @@ vnoremap g{ :exe "norm m`gv``k".v:count1."{j"<CR>``j``
 vnoremap g} :exe "norm m`gv``j".v:count1."}k"<CR>``k``
 nnoremap g{ :exe "norm k".v:count1."{j"<CR>``j``
 nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
-" }}}
-" RUBY {{{1
-noremap <Leader>rc :call RunCurrentSpecFile()<CR>
-noremap <Leader>rn :call RunNearestSpec()<CR>
-noremap <Leader>rl :call RunLastSpec()<CR>
-noremap <Leader>ra :call RunAllSpecs()<CR>
-
-au FileType ruby noremap <Leader>rc :call RunCurrentSpecFile()<CR>
-au FileType ruby noremap <Leader>rn :call RunNearestSpec()<CR>
-au FileType ruby noremap <Leader>rl :call RunLastSpec()<CR>
-au FileType ruby noremap <Leader>ra :call RunAllSpecs()<CR>
 " }}}
 " SEARCHING {{{1
 " sane regexes
@@ -588,7 +541,7 @@ nnoremap g; g;zz
 nnoremap g, g,zz
 
 " Open a Quickfix window for the last search.
-nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+nnoremap <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 " }}}
 " TERMINAL {{{1
 tnoremap jk <C-\><C-n>
@@ -652,7 +605,6 @@ endfunction
 
 command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
 command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
-nnoremap <leader>ss :ShowSpaces 1<CR>
 
 autocmd FileType css :TrimSpaces
 autocmd FileType scss :TrimSpaces
