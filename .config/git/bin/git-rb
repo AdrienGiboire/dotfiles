@@ -2,9 +2,7 @@
 
 default_branch='master'
 
-if [[ ! -z ${1} ]]; then
-  default_branch=${1}
-fi
+[[ ! -z ${1} ]] && default_branch=${1}
 
 git staash &&
   git checkout $default_branch &&
