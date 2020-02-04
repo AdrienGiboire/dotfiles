@@ -23,7 +23,7 @@
   fa = fetch --all
   pom = push origin master
   pum = push upstream master
-  b = !git branch -v
+  b = branch -v
   rc = rebase --continue
   ra = rebase --abort
   ri = rebase --interactive
