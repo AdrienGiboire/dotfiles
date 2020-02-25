@@ -130,7 +130,6 @@ call minpac#add('tpope/vim-unimpaired')
 call minpac#add('k-takata/minpac', { 'type': 'opt' })
 call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('olical/vim-enmasse')
-call minpac#add('taniarascia/new-moon.vim')
 call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('mileszs/ack.vim')
@@ -262,10 +261,6 @@ set t_8f=^[[38;2;%lu;%lu;%lum        " set foreground color
 set t_8b=^[[48;2;%lu;%lu;%lum        " set background color
 set t_Co=256                         " Enable 256 colors
 set termguicolors                    " Enable GUI colors for the terminal to get truecolor
-
-call minpac#add('altercation/vim-colors-solarized')
-set background=dark
-colorscheme solarized
 " }}}
 " FZF {{{2
 set rtp+=/usr/local/opt/fzf
