@@ -5,6 +5,7 @@ echo "=====> NODE"
 # NODEJS {{{1
 if [ ! -x "$(command -v node)" ]; then
   curl --fail -LSs https://install-node.now.sh/latest | bash -s -- --prefix=$HOME
+  export PATH="$HOME/bin:$PATH"
 fi
 [ -d $HOME/.npm-global ] || mkdir $HOME/.npm-global
 npm config set prefix "$HOME/.npm-global"
