@@ -47,6 +47,8 @@ declare -a list_of_files=(
   ".bashrc"
   ".config"
   ".dotfiles"
+  ".fzf"
+  ".fzf.bash"
   ".gitconfig"
   ".githelpers"
   ".gitignore"
