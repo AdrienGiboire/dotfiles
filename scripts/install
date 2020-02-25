@@ -91,17 +91,17 @@ config checkout
 config config status.showUntrackedFiles no
 # }}}
 
-$with_ruby && . ./install-ruby
-$with_node && . ./install-node
+$with_ruby && $HOME/scripts/install-ruby
+$with_node && $HOME/scripts/install-node
 
 # FZF {{{1
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install 2>&1
+git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+$HOME/.fzf/install 2>&1
 # }}}
 
 # VIM {{{1
-mkdir ~/Applications
-cd ~/Applications
+mkdir $HOME/Applications
+cd $HOME/Applications
 curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 chmod u+x nvim.appimage
 
