@@ -4,6 +4,10 @@ echo "=====> NODE"
 
 # NODEJS {{{1
 if [ ! -x "$(command -v node)" ]; then
+  # For some reasons, if you don't run the script in an appropriate directory,
+  # you might get permission errors. So we force it to be ran from the home
+  # directory.
+  cd $HOME
   curl --fail -LSs https://install-node.now.sh/latest | bash -s -- --prefix=$HOME
   export PATH="$HOME/bin:$PATH"
 fi
