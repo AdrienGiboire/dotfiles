@@ -1,28 +1,65 @@
 #!/bin/bash
 
-set -o nounset    # error when referencing undefined variable
-set -o errexit    # exit when command fails
+set -o nounset # error when referencing undefined variable
+set -o errexit # exit when command fails
 
-RUBY_VERSION=2.6.5
-CHRUBY_VERSION=0.3.9
-RUBY_INSTALL_VERSION=0.7.0
+VERBOSE=0
+
+function join { local IFS="$1"; shift; echo "$*"; }
+
+function die { printf '%s\n' "$1" >&2; exit 1; }
+
+function printparse {
+  if [ ${VERBOSE} -gt 0 ]; then
+    printf 'Parse: %s%s%s\n' "$1" "$2" "$3" >&2;
+  fi
+}
+
+function showme {
+  if [ ${VERBOSE} -gt 0 ]; then
+    printf 'VERBOSE: %s\n' "$1" >&2;
+  fi
+}
 
 function config {
   git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
 }
 
-# DEPENDENCIES {{{1
-function join { local IFS="$1"; shift; echo "$*"; }
+options=$(getopt -o v -l ruby,node -- "$@")
+[ $? -eq 0 ] || die "Incorrect options provided"
+eval set -- "$options"
 
+with_ruby=false
+with_node=false
+
+while true; do
+  case "$1" in
+    -v|--verbose)
+      VERBOSE=1
+      ;;
+    --ruby)
+      with_ruby=true
+      ;;
+    --node)
+      with_node=true
+      ;;
+    *)
+      break
+      ;;
+  esac
+  shift
+done
+
+# DEPENDENCIES {{{1
 utils=(
-  autojump
+  apt-transport-https
+  ca-certificates
+  curl
   git
-  imagemagick
-  libevent-dev
+  gnupg-agent
   make
-  postgresql
   silversearcher-ag
-  wget
+  software-properties-common
 )
 
 echo "==> Installing utils {$(join ' ' ${utils[@]})}"
@@ -44,43 +81,8 @@ config checkout
 config config status.showUntrackedFiles no
 # }}}
 
-# RUBY {{{1
-# install ruby-install
-command -v ruby-install >/dev/null 2>&1 || {
-  cd /tmp
-  wget -O ruby-install-$RUBY_INSTALL_VERSION.tar.gz https://github.com/postmodern/ruby-install/archive/v$RUBY_INSTALL_VERSION.tar.gz
-  tar -xzvf ruby-install-$RUBY_INSTALL_VERSION.tar.gz
-  cd ruby-install-$RUBY_INSTALL_VERSION/
-  sudo make install
-}
-
-if [ ! -d $HOME/.rubies ]; then
-  mkdir $HOME/.rubies
-
-  if [ ! -d $HOME/.rubies/ruby-$ruby-version ]; then
-    ruby-install ruby-$RUBY_VERSION
-  fi
-fi
-
-# install chruby
-command -v chruby >/dev/null 2>&1 || {
-  cd /tmp
-  wget -O chruby-$CHRUBY_VERSION.tar.gz https://github.com/postmodern/chruby/archive/v$CHRUBY_VERSION.tar.gz
-  tar -xzvf chruby-$CHRUBY_VERSION.tar.gz
-  cd chruby-$CHRUBY_VERSION/
-  sudo make install
-}
-
-echo "ruby-$RUBY_VERSION" > $HOME/.ruby-version
-# }}}
-
-# NODEJS {{{1
-if [ ! -x "$(command -v node)" ]; then
-  curl --fail -LSs https://install-node.now.sh/latest | sh
-fi
-[ -d $HOME/.npm-global ] || mkdir $HOME/.npm-global
-npm config set prefix "$HOME/.npm-global"
-# }}}
+$with_ruby && . ./install-ruby
+$with_node && . ./install-node
 
 # FZF {{{1
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -95,4 +97,4 @@ chmod u+x nvim.appimage
 
 git clone https://github.com/k-takata/minpac.git $HOME/.config/nvim/pack/minpac/opt/minpac
 nvim --headless +PackUpdate +q
-# }}}
+#}}}

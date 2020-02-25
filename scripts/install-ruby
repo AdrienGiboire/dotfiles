@@ -1,0 +1,47 @@
+#!/bin/bash
+
+echo "=====> RUBY"
+
+RUBY_VERSION=2.6.5
+CHRUBY_VERSION=0.3.9
+RUBY_INSTALL_VERSION=0.7.0
+
+# DEPENDENCIES {{{1
+utils=(
+  libevent-dev
+  wget
+)
+
+echo "==> Installing utils {$(join ' ' ${utils[@]})}"
+sudo apt-get install -y $(join ' ' ${utils[@]})
+# }}}
+
+# RUBY {{{1
+# install ruby-install
+command -v ruby-install >/dev/null 2>&1 || {
+  cd /tmp
+  wget -O ruby-install-$RUBY_INSTALL_VERSION.tar.gz https://github.com/postmodern/ruby-install/archive/v$RUBY_INSTALL_VERSION.tar.gz
+  tar -xzvf ruby-install-$RUBY_INSTALL_VERSION.tar.gz
+  cd ruby-install-$RUBY_INSTALL_VERSION/
+  sudo make install
+}
+
+if [ ! -d $HOME/.rubies ]; then
+  mkdir $HOME/.rubies
+
+  if [ ! -d $HOME/.rubies/ruby-$ruby-version ]; then
+    ruby-install ruby-$RUBY_VERSION
+  fi
+fi
+
+# install chruby
+command -v chruby >/dev/null 2>&1 || {
+  cd /tmp
+  wget -O chruby-$CHRUBY_VERSION.tar.gz https://github.com/postmodern/chruby/archive/v$CHRUBY_VERSION.tar.gz
+  tar -xzvf chruby-$CHRUBY_VERSION.tar.gz
+  cd chruby-$CHRUBY_VERSION/
+  sudo make install
+}
+
+echo "ruby-$RUBY_VERSION" > $HOME/.ruby-version
+# }}}
