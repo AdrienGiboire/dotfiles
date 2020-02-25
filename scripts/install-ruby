@@ -44,4 +44,9 @@ command -v chruby >/dev/null 2>&1 || {
 }
 
 echo "ruby-$RUBY_VERSION" > $HOME/.ruby-version
+
+echo "===================="
+echo "Add this snippet at the beginning of your `.bash_profile`:"
+echo "  source /usr/local/share/chruby/chruby.sh"
+echo "  source /usr/local/share/chruby/auto.sh"
 # }}}

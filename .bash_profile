@@ -1,6 +1,3 @@
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-
 eval `ssh-agent -s`
 
 # Load the shell dotfiles, and then some:
