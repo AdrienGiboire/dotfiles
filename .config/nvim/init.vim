@@ -116,35 +116,31 @@ augroup END
 " PLUGINS {{{1
 runtime macros/matchit.vim
 
-command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
-command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
+call plug#begin('~/.config/nvim/pack')
 
-packadd minpac
-call minpac#init({'verbose': 3})
-
-call minpac#add('AdrienGiboire/vim-todo')
-call minpac#add('tpope/vim-fugitive')
-call minpac#add('tpope/vim-markdown')
-call minpac#add('tpope/vim-repeat') " enable repeating supported plugin maps with '.'
-call minpac#add('tpope/vim-unimpaired')
-call minpac#add('k-takata/minpac', { 'type': 'opt' })
-call minpac#add('machakann/vim-highlightedyank')
-call minpac#add('olical/vim-enmasse')
-call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
-call minpac#add('junegunn/fzf.vim')
-call minpac#add('mileszs/ack.vim')
-call minpac#add('pangloss/vim-javascript')
-call minpac#add('tpope/vim-rails')
-call minpac#add('tpope/vim-rake')
-call minpac#add('vim-ruby/vim-ruby')
-call minpac#add('tpope/vim-surround')
-call minpac#add('terryma/vim-multiple-cursors')
-call minpac#add('jiangmiao/auto-pairs')
-call minpac#add('majutsushi/tagbar')
-call minpac#add('nathanaelkane/vim-indent-guides')
-call minpac#add('wesleyche/SrcExpl')
-call minpac#add('SirVer/ultisnips')
-call minpac#add('honza/vim-snippets')
+Plug 'AdrienGiboire/vim-todo'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with '.'
+Plug 'tpope/vim-unimpaired'
+Plug 'machakann/vim-highlightedyank'
+Plug 'olical/vim-enmasse'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'posva/vim-vue'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'jiangmiao/auto-pairs'
+Plug 'majutsushi/tagbar'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'wesleyche/SrcExpl'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 " }}}
 " MAPPINGS {{{1
 let mapleader = "\<Space>"
@@ -338,8 +334,6 @@ nnoremap <Leader>t :Tags<CR>
 " }}}
 " JavaScript {{{2
 let g:javascript_plugin_flow = 1
-
-call minpac#add('posva/vim-vue')
 "}}}
 " tagbar {{{2
 let g:tagbar_type_javascript = {
@@ -665,3 +659,5 @@ set statusline+=%L " Total lines
 if filereadable('.local.vim')
   so .local.vim
 endif
+
+call plug#end()

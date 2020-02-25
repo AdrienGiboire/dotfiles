@@ -1,29 +1,14 @@
 #!/bin/bash
 
 set -o nounset # error when referencing undefined variable
-set -o errexit # exit when command fails
 
-VERBOSE=0
-
-function join { local IFS="$1"; shift; echo "$*"; }
-
+function config { git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@; }
 function die { printf '%s\n' "$1" >&2; exit 1; }
-
-function try {
-  echo "$@"
-  $@
-  [ $? -eq 0 ] || echo "Something went wrong with the previous command"
-}
-
-function showme {
-  if [ ${VERBOSE} -gt 0 ]; then
-    printf 'VERBOSE: %s\n' "$1" >&2;
-  fi
-}
-
-function config {
-  git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
-}
+function join { local IFS="$1"; shift; echo "$*"; }
+function section { printf '\n%s\n' "=== $1"; }
+function showme { printf '%s\n' "$1" >&2; }
+function cleanup { $HOME/scripts/uninstall; }
+trap cleanup ERR
 
 options=$(getopt -o v -l ruby,node -- "$@")
 [ $? -eq 0 ] || die "Incorrect options provided"
@@ -34,9 +19,6 @@ with_node=false
 
 while true; do
   case "$1" in
-    -v|--verbose)
-      VERBOSE=1
-      ;;
     --ruby)
       with_ruby=true
       ;;
@@ -62,11 +44,12 @@ utils=(
   software-properties-common
 )
 
-echo "==> Installing utils {$(join ' ' ${utils[@]})}"
+section "Installing utils {$(join ' ' ${utils[@]})}"
 sudo apt-get install -y $(join ' ' ${utils[@]})
 # }}}
 
 # DOCKER {{{1
+section "Installing Docker"
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository \
   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
@@ -77,6 +60,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 # }}}
 
 # FETCH SOURCES {{{1
+section "Installing Dotfiles"
 git clone --bare git@github.com:AdrienGiboire/dotfiles.git $HOME/.dotfiles
 
 mkdir -p $HOME/.config-backup
@@ -94,17 +78,31 @@ config config status.showUntrackedFiles no
 $with_ruby && $HOME/scripts/install-ruby
 $with_node && $HOME/scripts/install-node
 
-# VIM {{{1
-[ ! -d $HOME/Applications ] && mkdir $HOME/Applications
-cd $HOME/Applications
-curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
-chmod u+x nvim.appimage
-
-git clone https://github.com/k-takata/minpac.git $HOME/.config/nvim/pack/minpac/opt/minpac
-try $HOME/Applications/nvim.appimage --headless +PackUpdate +q
-#}}}
-
 # FZF {{{1
-git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
-$HOME/.fzf/install
+section "Installing FZF"
+
+{
+  git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+  $HOME/.fzf/install
+} || {
+  showme "Could not install FZF"
+}
+# }}}
+
+# VIM {{{1
+section "Installing Neovim"
+
+{
+  [ ! -d $HOME/Applications ] && mkdir $HOME/Applications
+  cd $HOME/Applications
+  curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+  chmod u+x nvim.appimage
+
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+  $HOME/Applications/nvim.appimage --headless +'PlugUpdate --sync' +qa
+} || {
+  showme "Could not install Neovim"
+}
 # }}}
