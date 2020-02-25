@@ -24,7 +24,6 @@ set display+=lastline
 set encoding=utf-8
 set expandtab
 set exrc
-set foldlevel=1
 
 " Assume the /g flag on :s substitutions to replace all matches in a line
 set gdefault
@@ -144,17 +143,20 @@ call minpac#add('terryma/vim-multiple-cursors')
 call minpac#add('jiangmiao/auto-pairs')
 call minpac#add('majutsushi/tagbar')
 call minpac#add('nathanaelkane/vim-indent-guides')
+call minpac#add('wesleyche/SrcExpl')
+call minpac#add('SirVer/ultisnips')
+call minpac#add('honza/vim-snippets')
 " }}}
 " MAPPINGS {{{1
 let mapleader = "\<Space>"
 let maplocalleader = '\' " better ESC
 
 " Emacs bindings in command line mode
-cnoremap <c-a> <home>
-cnoremap <c-e> <end>
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
 
 " Make u/U behave for undo like n/N does for search
-nnoremap U <c-r>
+nnoremap U <C-R>
 
 inoremap jk <Esc>
 
@@ -164,17 +166,17 @@ nnoremap : ;
 
 " * and # for selected text, trying to keep the search literal (in case of
 " filenames, for example.)
-xnoremap * y/\V<c-r>=escape(@", '/\')<cr><cr>
-xnoremap # y?\V<c-r>=escape(@", '?\')<cr><cr>
+xnoremap * y/\V<C-R>=escape(@", '/\')<CR><CR>
+xnoremap # y?\V<C-R>=escape(@", '?\')<CR><CR>
 
 " You want to be part of the gurus? Time to get in serious stuff and stop using
 " arrow keys. Learn the Hard Way!
-noremap <left> <nop>
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <right> <nop>
+noremap <Left> <Nop>
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Right> <Nop>
 
-noremap K <nop>
+noremap K <Nop>
 
 " Yank from current cursor position to end of line
 map Y y$
@@ -183,34 +185,54 @@ map Y y$
 function! InsertTabWrapper()
     let col = col('.') - 1
     if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
+        return "\<Tab>"
     else
-        return "\<c-p>"
+        return "\<C-P>"
     endif
 endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
+inoremap <Tab> <C-R>=InsertTabWrapper()<CR>
+inoremap <S-Tab> <C-N>
 
 " Fast saving and closing current buffer without closing windows displaying
 " the buffer
-nnoremap <leader>wq :w!<cr>:Bclose<cr>
-nnoremap <leader>bc :Bclose<CR>
+nnoremap <Leader>wq :w!<CR>:Bclose<CR>
+nnoremap <Leader>bc :Bclose<CR>
 
 " make copy/paste from system clip easier
-vnoremap <leader>y "*y
-vnoremap <leader>p "*p
+vnoremap <Leader>y "*y
+vnoremap <Leader>p "*p
 
-noremap <C-s> <ESC>:w<CR>
+noremap <C-S> <ESC>:w<CR>
 
-nnoremap <leader>u yypVr-
-nnoremap <leader>U yypVr=
+nnoremap <Leader>u yypVr-
+nnoremap <Leader>U yypVr=
 
 " windows
-nnoremap <<C-w>i :exe "resize " . (winheight(0) * 2/3)<CR>
-nnoremap <<C-w>u :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <C-W>i :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <C-W>u :exe "resize " . (winheight(0) * 3/2)<CR>
 
 " Allow saving of files as sudo when I forget to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
+
+" pretty print JSON using python native tools
+nnoremap <Leader>pp :%!python -m json.tool<CR>
+
+function! s:TabToggle() abort
+  if tabpagewinnr(tabpagenr(), '$') > 1
+    " Zoom in when this tab has more than one window
+    tab split
+  elseif tabpagenr('$') > 1
+    " Zoom out when this tab is not the last tab
+    if tabpagenr() < tabpagenr('$')
+      tabclose
+      tabprevious
+    else
+      tabclose
+    endif
+  endif
+endfunction
+command! TabToggle call s:TabToggle()
+nnoremap <Leader><Leader> :TabToggle<CR>
 
 " tags {{{2
 " Instead of :tag jumping to first match definition, it jumps to the
@@ -224,16 +246,16 @@ nnoremap - :edit %:p:h<CR>
 " }}}
 " PLUGINS SETTINGS {{{1
 " Fugitive {{{2
-nnoremap <leader>ga :Gw<CR>
-nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gdel :Gdelete<CR>
-nnoremap <leader>gdi :Gdiff<CR>
-nnoremap <leader>gl :Glog<CR>
-nnoremap <leader>gmov :Gmove<CR>
-nnoremap <leader>gpo :Gpush<CR>
-nnoremap <leader>gpr :Git pullr<CR>i
-nnoremap <leader>gs :Gstatus<CR>
+nnoremap <Leader>ga :Gw<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gdel :Gdelete<CR>
+nnoremap <Leader>gdi :Gdiff<CR>
+nnoremap <Leader>gl :Glog<CR>
+nnoremap <Leader>gmov :Gmove<CR>
+nnoremap <Leader>gpo :Gpush<CR>
+nnoremap <Leader>gpr :Git pullr<CR>i
+nnoremap <Leader>gs :Gstatus<CR>
 " }}}
 " THEME {{{2
 set t_8f=^[[38;2;%lu;%lu;%lum        " set foreground color
@@ -315,16 +337,12 @@ endfunction
 autocmd VimEnter * command! -bang -nargs=? -complete=dir Files
       \ call s:with_agignore(<bang>0, <q-args>)
 
-nnoremap <C-p> :Files<CR>
-nnoremap <leader>bl :Buffers<CR>
-nnoremap <leader>t :Tags<CR>
+nnoremap <C-P> :Files<CR>
+nnoremap <Leader>bl :Buffers<CR>
+nnoremap <Leader>t :Tags<CR>
 " }}}
 " JavaScript {{{2
 let g:javascript_plugin_flow = 1
-augroup javascript_folding
-    au!
-    au FileType javascript setlocal foldmethod=syntax
-augroup END
 
 call minpac#add('posva/vim-vue')
 "}}}
@@ -351,12 +369,12 @@ let g:multi_cursor_exit_from_insert_mode=0
 " }}}
 " ACK/AG {{{2
 let g:ackprg = 'ag --nogroup --nocolor --column --path-to-ignore ~/.ignore'
-nnoremap <leader>ag :Ack!<space>
-nnoremap <M-k> :Ack! "\b<cword>\b"<CR>
+nnoremap <Leader>ag :Ack!<Space>
+nnoremap <M-K> :Ack! "\b<Cword>\b"<CR>
 " }}}
 " tagbar {{{2
 let g:tagbar_show_linebumbers = 1
-nnoremap <C-t> :TagbarToggle<CR>
+nnoremap <C-T> :TagbarToggle<CR>
 " }}}
 " indent guides {{{2
 let g:indent_guides_auto_colors = 0
@@ -448,7 +466,7 @@ function! s:Bclose(bang, buffer)
   execute wcurrent.'wincmd w'
 endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
-nnoremap <leader>bd :Bclose<CR>
+nnoremap <Leader>bd :Bclose<CR>
 " }}}
 " }}}
 " COMMANDS {{{1
@@ -461,8 +479,6 @@ command! Cnvim :tcd ~/.config/nvim
 command! Cntig :tcd ~/code/nametests-ig
 
 command! Todo :e ~/code/notes/todo.todo
-
-autocmd FileWritePost *.test.js :!yarn test %
 " }}}
 " FILETYPES {{{1
 " JavaScript {{{2
@@ -483,25 +499,30 @@ autocmd BufNewFile,BufRead *.rb set filetype=ruby
 " Git {{{2
 autocmd Filetype gitcommit setlocal spell textwidth=72
 " }}}
+
+" Svelte {{{2
+autocmd! BufNewFile,BufRead *.svelte set ft=html
+" }}}
+
 " }}}
 " NAVIGATION {{{1
 " Begining & End of line in mode
-noremap <c-a> ^
-noremap <c-e> g_
+noremap <C-A> ^
+noremap <C-E> g_
 
-" more natural movement with wrap on  but don't remap when it's called with a count
-noremap <expr>j (v:count == 0 ? 'gj' : 'j')
-noremap <expr>k (v:count == 0 ? 'gk' : 'k')
+" more natural movement with wrap on but don't remap when it's called with a count
+noremap <Expr>j (v:count == 0 ? 'gj' : 'j')
+noremap <Expr>k (v:count == 0 ? 'gk' : 'k')
 
 " Easy splitted window navigation
-noremap <C-h>  <C-w>h
-noremap <C-j>  <C-w>j
-noremap <C-k>  <C-w>k
-noremap <C-l>  <C-w>l
+noremap <C-H>  <C-W>h
+noremap <C-J>  <C-W>j
+noremap <C-K>  <C-W>k
+noremap <C-L>  <C-W>l
 
 " Splits ,v and ,h to open new splits (vertical and horizontal)
-nnoremap <leader>v <C-w>v<C-w>l
-nnoremap <leader>h <C-w>s<C-w>j
+nnoremap <Leader>v <C-W>v<C-W>l
+nnoremap <Leader>h <C-W>s<C-W>j
 
 " Reselect visual block after indent/outdent
 vnoremap < <gv
@@ -512,6 +533,20 @@ vnoremap g{ :exe "norm m`gv``k".v:count1."{j"<CR>``j``
 vnoremap g} :exe "norm m`gv``j".v:count1."}k"<CR>``k``
 nnoremap g{ :exe "norm k".v:count1."{j"<CR>``j``
 nnoremap g} :exe "norm j".v:count1."}k"<CR>``k``
+
+" Tab {{{2
+" Go to tab by number
+noremap <Leader>1 1gt
+noremap <Leader>2 2gt
+noremap <Leader>3 3gt
+noremap <Leader>4 4gt
+noremap <Leader>5 5gt
+noremap <Leader>6 6gt
+noremap <Leader>7 7gt
+noremap <Leader>8 8gt
+noremap <Leader>9 9gt
+noremap <Leader>0 :tablast<cr>
+" }}}
 " }}}
 " SEARCHING {{{1
 " sane regexes
@@ -529,10 +564,10 @@ set gdefault
 set hlsearch
 
 " clear search matching
-noremap <leader>/ :noh<cr>:call clearmatches()<cr>
+noremap <Leader>/ :noh<CR>:call clearmatches()<CR>
 
 " Don't jump when using * for search
-nnoremap * *<c-o>
+nnoremap * *<C-O>
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
@@ -543,14 +578,14 @@ nnoremap g; g;zz
 nnoremap g, g,zz
 
 " Open a Quickfix window for the last search.
-nnoremap <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+nnoremap <Leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 " }}}
 " TERMINAL {{{1
-tnoremap jk <C-\><C-n>
-tnoremap <C-h> <c-\><c-n><c-w>h
-tnoremap <C-j> <c-\><c-n><c-w>j
-tnoremap <C-k> <c-\><c-n><c-w>k
-tnoremap <C-l> <c-\><c-n><c-w>l
+tnoremap jk <C-\><C-N>
+tnoremap <C-H> <c-\><C-N><C-W>h
+tnoremap <C-J> <c-\><C-N><C-W>j
+tnoremap <C-K> <c-\><C-N><C-W>k
+tnoremap <C-L> <c-\><C-N><C-W>l
 
 if has('nvim')
   fu! OpenTerminal()
@@ -605,8 +640,8 @@ function TrimSpaces() range
   let &hlsearch=oldhlsearch
 endfunction
 
-command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
-command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
+command -bar -nargs=? ShowSpaces call ShowSpaces(<Args>)
+command -bar -nargs=0 -range=% TrimSpaces <Line1>,<Line2>call TrimSpaces()
 
 autocmd FileType css :TrimSpaces
 autocmd FileType scss :TrimSpaces
