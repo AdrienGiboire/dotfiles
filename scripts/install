@@ -96,7 +96,7 @@ $with_node && . ./install-node
 
 # FZF {{{1
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+~/.fzf/install 2>&1
 # }}}
 
 # VIM {{{1
