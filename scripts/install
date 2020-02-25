@@ -100,6 +100,9 @@ cd $HOME/Applications
 curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 chmod u+x nvim.appimage
 
+# Temp define nvim for next steps
+alias nvim="$HOME/Applications/nvim.appimage"
+
 git clone https://github.com/k-takata/minpac.git $HOME/.config/nvim/pack/minpac/opt/minpac
 nvim --headless +PackUpdate +q
 #}}}
