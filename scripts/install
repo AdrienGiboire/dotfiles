@@ -95,7 +95,7 @@ $with_ruby && $HOME/scripts/install-ruby
 $with_node && $HOME/scripts/install-node
 
 # VIM {{{1
-mkdir $HOME/Applications
+[ ! -d $HOME/Applications ] && mkdir $HOME/Applications
 cd $HOME/Applications
 curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 chmod u+x nvim.appimage
