@@ -9,10 +9,10 @@ function join { local IFS="$1"; shift; echo "$*"; }
 
 function die { printf '%s\n' "$1" >&2; exit 1; }
 
-function printparse {
-  if [ ${VERBOSE} -gt 0 ]; then
-    printf 'Parse: %s%s%s\n' "$1" "$2" "$3" >&2;
-  fi
+function try {
+  echo "$@"
+  $@
+  [ $? -eq 0 ] || echo "Something went wrong with the previous command"
 }
 
 function showme {
@@ -101,7 +101,7 @@ curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 chmod u+x nvim.appimage
 
 git clone https://github.com/k-takata/minpac.git $HOME/.config/nvim/pack/minpac/opt/minpac
-$HOME/Applications/nvim.appimage --headless +PackUpdate +q 2>&1
+try $HOME/Applications/nvim.appimage --headless +PackUpdate +q
 #}}}
 
 # FZF {{{1
