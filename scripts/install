@@ -103,6 +103,10 @@ section "Installing Neovim"
   tar -xvzf /tmp/lemonade.tar.gz --directory $HOME/bin/
   rm /tmp/lemonade.tar.gz
 
+  section "+ Install python3 provider (mandatory for some plugins)"
+  apt install python3-pip
+  python -m pip install --user --upgrade pynvim
+
   section "+ Install vim-plug"
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
