@@ -98,10 +98,16 @@ section "Installing Neovim"
   curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
   chmod u+x nvim.appimage
 
+  section "+ Install Lemonade for clipboard support over SSH"
+  curl -fLo /tmp/lemonade.tar.gz https://github.com/lemonade-command/lemonade/releases/latest/download/lemonade_linux_amd64.tar.gz
+  tar -xvzf /tmp/lemonade.tar.gz --directory $HOME/bin/
+  rm /tmp/lemonade.tar.gz
+
+  section "+ Install vim-plug"
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
   $HOME/Applications/nvim.appimage --headless +'PlugUpdate --sync' +qa
+
 } || {
   showme "Could not install Neovim"
 }
