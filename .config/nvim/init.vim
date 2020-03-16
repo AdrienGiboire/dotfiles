@@ -119,28 +119,29 @@ runtime macros/matchit.vim
 call plug#begin('~/.config/nvim/pack')
 
 Plug 'AdrienGiboire/vim-todo'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with '.'
-Plug 'tpope/vim-unimpaired'
-Plug 'machakann/vim-highlightedyank'
-Plug 'olical/vim-enmasse'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'mileszs/ack.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'posva/vim-vue'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rake'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'jiangmiao/auto-pairs'
-Plug 'majutsushi/tagbar'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'wesleyche/SrcExpl'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'lambdalisue/suda.vim'
+Plug 'machakann/vim-highlightedyank'
+Plug 'majutsushi/tagbar'
+Plug 'mileszs/ack.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'olical/vim-enmasse'
+Plug 'pangloss/vim-javascript'
+Plug 'posva/vim-vue'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with '.'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-ruby/vim-ruby'
+Plug 'wesleyche/SrcExpl'
 " }}}
 " MAPPINGS {{{1
 let mapleader = "\<Space>"
@@ -207,7 +208,7 @@ nnoremap <C-W>i :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <C-W>u :exe "resize " . (winheight(0) * 3/2)<CR>
 
 " Allow saving of files as sudo when I forget to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
+cmap w!! w suda://%
 
 " pretty print JSON using python native tools
 nnoremap <Leader>pp :%!python -m json.tool<CR>
