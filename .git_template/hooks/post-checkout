@@ -2,7 +2,7 @@
 
 [[ $SKIP_GIT_HOOK ]] && exit 0
 echo 'Generating tags...'
-ctags -R -f /Users/adrien/code/nametests-ig/tags /Users/adrien/code/nametests-ig
+ctags -R -f ./tags .
 echo 'Tags generated!'
 
 previous_ref=$1
@@ -52,15 +52,16 @@ function clone_database() {
   echo 'All done here. Happy hacking!'
 }
 
-default=`git config octoly.default-database-suffix`
-pg_cleaned_default=`echo $default | sed 's/-/_/g'`
-gc_cleaned_default=`echo $default | sed 's/_/-/g'`
+project_name=${PWD##*/}
+default=$(git config $project_name.default-database-suffix)
 [ -z $default ] &&
   echo 'No default branch set up in your git config.' &&
-  echo 'Run `git config octoly.default-database-suffix BRANCH_NAME` to continue.' &&
-  echo 'Example: git config octoly.default-database-suffix development' &&
+  echo 'Run `git config '$project_name'.default-database-suffix BRANCH_NAME` to continue.' &&
+  echo 'Example: git config '$project_name'.default-database-suffix development' &&
   exit
 
+pg_cleaned_default=`echo $default | sed 's/-/_/g'`
+gc_cleaned_default=`echo $default | sed 's/_/-/g'`
 branch=`git symbolic-ref HEAD 2>/dev/null | sed 's/refs\/heads\///'`
 if [ -n "$branch" ]; then
   pg_cleaned_branch=`echo $branch | sed 's/-/_/g'`
