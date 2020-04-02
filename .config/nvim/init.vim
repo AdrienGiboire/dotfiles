@@ -194,9 +194,18 @@ inoremap <S-Tab> <C-N>
 nnoremap <Leader>wq :w!<CR>:Bclose<CR>
 nnoremap <Leader>bc :Bclose<CR>
 
-" make copy/paste from system clip easier
-vnoremap <Leader>y "*y
-vnoremap <Leader>p "*p
+" Make copy/paste from system clip easier
+" Seems like if you're on MacOS or Linux/Unix the register for the system
+" clipboard is not the same
+if has("unix")
+  if has("mac")
+    vnoremap <Leader>y "*y
+    vnoremap <Leader>p "*p
+  else
+    vnoremap <Leader>y "+y
+    vnoremap <Leader>p "+p
+  endif
+endif
 
 noremap <C-S> <ESC>:w<CR>
 
