@@ -39,6 +39,7 @@ utils=(
   curl
   git
   gnupg-agent
+  jq
   make
   silversearcher-ag
   software-properties-common

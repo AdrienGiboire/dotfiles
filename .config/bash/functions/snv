@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Some projects use `.node-version` file to lock the node version they use. NVM
+# does not support `.node-version` and I don't want to install yet another
+# automatic version switching-ish library/binary/... just for this.
+#
+# No need to check for the `nvm` existence as bash will let me know.
+#
+# As a reminder, I support `.node-version` and project with no `.node-version`
+# because older node projects don't have `engines` property in `package.json`.
+snv () {
+  if [ -f .node-version ]; then
+    node_version=$(more .node-version)
+  else
+    # If `.node-version` does not exist, try to figure out node version from
+    # `package.json`
+    node_version=$(cat package.json | jq -e .engines.node | sed s/[\"^]//g)
+  fi
+
+  nvm use $node_version
+}
+
+# vim:ft=sh:ts=2:sw=2:sts:et
