@@ -1,0 +1,5 @@
+#!/bin/bash
+
+whoislistening () {
+  sudo netstat -ltnp | grep -w ":${1}"
+}
