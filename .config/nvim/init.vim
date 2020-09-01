@@ -239,6 +239,10 @@ endfunction
 command! TabToggle call s:TabToggle()
 nnoremap <Leader><Leader> :TabToggle<CR>
 
+" URL encode/decode selection
+vnoremap <leader>en :!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>
+vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>
+
 " tags {{{2
 " Instead of :tag jumping to first match definition, it jumps to the
 " definition if there is only one match. Else, it displays a list of all
