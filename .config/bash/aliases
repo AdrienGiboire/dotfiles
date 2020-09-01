@@ -56,3 +56,5 @@ alias nocaps="setxkbmap -option ctrl:nocaps"
 
 alias dc="docker-compose"	
 alias dcr="dc run"
+
+alias chromedev='/usr/bin/chromium-browser --disable-web-security --user-data-dir="/tmp"'
