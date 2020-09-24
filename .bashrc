@@ -1,7 +1,5 @@
 [ -n "$PS1" ] && source ~/.bash_profile
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 # Android (Studio)
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
