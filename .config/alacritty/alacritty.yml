@@ -62,3 +62,7 @@ schemes:
 colors: *dark
 font:
   size: 14.0
+
+window:
+  decorations: none
+  startup_mode: Fullscreen
