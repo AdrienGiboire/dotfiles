@@ -24,49 +24,37 @@ set display+=lastline
 set encoding=utf-8
 set expandtab
 set exrc
-
 " Assume the /g flag on :s substitutions to replace all matches in a line
 set gdefault
-
 set history=1000
 set inccommand=split
 set incsearch
 set laststatus=2
-
 " needed to improve vim performances with folding on and working on ruby/yaml files
 set lazyredraw
-
 set list
 set listchars=tab:▸\ ,eol:¬,trail:⌴
 set modelines=5
-
 set nobackup
 set noeol
 set nohidden
 set nojoinspaces
 set noswapfile
 set nowritebackup
-
 set number
 set regexpengine=1
 set relativenumber
 set ruler
-
 " Set 5 lines to the cursor - when moving vertically
 set scrolloff=5
-
 set secure
 set shiftwidth=2
-
 " don't give |ins-completion-menu| messages
 set shortmess+=c
-
 " always show signcolumns
 set signcolumn=yes
-
 set softtabstop=2
 set tabstop=2
-
 set visualbell t_vb=
 
 set wildignore=**/.svn/**
@@ -97,6 +85,9 @@ set wildmode=full
 set wildignorecase
 set wrap
 
+let mapleader = "\<Space>"
+let maplocalleader = '\'
+
 augroup netrw_buf_hidden_fix
   autocmd!
 
@@ -113,6 +104,7 @@ augroup neovim_terminal
   autocmd TermOpen * startinsert
 augroup END
 " }}}
+
 " PLUGINS {{{1
 runtime macros/matchit.vim
 
@@ -124,29 +116,98 @@ Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+" FZF {{{2
+set rtp+=/usr/local/opt/fzf
+
+let g:fzf_tags_command = 'ctags --sort=foldcase -R'
+
+if has('nvim')
+  let $FZF_DEFAULT_OPTS .= ' --inline-info'
+endif
+
+" All files
+command! -nargs=? -complete=dir AF
+  \ call fzf#run(fzf#wrap(fzf#vim#with_preview({
+  \   'source': 'fd --type f --hidden --follow --exclude .git --exclude build --no-ignore . '.expand(<q-args>),
+  \   'dir': systemlist('git rev-parse --show-toplevel')[0]
+  \ })))
+
+" terminal options
+autocmd! FileType fzf
+autocmd  FileType fzf set noshowmode noruler nonu
+
+function! s:with_agignore(bang, args)
+  let agignore = '/tmp/agignore-for-fzf'
+  let entries = split(&wildignore, ',')
+  let source = 'ag --path-to-ignore '.agignore.' -g ""'
+  call writefile(entries, agignore)
+  call fzf#vim#files(a:args, fzf#vim#with_preview({'source': source}))
+endfunction
+
+autocmd VimEnter * command! -bang -nargs=? -complete=dir Files
+      \ call s:with_agignore(<bang>0, <q-args>)
+
+nnoremap <C-P> :Files<CR>
+nnoremap <Leader>bl :Buffers<CR>
+nnoremap <Leader>t :Tags<CR>
+" }}}
+
 Plug 'lambdalisue/suda.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'
+" tagbar {{{2
+let g:tagbar_type_javascript = {
+      \ 'ctagstype': 'javascript',
+      \ 'kinds': [
+      \ 'A:Array/Arrays',
+      \ 'P:Property/Properties',
+      \ 'T:Tag/Tags',
+      \ 'O:Object/Objects',
+      \ 'G:Generator/Generators',
+      \ 'F:Function/Functions',
+      \ 'C:Class/Classes',
+      \ 'M:Method/Methods',
+      \ 'V:Variable/Variables',
+      \ 'I:Import/Imports',
+      \ 'E:Export/Exports',
+      \ 'S:StyledComponent/StyledComponents'
+      \ ]}
+
+let g:tagbar_show_linebumbers = 1
+nnoremap <C-T> :TagbarToggle<CR>
+" }}}
+
 Plug 'mileszs/ack.vim'
+" ACK/AG {{{2
+let g:ackprg = 'ag --nogroup --nocolor --column --path-to-ignore ~/.ignore'
+nnoremap <Leader>ag :Ack!<Space>
+nnoremap <M-K> :Ack! "\b<Cword>\b"<CR>
+" }}}
+
 Plug 'nathanaelkane/vim-indent-guides'
+" indent guides {{{2
+let g:indent_guides_enable_on_vim_startup = 1
+" }}}
+
 Plug 'olical/vim-enmasse'
-Plug 'pangloss/vim-javascript'
-Plug 'posva/vim-vue'
+Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rake'
+" multiple cursors {{{2
+let g:multi_cursor_exit_from_insert_mode=0
+" }}}
+
 Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with '.'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vim-ruby/vim-ruby'
+Plug 'vim-vdebug/vdebug'
 Plug 'wesleyche/SrcExpl'
+" SrcExpl {{{ "
+let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R"
+nnoremap <F8> :SrcExplToggle<CR>
+" }}} SrcExpl "
 " }}}
-" MAPPINGS {{{1
-let mapleader = "\<Space>"
-let maplocalleader = '\' " better ESC
 
+" MAPPINGS {{{1
 " Emacs bindings in command line mode
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
@@ -154,6 +215,7 @@ cnoremap <C-E> <End>
 " Make u/U behave for undo like n/N does for search
 nnoremap U <C-R>
 
+" better ESC
 inoremap jk <Esc>
 
 " Why a command used so much needs more keystroke than a barely known command?
@@ -176,18 +238,6 @@ noremap K <Nop>
 
 " Yank from current cursor position to end of line
 map Y y$
-
-" Indent if we're at the beginning of a line. Else, do completion.
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<Tab>"
-    else
-        return "\<C-P>"
-    endif
-endfunction
-inoremap <Tab> <C-R>=InsertTabWrapper()<CR>
-inoremap <S-Tab> <C-N>
 
 " Fast saving and closing current buffer without closing windows displaying
 " the buffer
@@ -222,23 +272,6 @@ cmap w!! w suda://%
 " pretty print JSON using python native tools
 nnoremap <Leader>pp :%!python -m json.tool<CR>
 
-function! s:TabToggle() abort
-  if tabpagewinnr(tabpagenr(), '$') > 1
-    " Zoom in when this tab has more than one window
-    tab split
-  elseif tabpagenr('$') > 1
-    " Zoom out when this tab is not the last tab
-    if tabpagenr() < tabpagenr('$')
-      tabclose
-      tabprevious
-    else
-      tabclose
-    endif
-  endif
-endfunction
-command! TabToggle call s:TabToggle()
-nnoremap <Leader><Leader> :TabToggle<CR>
-
 " URL encode/decode selection
 vnoremap <leader>en :!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>
 vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>
@@ -249,148 +282,20 @@ vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdi
 " matching tags.
 nnoremap <C-]> g<C-]>
 " }}}
+
 " netrw {{{2
 nnoremap - :edit %:p:h<CR>
+let g:netrw_keepdir=0
 " }}}
 " }}}
-" PLUGINS SETTINGS {{{1
-" Fugitive {{{2
-nnoremap <Leader>ga :Gw<CR>
-nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gc :Gcommit<CR>
-nnoremap <Leader>gdel :Gdelete<CR>
-nnoremap <Leader>gdi :Gdiff<CR>
-nnoremap <Leader>gl :Glog<CR>
-nnoremap <Leader>gmov :Gmove<CR>
-nnoremap <Leader>gpo :Gpush<CR>
-nnoremap <Leader>gpr :Git pullr<CR>i
-nnoremap <Leader>gs :Gstatus<CR>
-" }}}
-" THEME {{{2
-set t_8f=^[[38;2;%lu;%lu;%lum        " set foreground color
-set t_8b=^[[48;2;%lu;%lu;%lum        " set background color
-set t_Co=256                         " Enable 256 colors
-set termguicolors                    " Enable GUI colors for the terminal to get truecolor
-" }}}
-" FZF {{{2
-set rtp+=/usr/local/opt/fzf
 
-if has('nvim') || has('gui_running')
-  let $FZF_DEFAULT_OPTS .= ' --inline-info'
-endif
-
-" All files
-command! -nargs=? -complete=dir AF
-  \ call fzf#run(fzf#wrap(fzf#vim#with_preview({
-  \   'source': 'fd --type f --hidden --follow --exclude .git --exclude build --no-ignore . '.expand(<q-args>)
-  \ })))
-
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-" terminal options
-autocmd! FileType fzf
-autocmd  FileType fzf set noshowmode noruler nonu
-
-if has('nvim') && exists('&winblend') && &termguicolors
-  set winblend=10
-
-  hi NormalFloat guibg=None
-  if exists('g:fzf_colors.bg')
-    call remove(g:fzf_colors, 'bg')
-  endif
-
-  if stridx($FZF_DEFAULT_OPTS, '--border') == -1
-    let $FZF_DEFAULT_OPTS .= ' --border --margin=0,2'
-  endif
-
-  function! FloatingFZF()
-    let width = float2nr(&columns * 0.9)
-    let height = float2nr(&lines * 0.6)
-    let opts = { 'relative': 'editor',
-               \ 'row': (&lines - height) / 2,
-               \ 'col': (&columns - width) / 2,
-               \ 'width': width,
-               \ 'height': height }
-
-    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-  endfunction
-
-  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-endif
-
-function! s:with_agignore(bang, args)
-  let agignore = '/tmp/agignore-for-fzf'
-  let entries = split(&wildignore, ',')
-  let source = 'ag --path-to-ignore '.agignore.' -g ""'
-  call writefile(entries, agignore)
-  call fzf#vim#files(a:args, fzf#vim#with_preview({'source': source}))
-endfunction
-
-autocmd VimEnter * command! -bang -nargs=? -complete=dir Files
-      \ call s:with_agignore(<bang>0, <q-args>)
-
-nnoremap <C-P> :Files<CR>
-nnoremap <Leader>bl :Buffers<CR>
-nnoremap <Leader>t :Tags<CR>
-" }}}
-" JavaScript {{{2
-let g:javascript_plugin_flow = 1
-"}}}
-" tagbar {{{2
-let g:tagbar_type_javascript = {
-      \ 'ctagstype': 'javascript',
-      \ 'kinds': [
-      \ 'A:Array/Arrays',
-      \ 'P:Property/Properties',
-      \ 'T:Tag/Tags',
-      \ 'O:Object/Objects',
-      \ 'G:Generator/Generators',
-      \ 'F:Function/Functions',
-      \ 'C:Class/Classes',
-      \ 'M:Method/Methods',
-      \ 'V:Variable/Variables',
-      \ 'I:Import/Imports',
-      \ 'E:Export/Exports',
-      \ 'S:StyledComponent/StyledComponents'
-      \ ]}
-" }}}
-" multiple cursors {{{2
-let g:multi_cursor_exit_from_insert_mode=0
-" }}}
-" ACK/AG {{{2
-let g:ackprg = 'ag --nogroup --nocolor --column --path-to-ignore ~/.ignore'
-nnoremap <Leader>ag :Ack!<Space>
-nnoremap <M-K> :Ack! "\b<Cword>\b"<CR>
-" }}}
-" tagbar {{{2
-let g:tagbar_show_linebumbers = 1
-nnoremap <C-T> :TagbarToggle<CR>
-" }}}
-" indent guides {{{2
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_guide_size = 1
-" }}}
-" }}}
 " ABBREVIATIONS {{{1
 iab @@p adrien@sent.com
 iab rtfm Read The Fantastic Manual
 iab tts strftime("%T")
 iab dts strftime("%a %d %b %Y")
 " }}}
+
 " BUFFERS {{{1
 " Bclose {{{2
 
@@ -472,17 +377,16 @@ command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>'
 nnoremap <Leader>bd :Bclose<CR>
 " }}}
 " }}}
+
 " COMMANDS {{{1
 " Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
 command! Wq :wq
 command! Q :q
 
-command! Cnvim :tcd ~/.config/nvim
-command! Cntig :tcd ~/code/nametests-ig
-
 command! Todo :e ~/code/notes/todo.todo
 " }}}
+
 " FILETYPES {{{1
 " JavaScript {{{2
 autocmd BufNewFile,BufRead *.es6 set filetype=javascript
@@ -508,6 +412,7 @@ autocmd! BufNewFile,BufRead *.svelte set ft=html
 " }}}
 
 " }}}
+
 " NAVIGATION {{{1
 " Begining & End of line in mode
 noremap <C-A> ^
@@ -551,6 +456,7 @@ noremap <Leader>9 9gt
 noremap <Leader>0 :tablast<cr>
 " }}}
 " }}}
+
 " SEARCHING {{{1
 " sane regexes
 nnoremap / /\v
@@ -583,6 +489,7 @@ nnoremap g, g,zz
 " Open a Quickfix window for the last search.
 nnoremap <Leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 " }}}
+
 " TERMINAL {{{1
 tnoremap jk <C-\><C-N>
 tnoremap <C-H> <c-\><C-N><C-W>h
@@ -610,6 +517,7 @@ endif
 
 nnoremap <F4> :call OpenTerminal()<CR>
 " }}}
+
 " TRAILING WHITESPACES {{{1
 " Avoid installing twice
 if exists('g:loaded_trailing_whitespaces')
@@ -653,6 +561,7 @@ autocmd FileType ruby :TrimSpaces
 autocmd FileType sh :TrimSpaces
 autocmd FileType java :TrimSpaces
 " }}}
+
 " UI {{{1
 " Highlight current line only on focused window
 augroup CursorLine
