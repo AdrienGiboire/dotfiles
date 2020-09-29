@@ -19,6 +19,11 @@ public/packs
 .ignore
 
 tags
-.idea/
+.idea
+.vscode
 
 Homestead
+.vagrant
+composer.phar
+
+todo.todo
