@@ -25,7 +25,7 @@ alias rc="drails c"
 
 alias wr="which ruby"
 
-alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias config="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # NEOVIM {{{1
 alias nvim='~/Applications/nvim.appimage'
@@ -58,3 +58,5 @@ alias dc="docker-compose"
 alias dcr="dc run"
 
 alias chromedev='/usr/bin/chromium-browser --disable-web-security --user-data-dir="/tmp"'
+alias watch-dev="yarn watch --env.tenant nametests --env.platform fbfake"
+alias watch-sb="watch-dev --env.sandbox --env.sandbox-data"
