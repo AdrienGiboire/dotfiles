@@ -114,7 +114,7 @@ section "Installing Neovim"
 
   section "+ Install python3 provider (mandatory for some plugins)"
   apt install python3-pip
-  python -m pip install --user --upgrade pynvim
+  python3 -m pip install --user --upgrade pynvim
 
   section "+ Install vim-plug"
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
