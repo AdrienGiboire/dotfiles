@@ -21,8 +21,9 @@
   amend = commit --amend
   aa = add --all
   fa = fetch --all
-  pom = push origin master
-  pum = push upstream master
+  p = push
+  pom = push origin main
+  pum = push upstream main
   b = branch -v
   rc = rebase --continue
   ra = rebase --abort
