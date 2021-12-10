@@ -273,8 +273,8 @@ cmap w!! w suda://%
 nnoremap <Leader>pp :%!python -m json.tool<CR>
 
 " URL encode/decode selection
-vnoremap <leader>en :!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>
-vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>
+vnoremap <leader>uen :!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>
+vnoremap <leader>ude :!python -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>
 
 " tags {{{2
 " Instead of :tag jumping to first match definition, it jumps to the
