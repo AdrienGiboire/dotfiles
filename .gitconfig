@@ -22,6 +22,7 @@
   aa = add --all
   fa = fetch --all
   p = push
+  pf = push --force
   pom = push origin main
   pum = push upstream main
   b = branch -v
