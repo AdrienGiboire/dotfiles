@@ -60,3 +60,8 @@ alias dcr="dc run"
 alias chromedev='/usr/bin/chromium-browser --disable-web-security --user-data-dir="/tmp"'
 alias watch-dev="yarn watch --env.tenant nametests --env.platform fbfake"
 alias watch-sb="watch-dev --env.sandbox --env.sandbox-data"
+
+alias tstart='cd ~/code/TunSafe; sudo tunsafe start -d xilam.conf; cd -'
+alias tstop='cd ~/code/TunSafe; sudo tunsafe stop'
+
+alias open='xdg-open'
