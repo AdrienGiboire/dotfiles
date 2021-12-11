@@ -12,24 +12,44 @@ flag=$3
 
 [ $flag -eq 0 ] && exit
 
-function clone_database() {
-  db_owner=`cat config/database.yml | grep -e 'username' |  cut -d ':' -f2-`
-  clone_db=true
+function log() {
+  echo "$1 --- $2"
+}
 
-  echo "Cloning database '$db_owner\_$pg_cleaned_default' into '$db_owner\_$pg_cleaned_branch'..."
+function debug() {
+  log "DEBUG" "$1"
+}
 
-  if psql -lqt | cut -d \| -f 1 | grep -qw $db_owner\_$pg_cleaned_branch; then
+function mysql_execute() {
+  debug "Executing SQL Statement: $1"
+  [[ $2 == 'use_sudo' ]] && sudo mysql -uroot -proot -e "$1"
+  [[ -z $2 ]] && mysql -uroot -proot -e "$1"
+}
+
+function mysql_kill_processes() {
+  echo "Killing processes linked to '$db_target_name'..."
+
+  process_list_file="${mysql_data_path}process_list.txt"
+
+  sudo [ -f $process_list_file ] && sudo rm $process_list_file
+  mysql_execute "SELECT CONCAT('KILL ',id,';') FROM information_schema.processlist WHERE db='$db_target_name' INTO OUTFILE '$process_list_file';"
+  mysql_execute "SOURCE $process_list_file;" "use_sudo"
+}
+
+function mysql_clone_database() {
+  mysql_data_path=`mysql_execute "SHOW VARIABLES LIKE 'secure_file_priv';" | tail -1 | cut -f 2`
+
+  if mysql_execute "SHOW DATABASES;" | grep $db_target_name; then
     while true ; do
-      read -p "Database '$db_owner\_$pg_cleaned_branch' already exists, do you want to reset it to '$db_owner\_$pg_cleaned_default'? (y/N) " answer </dev/tty
+      read -p "Database '$db_target_name' already exists, do you want to reset it to '$db_source_name'? (y/N) " answer </dev/tty
       [ -z $answer ] && answer='n'
 
       case ${answer:0:1} in
         y|Y )
-          echo "Killing psql processes linked to '$db_owner\_$pg_cleaned_branch'..."
-          psql -tc "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '$db_owner\_$pg_cleaned_branch' AND pid <> pg_backend_pid();" -d postgres -U $db_owner
+          mysql_kill_processes
 
           echo "Dropping database..."
-          psql -tc "DROP DATABASE $db_owner\_$pg_cleaned_branch;" -d postgres -U $db_owner
+          mysql_execute "DROP DATABASE $db_target_name;"
           break
           ;;
         n|N )
@@ -43,12 +63,73 @@ function clone_database() {
   fi
 
   if $clone_db; then
-    echo "Killing psql processes linked to '$db_owner\_$pg_cleaned_default'..."
-    psql -tc "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '$db_owner\_$pg_cleaned_default' AND pid <> pg_backend_pid();" -d postgres -U $db_owner
+    mysql_kill_processes
 
     echo "Creating database..."
-    psql -tc "CREATE DATABASE $db_owner\_$pg_cleaned_branch WITH TEMPLATE $db_owner\_$pg_cleaned_default OWNER $db_owner;" -d postgres -U $db_owner
+    mysqldump -uroot -proot $db_source_name -r /tmp/dump.sql
+    mysql_execute "CREATE DATABASE $db_target_name;"
+    mysql_execute "USE $db_target_name; SOURCE /tmp/dump.sql;"
+    mysql_execute "GRANT ALL ON $db_target_name.* TO '$db_owner'@'localhost'; FLUSH PRIVILEGES;"
   fi
+}
+
+function postgres_clone_database() {
+  if psql -U $db_owner -lqt | cut -d \| -f 1 | grep -qw $db_owner\_$db_cleaned_branch; then
+    while true ; do
+      read -p "Database '$db_target_name' already exists, do you want to reset it to '$db_source_name'? (y/N) " answer </dev/tty
+      [ -z $answer ] && answer='n'
+
+      case ${answer:0:1} in
+        y|Y )
+          echo "Killing psql processes linked to '$db_target_name'..."
+          psql -tc "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '$db_target_name' AND pid <> pg_backend_pid();" -d postgres -U $db_owner
+
+          echo "Dropping database..."
+          psql -tc "DROP DATABASE $db_target_name;" -d postgres -U $db_owner
+          break
+          ;;
+        n|N )
+          clone_db=false
+          break
+          ;;
+        * )
+          echo 'Please answer yes (y) or no (n).';;
+      esac
+    done
+  fi
+
+  if $clone_db; then
+    echo "Killing processes linked to '$db_source_name'..."
+
+    echo "Killing psql processes linked to '$db_source_name'..."
+    psql -tc "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '$db_source_name' AND pid <> pg_backend_pid();" -d postgres -U $db_owner
+
+    echo "Creating database..."
+    psql -tc "CREATE DATABASE $db_target_name WITH TEMPLATE $db_source_name OWNER $db_owner;" -d postgres -U $db_owner
+  fi
+}
+
+function clone_database() {
+  db_adapter=`cat config/database.yml | grep -e 'adapter' | cut -d ':' -f2 | head -1 | sed 's/^[ \t]*//;s/[ \t]*$//'`
+  db_owner=`cat config/database.yml | grep -e 'username' | cut -d ':' -f2 | head -1 | sed 's/^[ \t]*//;s/[ \t]*$//'`
+
+  clone_db=true
+  db_target_name="${project_name}_${db_cleaned_branch}"
+  db_source_name="${project_name}_${db_cleaned_default}"
+  [[ $db_cleaned_default == "master" || $db_cleaned_default == "main" ]] && db_target_name="${project_name}_development"
+
+  echo "Cloning database '$db_source_name' into '$db_target_name'..."
+
+  case $db_adapter in
+    "mysql2" )
+      mysql_clone_database
+      ;;
+    "postgres" )
+      postgres_clone_database
+      ;;
+    * )
+      echo "Unknown adapter `$adapter`";;
+  esac
 
   echo 'All done here. Happy hacking!'
 }
@@ -61,16 +142,17 @@ default=$(git config $project_name.default-database-suffix)
   echo 'Example: git config '$project_name'.default-database-suffix development' &&
   exit
 
-pg_cleaned_default=`echo $default | sed 's/-/_/g'`
+db_cleaned_default=`echo $default | sed 's/-/_/g'`
 gc_cleaned_default=`echo $default | sed 's/_/-/g'`
 branch=`git symbolic-ref HEAD 2>/dev/null | sed 's/refs\/heads\///'`
 if [ -n "$branch" ]; then
-  pg_cleaned_branch=`echo $branch | sed 's/-/_/g'`
+  db_cleaned_branch=`echo $branch | sed 's/-/_/g'`
   gc_cleaned_branch=`echo $branch | sed 's/_/-/g'`
   echo "Checking configuration for database behaviour on checkout to '$branch'..."
 
   if [ $branch != $default ]; then
     isolate_db=`git config --bool branch.$gc_cleaned_branch.isolate-database`
+
     if [ -z $isolate_db ]; then
       echo 'No configuration found for current branch database behaviour.'
       while true ; do
