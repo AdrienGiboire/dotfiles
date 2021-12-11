@@ -1,8 +1,9 @@
 #!/bin/bash
 
 [[ $SKIP_GIT_HOOK ]] && exit 0
+
 echo 'Generating tags...'
-ctags -R -f ./tags .
+.git/hooks/ctags
 echo 'Tags generated!'
 
 previous_ref=$1
