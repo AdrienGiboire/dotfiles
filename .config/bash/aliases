@@ -28,7 +28,7 @@ alias wr="which ruby"
 alias config="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # NEOVIM {{{1
-alias nvim='~/Desktop/Applications/nvim.appimage'
+alias nvim='~/Applications/nvim.appimage'
 alias n='nvim'
 alias vim='nvim'
 alias vi='nvim'
