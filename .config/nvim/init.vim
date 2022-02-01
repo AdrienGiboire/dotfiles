@@ -196,6 +196,13 @@ Plug 'terryma/vim-multiple-cursors'
 let g:multi_cursor_exit_from_insert_mode=0
 " }}}
 
+" FUGITIVE {{{
+Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
+let g:fugitive_gitlab_domains = ['https://gitlab.innovationlawlab.org']
+let g:gitlab_api_keys = {'gitlab.com': 'z-vzZzCSawoR22shPKJy', 'innovationlawlab.org': 'z-vzZzCSawoR22shPKJy'}
+nnoremap <leader>g :Git 
+" }}}
 Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with '.'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
