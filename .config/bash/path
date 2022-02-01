@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PATH="/usr/local/bin:$PATH"
+PATH="/usr/local/bin:/home/adrien/.yarn/bin:$PATH"
 
 if [ -d "$HOME/adb-fastboot/platform-tools" ]; then
   PATH="$HOME/adb-fastboot/platform-tools:$PATH"
