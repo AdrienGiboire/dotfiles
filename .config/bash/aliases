@@ -61,7 +61,7 @@ alias chromedev='/usr/bin/chromium-browser --disable-web-security --user-data-di
 alias watch-dev="yarn watch --env.tenant nametests --env.platform fbfake"
 alias watch-sb="watch-dev --env.sandbox --env.sandbox-data"
 
-alias tstart='cd ~/code/TunSafe; sudo tunsafe start -d xilam.conf; cd -'
-alias tstop='cd ~/code/TunSafe; sudo tunsafe stop'
+alias tstart='sudo tunsafe start -d ~/.config/tunsafe-profiles/krystal.conf'
+alias tstop='sudo tunsafe stop'
 
 alias open='xdg-open'
