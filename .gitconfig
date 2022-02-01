@@ -1,6 +1,6 @@
 [core]
   excludesfile = ~/.gitignore
-  editor = nvim
+  editor = ~/Applications/nvim.appimage
   ignorecase = false
   # protect your project from Windows line endings creeping in
   autocrlf = input
