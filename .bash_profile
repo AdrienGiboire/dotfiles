@@ -40,3 +40,4 @@ shopt -s globstar
 if [ -f ~/.config/bash/completions/git-completion.bash ]; then
   . ~/.config/bash/completions/git-completion.bash
 fi
+. "$HOME/.cargo/env"
