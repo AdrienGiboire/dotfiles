@@ -1,4 +1,5 @@
 eval `ssh-agent -s`
+export EDITOR=vim
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -40,4 +41,16 @@ shopt -s globstar
 if [ -f ~/.config/bash/completions/git-completion.bash ]; then
   . ~/.config/bash/completions/git-completion.bash
 fi
+
 . "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+
+source ~/.bash_completion.d/alacritty

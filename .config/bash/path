@@ -9,9 +9,11 @@ fi
 if [ -d "$HOME/.config/git/bin" ]; then
   PATH="$HOME/.config/git/bin:$PATH"
 fi
+
 if [ -d "$HOME/.npm-global/bin" ]; then
   PATH="$HOME/.npm-global/bin:$PATH"
 fi
+
 if [ -d "$HOME/bin" ]; then
   PATH="$HOME/bin:$PATH"
 fi
@@ -21,6 +23,15 @@ for FOLDER in $MYFILES; do
   PATH="$HOME/bin/$FOLDER:$PATH"
   echo "Adding $FOLDER"
 done
+
+# Android (Studio)
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$HOME/Applications/android-studio/bin
+
 
 export PATH
 
