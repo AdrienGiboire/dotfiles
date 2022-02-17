@@ -11,12 +11,12 @@ alias grep='grep --color=auto'
 # RAILS {{{
 
 alias be='bundle exec'
-alias drake="set RAILS_ENV development && bin/rake"
-alias prake="set RAILS_ENV production && bin/rake"
-alias trake="set RAILS_ENV test && bin/rake"
-alias drails="set INCLUDE_LIVERELOAD t && set LES_VRAIS_BARBUS t && set RAILS_ENV development && bin/rails"
-alias prails="set RAILS_ENV production && bin/rails"
-alias trails="set RAILS_ENV test && bin/rails"
+alias drake="RAILS_ENV=development bin/rake"
+alias prake="RAILS_ENV=production bin/rake"
+alias trake="RAILS_ENV=test bin/rake"
+alias drails="RAILS_ENV=development bin/rails"
+alias prails="RAILS_ENV=production bin/rails"
+alias trails="RAILS_ENV=test bin/rails"
 alias reset_db="drake db:drop && drake db:create && drake db:migrate && drake db:seed"
 alias rs="drails s"
 alias rc="drails c"
