@@ -65,3 +65,7 @@ alias tstart='sudo tunsafe start -d ~/.config/tunsafe-profiles/krystal.conf'
 alias tstop='sudo tunsafe stop'
 
 alias open='xdg-open'
+
+alias llp='tmux -L LLP -f ~/.config/tmux/llp.conf a'
+alias krystal='tmux -L KRYSTAL -f ~/.config/tmux/krystal.conf a'
+alias spine='PROJECT_NAME=spine tmux -L SPINE -f ~/.config/tmux/generic.conf a'
