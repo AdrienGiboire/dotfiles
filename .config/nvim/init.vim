@@ -189,6 +189,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_enable_on_vim_startup = 1
 " }}}
 
+Plug 'neomake/neomake'
+autocmd VimEnter * call neomake#configure#automake('nw', 750)
+
 Plug 'olical/vim-enmasse'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
