@@ -64,3 +64,7 @@ alias open='xdg-open'
 alias llp='tmux -L LLP -f ~/.config/tmux/llp.conf a'
 alias krystal='tmux -L KRYSTAL -f ~/.config/tmux/krystal.conf a'
 alias spine='PROJECT_NAME=spine tmux -L SPINE -f ~/.config/tmux/generic.conf a'
+
+function tmuxnew () {
+  PROJECT_NAME=$1 tmux -L $1 -f ~/.config/tmux/generic.conf a
+}
