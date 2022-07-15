@@ -68,3 +68,13 @@ alias spine='PROJECT_NAME=spine tmux -L SPINE -f ~/.config/tmux/generic.conf a'
 function tmuxnew () {
   PROJECT_NAME=$1 tmux -L $1 -f ~/.config/tmux/generic.conf a
 }
+
+function stop () {
+  for _service in $@
+  do
+    echo "INFO -- Stopping $_service"
+    sudo service $_service stop
+  done
+}
+
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
