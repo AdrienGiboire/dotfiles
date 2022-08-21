@@ -22,8 +22,7 @@ function debug() {
 
 function mysql_execute() {
   debug "Executing SQL Statement: $1"
-  [[ $2 == 'use_sudo' ]] && sudo mysql -uroot -proot -e "$1"
-  [[ -z $2 ]] && mysql -uroot -proot -e "$1"
+  sudo mysql -e "$1"
 }
 
 function mysql_kill_processes() {
@@ -33,7 +32,7 @@ function mysql_kill_processes() {
 
   sudo [ -f $process_list_file ] && sudo rm $process_list_file
   mysql_execute "SELECT CONCAT('KILL ',id,';') FROM information_schema.processlist WHERE db='$db_target_name' INTO OUTFILE '$process_list_file';"
-  mysql_execute "SOURCE $process_list_file;" "use_sudo"
+  mysql_execute "SOURCE $process_list_file;"
 }
 
 function mysql_clone_database() {
@@ -66,7 +65,7 @@ function mysql_clone_database() {
     mysql_kill_processes
 
     echo "Creating database..."
-    mysqldump -uroot -proot $db_source_name -r /tmp/dump.sql
+    sudo mysqldump $db_source_name -r /tmp/dump.sql
     mysql_execute "CREATE DATABASE $db_target_name;"
     mysql_execute "USE $db_target_name; SOURCE /tmp/dump.sql;"
     mysql_execute "GRANT ALL ON $db_target_name.* TO '$db_owner'@'localhost'; FLUSH PRIVILEGES;"
