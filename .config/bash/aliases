@@ -49,12 +49,8 @@ alias ducks='du -cks * | sort -rn | head'
 # for ubuntu (and more?), remap caps lock to ctrl
 alias nocaps="setxkbmap -option ctrl:nocaps"
 
-alias dc="docker-compose"	
+alias dc="docker-compose"
 alias dcr="dc run"
-
-alias chromedev='/usr/bin/chromium-browser --disable-web-security --user-data-dir="/tmp"'
-alias watch-dev="yarn watch --env.tenant nametests --env.platform fbfake"
-alias watch-sb="watch-dev --env.sandbox --env.sandbox-data"
 
 alias tstart='sudo tunsafe start -d ~/.config/tunsafe-profiles/krystal.conf'
 alias tstop='sudo tunsafe stop'
