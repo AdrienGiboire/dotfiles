@@ -232,11 +232,6 @@ inoremap jk <Esc>
 nnoremap ; :
 nnoremap : ;
 
-" * and # for selected text, trying to keep the search literal (in case of
-" filenames, for example.)
-xnoremap * y/\V<C-R>=escape(@", '/\')<CR><CR>
-xnoremap # y?\V<C-R>=escape(@", '?\')<CR><CR>
-
 " You want to be part of the gurus? Time to get in serious stuff and stop using
 " arrow keys. Learn the Hard Way!
 noremap <Left> <Nop>
