@@ -2,14 +2,21 @@
 
 echo "=== Installing Node"
 
+NODE_VERSION=14
+
 # NODEJS {{{1
 if [ ! -x "$(command -v node)" ]; then
   # For some reasons, if you don't run the script in an appropriate directory,
   # you might get permission errors. So we force it to be ran from the home
   # directory.
   cd $HOME
-  curl --fail -LSs https://install-node.now.sh/latest | bash -s -- --prefix=$HOME
-  export PATH="$HOME/bin:$PATH"
+  curl --fail -sSL https://deb.nodesource.com/setup_$NODE_VERSION.x | sudo -E bash -s -- --prefix=$HOME
+  sudo apt install -y nodejs
+
+  curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  sudo apt update
+  sudo apt install -y yarn
 fi
 [ -d $HOME/.npm-global ] || mkdir $HOME/.npm-global
 npm config set prefix "$HOME/.npm-global"
