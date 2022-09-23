@@ -8,6 +8,7 @@ function join { local IFS="$1"; shift; echo "$*"; }
 function section { printf '\n%s\n' "=== $1"; }
 function showme { printf '%s\n' "$1" >&2; }
 function cleanup { $HOME/scripts/uninstall; }
+
 trap cleanup ERR
 
 options=$(getopt -o v -l ruby,node -- "$@")
@@ -47,25 +48,6 @@ utils=(
 
 section "Installing utils {$(join ' ' ${utils[@]})}"
 sudo apt-get install -y $(join ' ' ${utils[@]})
-# }}}
-
-# DOCKER {{{1
-section "Installing Docker & Compose"
-
-section "+ Docker"
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository \
-  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) \
-  stable"
-sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-
-section "+ Compose"
-sudo apt-get install -y python-dev libffi-dev gcc libc-dev make
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-
 # }}}
 
 # FETCH SOURCES {{{1
