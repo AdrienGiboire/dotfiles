@@ -7,7 +7,6 @@
 [user]
   name = Adrien
   email = github@adrien.sent.com
-	signingkey = 6AEE3B0147923AF2
 [color]
   ui = auto
 [alias]
@@ -61,3 +60,5 @@
   newHighlight = green bold 22
 [init]
   templatedir = ~/.git_template
+[filter "ignoreKey"]
+  clean = sed '/signingkey/d'
