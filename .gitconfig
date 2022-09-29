@@ -11,32 +11,31 @@
 [color]
   ui = auto
 [alias]
+  aa = add --all
+  amend = commit --amend
   arc = !git aa && git rc
-  st = status
+  b = branch -v
   ci = commit --verbose
   co = checkout
-  cpk = cherry-pick
-  di = diff --color
+  commend = commit --amend --no-edit
+  ctags = !.git/hooks/ctags
   dc = diff --color --cached
-  amend = commit --amend
-  aa = add --all
+  d = difftool
+  di = diff --color
   fa = fetch --all
   p = push
   pf = push --force
+  pick = cherry-pick
   pom = push origin main
   pum = push upstream main
-  b = branch -v
-  rc = rebase --continue
   ra = rebase --abort
+  rc = rebase --continue
   ri = rebase --interactive
+  st = status
+  staash = stash --include-untracked
 
   r = !git l -10
   l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-
-  d = difftool
-  commend = commit --amend --no-edit
-  staash = stash --include-untracked
-  ctags = !.git/hooks/ctags
 
   tags = "for-each-ref --sort=taggerdate --format='%(color:green)%(subject)%(color:reset), tagged: %(color:yellow)%(refname:short)%(color:reset)\n%(taggerdate)\n%(taggername) %(taggeremail)\n\n%(contents:body)\n' refs/tags"
 
