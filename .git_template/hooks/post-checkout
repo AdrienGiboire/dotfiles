@@ -141,12 +141,12 @@ default=$(git config $project_name.default-database-suffix)
   echo 'Example: git config '$project_name'.default-database-suffix development' &&
   exit
 
-db_cleaned_default=`echo $default | sed 's/-/_/g'`
-gc_cleaned_default=`echo $default | sed 's/_/-/g'`
+db_cleaned_default=`echo $default | sed 's/-/_/g' | sed 's/\./__/g'`
+gc_cleaned_default=`echo $default | sed 's/__/./g' | sed 's/_/-/g'` # order of sed is of importance
 branch=`git symbolic-ref HEAD 2>/dev/null | sed 's/refs\/heads\///'`
 if [ -n "$branch" ]; then
-  db_cleaned_branch=`echo $branch | sed 's/[\/-]/_/g'`
-  gc_cleaned_branch=`echo $branch | sed 's/[\/_]/-/g'`
+  db_cleaned_branch=`echo $branch | sed 's/[\/-]/_/g' | sed 's/\./__/g'`
+  gc_cleaned_branch=`echo $branch | sed 's/__/./g' | sed 's/[\/_]/-/g'` # order of sed is of importance
   echo "Checking configuration for database behaviour on checkout to '$branch'..."
 
   if [ $branch != $default ]; then
