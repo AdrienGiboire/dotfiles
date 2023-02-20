@@ -54,13 +54,16 @@ alias dcr="dc run"
 
 alias tstart='sudo tunsafe start -d ~/.config/tunsafe-profiles/krystal.conf'
 alias tstop='sudo tunsafe stop'
+alias tshow='sudo tunsafe show'
 
 alias open='xdg-open'
 
 alias llp='tmux -L LLP -f ~/.config/tmux/llp.conf a'
+alias llpn='tmux -L LLPN -f ~/.config/tmux/llpn.conf a'
 alias krystal='tmux -L KRYSTAL -f ~/.config/tmux/krystal.conf a'
 alias spine='tmux -L SPINE -f ~/.config/tmux/spine.conf a'
 alias 5m5v='PROJECT_NAME=5m5v tmux -L 5M5V -f ~/.config/tmux/generic.conf a'
+alias infra='tmux -L INFRA -f ~/.config/tmux/infra.conf a'
 
 function tmuxnew () {
   PROJECT_NAME=$1 tmux -L $1 -f ~/.config/tmux/generic.conf a
