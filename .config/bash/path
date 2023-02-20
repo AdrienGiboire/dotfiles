@@ -32,6 +32,9 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$HOME/Applications/android-studio/bin
 
+# PUREVPN
+
+export PATH=$PATH:/etc/pure-linux-cli/:/etc/pure-linux-cli/
 
 export PATH
 
