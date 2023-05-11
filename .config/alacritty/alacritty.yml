@@ -1,8 +1,8 @@
 import:
-  - monokai-theme.yml
+  - ~/.config/alacritty/hardhacker.yml
 
 font:
-  size: 14.0
+  size: 18.0
   normal:
     family: 'Noto Mono'
 
