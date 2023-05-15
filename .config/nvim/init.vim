@@ -111,8 +111,6 @@ runtime macros/matchit.vim
 call plug#begin('~/.config/nvim/pack')
 
 Plug 'AdrienGiboire/vim-todo'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -151,6 +149,12 @@ nnoremap <C-P> :Files<CR>
 nnoremap <Leader>bl :Buffers<CR>
 nnoremap <Leader>t :Tags<CR>
 " }}}
+Plug 'junegunn/goyo.vim'
+" goyo {{{
+let goyo_width = 120
+let g:goyo_linenr = 1
+" }}}
+
 
 Plug 'lambdalisue/suda.vim'
 Plug 'machakann/vim-highlightedyank'
@@ -190,7 +194,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 " }}}
 
 Plug 'neomake/neomake'
-autocmd VimEnter * call neomake#configure#automake('nw', 750)
 
 Plug 'olical/vim-enmasse'
 Plug 'sheerun/vim-polyglot'
@@ -215,6 +218,8 @@ Plug 'wesleyche/SrcExpl'
 let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R"
 nnoremap <F8> :SrcExplToggle<CR>
 " }}} SrcExpl "
+
+call plug#end()
 " }}}
 
 " MAPPINGS {{{1
@@ -588,4 +593,8 @@ if filereadable('.local.vim')
   so .local.vim
 endif
 
-call plug#end()
+" PLUGIN CONFIGURATIONS {{{
+" NEOMAKE {{{
+call neomake#configure#automake('nw', 750)
+" }}}
+" }}}
