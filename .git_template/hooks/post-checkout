@@ -113,7 +113,8 @@ function clone_database() {
   db_owner=`cat config/database.yml | grep -e 'username' | cut -d ':' -f2 | head -1 | sed 's/^[ \t]*//;s/[ \t]*$//'`
 
   clone_db=true
-  db_target_name="${project_name}_${db_cleaned_branch}"
+    full_db_target_name="${project_name}_${db_cleaned_branch}"
+  db_target_name=${full_db_target_name::63}
   db_source_name="${project_name}_${db_cleaned_default}"
   [[ $db_cleaned_default == "master" || $db_cleaned_default == "main" ]] && db_target_name="${project_name}_development"
 
