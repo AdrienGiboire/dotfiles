@@ -28,3 +28,4 @@ composer.phar
 
 todo.todo
 dump.sql
+.env.development.local
