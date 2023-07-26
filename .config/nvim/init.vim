@@ -156,6 +156,7 @@ let g:goyo_linenr = 1
 " }}}
 
 
+Plug 'konfekt/vim-compilers'
 Plug 'lambdalisue/suda.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'majutsushi/tagbar'
@@ -402,6 +403,17 @@ command! Todo :e ~/code/notes/todo.todo
 autocmd BufNewFile,BufRead *.es6 set filetype=javascript
 autocmd BufNewFile,BufRead *.json set filetype=json
 autocmd BufNewFile,BufRead *.jsx set filetype=javascript
+
+
+augroup Linting
+  autocmd!
+  autocmd FileType javascript compiler eslint
+  autocmd FileType vue compiler eslint
+  autocmd BufWritePost *.js,*.vue silent make! <afile> | silent redraw!
+  autocmd QuickFixCmdPost [^l]* cwindow
+
+  autocmd Filetype ruby compiler rubocop
+augroup END
 " }}}
 
 " Markdown {{{2

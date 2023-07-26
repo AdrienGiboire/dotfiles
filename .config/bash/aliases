@@ -59,14 +59,17 @@ alias tshow='sudo tunsafe show'
 alias open='xdg-open'
 
 alias llp='tmux -L LLP -f ~/.config/tmux/llp.conf a'
-alias llpn='tmux -L LLPN -f ~/.config/tmux/llpn.conf a'
+alias llpn='PROJECT_NAME=LLPN tmuxnew llp-notification-center'
 alias krystal='tmux -L KRYSTAL -f ~/.config/tmux/krystal.conf a'
 alias spine='tmux -L SPINE -f ~/.config/tmux/spine.conf a'
-alias 5m5v='PROJECT_NAME=5m5v tmux -L 5M5V -f ~/.config/tmux/generic.conf a'
+alias 5m5v='tmuxnew 5m5v'
 alias infra='tmux -L INFRA -f ~/.config/tmux/infra.conf a'
 
 function tmuxnew () {
-  PROJECT_NAME=$1 tmux -L $1 -f ~/.config/tmux/generic.conf a
+  PROJECT_DIRECTORY=$1
+  PROJECT_NAME="${PROJECT_NAME:-$PROJECT_DIRECTORY}"
+
+  PROJECT_DIRECTORY="$PROJECT_DIRECTORY" tmux -L $PROJECT_NAME -f ~/.config/tmux/generic.conf a
 }
 
 function stop () {
@@ -76,5 +79,3 @@ function stop () {
     sudo service $_service stop
   done
 }
-
-alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
