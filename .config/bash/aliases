@@ -60,10 +60,12 @@ alias open='xdg-open'
 
 alias llp='tmux -L LLP -f ~/.config/tmux/llp.conf a'
 alias llpn='PROJECT_NAME=LLPN tmuxnew llp-notification-center'
+alias infra='tmux -L INFRA -f ~/.config/tmux/infra.conf a'
 alias krystal='tmux -L KRYSTAL -f ~/.config/tmux/krystal.conf a'
 alias spine='tmux -L SPINE -f ~/.config/tmux/spine.conf a'
 alias 5m5v='tmuxnew 5m5v'
-alias infra='tmux -L INFRA -f ~/.config/tmux/infra.conf a'
+alias vivi-client='tmux -L vivi-client -f ~/.config/tmux/vivi-client.conf a'
+alias vivi-server='tmux -L vivi-server -f ~/.config/tmux/vivi-server.conf a'
 
 function tmuxnew () {
   PROJECT_DIRECTORY=$1
