@@ -147,7 +147,7 @@ autocmd VimEnter * command! -bang -nargs=? -complete=dir Files
 
 nnoremap <C-P> :Files<CR>
 nnoremap <Leader>bl :Buffers<CR>
-nnoremap <Leader>t :Tags<CR>
+"nnoremap <Leader>t :Tags<CR>
 " }}}
 Plug 'junegunn/goyo.vim'
 " goyo {{{
@@ -213,6 +213,19 @@ nnoremap <leader>g :Git
 Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with '.'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+
+" vim-test {{{
+Plug 'vim-test/vim-test'
+let test#strategy = 'vimux'
+autocmd BufWritePost *_test.rb :TestLast
+nnoremap <silent> <leader>tt :TestNearest<CR>
+nnoremap <silent> <leader>tf :TestFile<CR>
+nnoremap <silent> <leader>ta :TestSuite<CR>
+nnoremap <silent> <leader>tl :TestLast<CR>
+nnoremap <silent> <leader>tg :TestVisit<CR>
+" }}}
+
+Plug 'preservim/vimux'
 Plug 'vim-vdebug/vdebug'
 Plug 'wesleyche/SrcExpl'
 " SrcExpl {{{ "
@@ -409,10 +422,10 @@ augroup Linting
   autocmd!
   autocmd FileType javascript compiler eslint
   autocmd FileType vue compiler eslint
-  autocmd BufWritePost *.js,*.vue silent make! <afile> | silent redraw!
-  autocmd QuickFixCmdPost [^l]* cwindow
-
   autocmd Filetype ruby compiler rubocop
+
+  autocmd BufWritePost *.js,*.vue,*.rb silent make! <afile> | silent redraw!
+  autocmd QuickFixCmdPost [^l]* cwindow
 augroup END
 " }}}
 
