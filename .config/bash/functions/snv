@@ -10,7 +10,7 @@
 # because older node projects don't have `engines` property in `package.json`.
 snv () {
   if [ -f .node-version ]; then
-    node_version=$(more .node-version)
+    node_version=$(cat .node-version)
   else
     # If `.node-version` does not exist, try to figure out node version from
     # `package.json`
