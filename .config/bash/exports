@@ -5,8 +5,7 @@ export TERM=xterm-256color
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
-export EDITOR='nvim'
-export HOMEBREW_EDITOR='nvim'
+export EDITOR='/home/adrien/Applications/nvim.appimage'
 export LESS='-F -X --ignore-case --raw-control-chars'
 # CTAGS Sorting in Vim is better behaved with this in place
 export LC_COLLATE=C
