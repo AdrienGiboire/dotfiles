@@ -22,6 +22,7 @@
   d = difftool
   di = diff --color
   fa = fetch --all
+  fix = !git di --name-only | uniq | xargs $EDITOR
   p = push
   pf = push --force-with-lease
   pick = cherry-pick
