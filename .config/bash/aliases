@@ -76,10 +76,20 @@ function tmuxnew () {
   PROJECT_DIRECTORY="$PROJECT_DIRECTORY" tmux -L $PROJECT_NAME -f ~/.config/tmux/generic.conf a
 }
 
+function start () {
+  for _service in $@
+  do
+    echo "INFO -- Starting $_service"
+    sudo service $_service start
+    echo "INFO -- $_service started"
+  done
+}
+
 function stop () {
   for _service in $@
   do
     echo "INFO -- Stopping $_service"
     sudo service $_service stop
+    echo "INFO -- $_service stopped"
   done
 }
