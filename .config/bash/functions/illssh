@@ -1,0 +1,10 @@
+#!/bin/bash
+
+illssh () {
+  instance_name=$1
+  [[ -n $2 ]] && user=$2 || user='ubuntu'
+
+  echo "SSH into ${instance_name} with user ${user}"
+
+  ssh "$user@$instance_name-cdb.innovationlawlab.org"
+}
