@@ -1,5 +1,6 @@
 import:
-  - ~/.config/alacritty/hardhacker.yml
+  #- ~/.config/alacritty/hardhacker.yml
+  - ~/.config/alacritty/pencil_light.yaml
 
 font:
   size: 12.0

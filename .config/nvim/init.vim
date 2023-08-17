@@ -598,6 +598,9 @@ autocmd FileType java :TrimSpaces
 " }}}
 
 " UI {{{1
+
+set background=light
+
 " Highlight current line only on focused window
 augroup CursorLine
   au!
