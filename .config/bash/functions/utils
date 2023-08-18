@@ -1,6 +1,14 @@
 # vim:ft=sh:ts=2:sw=2:sts:et
 
+_err() {
+  printf "[ \e[31;1mERR\e[m ] %s\n" "${1}" >&2
+}
+
 # Returns whether the given command is executable or aliased.
 _has() {
-  return $( whence $1 &>/dev/null )
+  return $( command -v $1 &>/dev/null )
+}
+
+_is_blank() {
+  [ -z "${1}" ]
 }
