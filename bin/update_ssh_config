@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. ~/.config/bash/functions/utils
+
+if ! _has bw
+then
+  _err 'Install Bitwarden CLI first, e.g.: sudo snap install bw'
+  exit 1
+fi
+
+ssh_config=$(bw get notes SSHConfig)
+
+if ! _is_blank $ssh_config
+then
+  echo "$ssh_config" > ~/.ssh/config
+  echo 'SSH Config up to date.'
+  exit 0
+fi
