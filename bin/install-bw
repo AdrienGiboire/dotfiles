@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd /tmp
+release_file=`curl -o bw.zip -L https://github.com/bitwarden/clients/releases/download/cli-v2023.7.0/bw-linux-2023.7.0.zip`
+unzip bw.zip -d ~/bin
