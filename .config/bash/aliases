@@ -52,9 +52,10 @@ alias nocaps="setxkbmap -option ctrl:nocaps"
 alias dc="docker-compose"
 alias dcr="dc run"
 
-alias tstart='sudo tunsafe start -d ~/.config/tunsafe-profiles/krystal.conf'
-alias tstop='sudo tunsafe stop'
-alias tshow='sudo tunsafe show'
+# Aliases for Xilam Connect/DisConnect
+alias xc='wg-quick up /home/adrien/.config/tunsafe-profiles/krystal2.conf'
+alias xdc='wg-quick down /home/adrien/.config/tunsafe-profiles/krystal2.conf'
+alias wg='sudo wg'
 
 alias open='xdg-open'
 
