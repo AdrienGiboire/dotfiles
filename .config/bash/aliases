@@ -53,8 +53,8 @@ alias dc="docker-compose"
 alias dcr="dc run"
 
 # Aliases for Xilam Connect/DisConnect
-alias xc='wg-quick up /home/adrien/.config/tunsafe-profiles/krystal2.conf'
-alias xdc='wg-quick down /home/adrien/.config/tunsafe-profiles/krystal2.conf'
+alias xc='wg-quick up /home/adrien/.config/tunsafe-profiles/krystal.conf'
+alias xdc='wg-quick down /home/adrien/.config/tunsafe-profiles/krystal.conf'
 alias wg='sudo wg'
 
 alias open='xdg-open'
