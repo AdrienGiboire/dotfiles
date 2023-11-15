@@ -510,9 +510,6 @@ set hlsearch
 " clear search matching
 noremap <Leader>/ :noh<CR>:call clearmatches()<CR>
 
-" Don't jump when using * for search
-nnoremap * *<C-O>
-
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
 nnoremap N Nzzzv
