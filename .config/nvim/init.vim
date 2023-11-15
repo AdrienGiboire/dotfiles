@@ -189,13 +189,8 @@ nnoremap <Leader>ag :Ack!<Space>
 nnoremap <M-K> :Ack! "\b<Cword>\b"<CR>
 " }}}
 
-Plug 'nathanaelkane/vim-indent-guides'
-" indent guides {{{2
-let g:indent_guides_enable_on_vim_startup = 1
-" }}}
-
+Plug 'preservim/vim-indent-guides'
 Plug 'neomake/neomake'
-
 Plug 'olical/vim-enmasse'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-multiple-cursors'
