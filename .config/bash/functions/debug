@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+debug () {
+  log "DEBUG" "$1"
+}
