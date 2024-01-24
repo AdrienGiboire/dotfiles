@@ -1,14 +1,30 @@
 # vim:ft=sh:ts=2:sw=2:sts:et
 
-_err() {
-  printf "[ \e[31;1mERR\e[m ] %s\n" "${1}" >&2
+_debug () {
+  _log "DEBUG" "$1"
+}
+
+_err () {
+  _log "[ \e[31;1mERR\e[m ] %s\n" "${1}"
+}
+
+_log () {
+  local level='INFO'
+  local message=$1
+
+  if ! _is_blank $2; then
+    level=$1
+    message=$2
+  fi
+
+  echo "$level --- $message"
 }
 
 # Returns whether the given command is executable or aliased.
-_has() {
+_has () {
   return $( command -v $1 &>/dev/null )
 }
 
-_is_blank() {
+_is_blank () {
   [ -z "${1}" ]
 }

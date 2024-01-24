@@ -62,7 +62,7 @@ function clone_database() {
 
   case $db_adapter in
     "mysql2" )
-      mysql_clone_database $db_owner $db_source_name $db_target_name
+      mysql-clone-database $db_owner $db_source_name $db_target_name
       ;;
     "postgres" )
       postgres_clone_database
