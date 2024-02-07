@@ -53,6 +53,8 @@
   default = current
 [difftool]
   prompt = false
+[difftool "nvimdiff"]
+  cmd = "$EDITOR -d \"$LOCAL\" \"$REMOTE\""
 [github]
   token = 318ac7f82fedc1e5c2d0d3e75d7d34b2e7e8ff91
   user = AdrienGiboire
