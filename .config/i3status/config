@@ -1,0 +1,37 @@
+general {
+  colors = true
+  color_good = "#a3be8c"
+  color_bad  = "#bf616a"
+  color_degraded = "#ebcb8b"
+  interval = 1
+  separator = "|"
+}
+
+order += "disk /"
+order += "cpu_usage"
+order += "memory"
+order += "battery all"
+order += "time"
+
+disk "/" {
+  format = "/: %percentage_used"
+}
+
+cpu_usage {
+  format = "CPU: %usage"
+  degraded_threshold = 90
+  max_threshold = 95
+}
+
+battery all {
+  path=/sys/class/power_supply/%d/uevent
+  format = "BAT AGGR: %percentage"
+  last_full_capacity = true
+  threshold_type=percentage
+  low_threshold=10
+}
+
+memory {
+  memory_used_method = classical
+  format="Memory: %used/%total"
+}
