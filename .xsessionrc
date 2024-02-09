@@ -1,3 +1,4 @@
 xinput set-prop "SYNA8009:00 06CB:CE57 Mouse"  "libinput Natural Scrolling Enabled" 1
 xinput set-prop "SYNA8009:00 06CB:CE57 Touchpad"  "libinput Natural Scrolling Enabled" 1
 
+setxkbmap -option ctrl:nocaps
