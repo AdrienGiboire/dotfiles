@@ -26,6 +26,7 @@ alias rc="drails c"
 alias wr="which ruby"
 
 alias config="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias i3config='n ~/.config/i3/config'
 
 # NEOVIM {{{1
 alias nvim="\$EDITOR"
