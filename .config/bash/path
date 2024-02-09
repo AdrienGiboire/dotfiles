@@ -33,8 +33,10 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$HOME/Applications/android-studio/bin
 
 # PUREVPN
-
 export PATH=$PATH:/etc/pure-linux-cli/:/etc/pure-linux-cli/
+
+# Flatpak
+export PATH=$PATH:/var/lib/flatpak/exports/bin
 
 export PATH
 
