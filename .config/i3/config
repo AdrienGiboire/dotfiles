@@ -189,8 +189,10 @@ bar {
         status_command i3status
 }
 
+# Arandr
 for_window [class="Arandr"] floating enable
 
+# Open and move apps
 exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/firefox'
 exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/google-chrome'
 exec --no-startup-id i3-msg 'workspace 3; exec /usr/local/bin/alacritty'
@@ -200,3 +202,13 @@ assign [class="Firefox"] $ws1
 assign [class="Google-chrome"] $ws2
 assign [class="Alacritty"] $ws3
 assign [class="Slack"] $ws5
+
+## Screenshots
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+
+## Clipboard Screenshots
+bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
