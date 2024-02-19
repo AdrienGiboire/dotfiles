@@ -151,7 +151,7 @@ autocmd VimEnter * command! -bang -nargs=? -complete=dir Files
 
 nnoremap <C-P> :Files<CR>
 nnoremap <Leader>bl :Buffers<CR>
-"nnoremap <Leader>t :Tags<CR>
+nnoremap <Leader>t :Tags<CR>
 " }}}
 Plug 'junegunn/goyo.vim'
 " goyo {{{
@@ -186,11 +186,10 @@ let g:tagbar_show_linebumbers = 1
 nnoremap <C-T> :TagbarToggle<CR>
 " }}}
 
-Plug 'mileszs/ack.vim'
-" ACK/AG {{{2
-let g:ackprg = 'ag --nogroup --nocolor --column --path-to-ignore ~/.ignore'
-nnoremap <Leader>ag :Ack!<Space>
-nnoremap <M-K> :Ack! "\b<Cword>\b"<CR>
+Plug 'mhinz/vim-grepper'
+" Grepper/AG {{{2
+nnoremap <Leader>ag :Grepper -tool ag<CR>
+nnoremap <Leader>* :Grepper -tool ag -cword -noprompt<CR>
 " }}}
 
 Plug 'preservim/vim-indent-guides'
