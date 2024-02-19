@@ -111,7 +111,11 @@ runtime macros/matchit.vim
 call plug#begin('~/.config/nvim/pack')
 
 Plug 'AdrienGiboire/vim-todo'
+
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+
 Plug 'jiangmiao/auto-pairs'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " FZF {{{2
@@ -591,7 +595,7 @@ autocmd FileType java :TrimSpaces
 
 " UI {{{1
 
-set background=light
+colorscheme catppuccin-mocha
 
 " Highlight current line only on focused window
 augroup CursorLine
