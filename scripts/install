@@ -45,6 +45,7 @@ utils=(
   make
   silversearcher-ag
   software-properties-common
+  tmux
 )
 
 section "Installing utils {$(join ' ' ${utils[@]})}"
