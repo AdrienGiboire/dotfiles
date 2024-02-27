@@ -1,0 +1,64 @@
+import = ["/home/bart/.config/alacritty/catppuccin/catppuccin-mocha.toml"]
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "Noto Mono"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;49~"
+key = "Key1"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;50~"
+key = "Key2"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;51~"
+key = "Key3"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;52~"
+key = "Key4"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;53~"
+key = "Key5"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;54~"
+key = "Key6"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;55~"
+key = "Key7"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;56~"
+key = "Key8"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;57~"
+key = "Key9"
+mods = "Control"
+
+[window]
+decorations = "none"
+startup_mode = "Maximized"
