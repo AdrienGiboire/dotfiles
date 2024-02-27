@@ -47,6 +47,7 @@ utils=(
   silversearcher-ag
   software-properties-common
   tmux
+  xclip
 )
 
 section "Installing utils {$(join ' ' ${utils[@]})}"
