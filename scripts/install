@@ -81,6 +81,11 @@ section "Installing FZF"
 }
 # }}}
 
+# Rust {{{
+# Necessary for some vim plugins like vim-test
+curl https://sh.rustup.rs -sSf | sh
+# }}}
+
 # VIM {{{1
 section "Installing Neovim"
 
