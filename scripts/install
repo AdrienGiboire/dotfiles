@@ -38,6 +38,7 @@ utils=(
   apt-transport-https
   ca-certificates
   curl
+  flatpak
   git
   gnupg-agent
   jq
