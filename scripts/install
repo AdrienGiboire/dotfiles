@@ -121,6 +121,9 @@ scdoc < extra/man/alacritty-bindings.5.scd | gzip -c | sudo tee /usr/local/share
 # Shell Completions
 mkdir -p ~/.bash_completion
 cp extra/completions/alacritty.bash ~/.bash_completion/alacritty
+
+# Theme
+curl -LO --output-dir ~/.config/alacritty https://github.com/catppuccin/alacritty/raw/main/catppuccin-mocha.toml
 # }}}
 
 # VIM {{{1
