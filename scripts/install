@@ -101,7 +101,7 @@ section "Installing Neovim"
   rm /tmp/lemonade.tar.gz
 
   section "+ Install python3 provider (mandatory for some plugins)"
-  apt install python3-pip
+  sudo apt install python3-pip
   python3 -m pip install --user --upgrade pynvim
 
   section "+ Install vim-plug"
