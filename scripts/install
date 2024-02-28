@@ -36,6 +36,7 @@ done
 # DEPENDENCIES {{{1
 utils=(
   apt-transport-https
+  arandr
   ca-certificates
   curl
   flatpak
