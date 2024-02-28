@@ -156,3 +156,15 @@ section "Installing Neovim"
   showme "Could not install Neovim"
 }
 # }}}
+
+# Softwares {{{
+section "Installing softwares {$(join ' ' ${softwares[@]})}"
+
+softwares=(
+  com.slack.Slack
+  com.spotify.Client
+  org.telegram.desktop
+)
+
+flatpak install -y $(join ' ' ${softwares[@]})
+# }}}
