@@ -161,6 +161,7 @@ section "Installing Neovim"
 section "Installing softwares {$(join ' ' ${softwares[@]})}"
 
 softwares=(
+  com.discordapp.Discord
   com.slack.Slack
   com.spotify.Client
   org.telegram.desktop
