@@ -41,8 +41,10 @@ utils=(
   flatpak
   git
   gnupg-agent
+  i3
   jq
   make
+  pavucontrol
   scdoc
   silversearcher-ag
   software-properties-common
