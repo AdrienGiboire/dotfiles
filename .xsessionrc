@@ -1,4 +1,7 @@
+# Thinkpad
 xinput set-prop "SYNA8009:00 06CB:CE57 Mouse"  "libinput Natural Scrolling Enabled" 1
 xinput set-prop "SYNA8009:00 06CB:CE57 Touchpad"  "libinput Natural Scrolling Enabled" 1
 
-setxkbmap -option ctrl:nocaps
+# System76
+xinput set-prop "ELAN0412:00 04F3:316F Mouse"  "libinput Natural Scrolling Enabled" 1
+xinput set-prop "ELAN0412:00 04F3:316F Touchpad"  "libinput Natural Scrolling Enabled" 1
