@@ -195,6 +195,8 @@ assign [class="firefox"] $ws1
 assign [class="Google-chrome"] $ws2
 assign [class="Alacritty"] $ws3
 assign [class="Slack"] $ws5
+assign [class="TelegramDesktop"] $ws5
+assign [class="Discord"] $ws5
 assign [class="thunderbird"] $ws6
 assign [class="Spotify"] $ws7
 
