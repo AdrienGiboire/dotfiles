@@ -42,6 +42,7 @@ utils=(
   flatpak
   git
   gnupg-agent
+  htop
   i3
   jq
   make
