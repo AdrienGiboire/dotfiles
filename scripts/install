@@ -46,6 +46,7 @@ utils=(
   jq
   make
   pavucontrol
+  resolvconf
   scdoc
   silversearcher-ag
   software-properties-common
