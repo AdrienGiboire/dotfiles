@@ -37,6 +37,7 @@ done
 utils=(
   apt-transport-https
   arandr
+  brightnessctl
   ca-certificates
   curl
   flatpak
