@@ -169,6 +169,7 @@ softwares=(
   com.slack.Slack
   com.spotify.Client
   org.telegram.desktop
+  org.videolan.VLC
 )
 
 flatpak install -y $(join ' ' ${softwares[@]})
