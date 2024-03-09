@@ -1,5 +1,7 @@
 [ -n "$PS1" ] && source ~/.bash_profile
 
+setxkbmap -option ctrl:nocaps -layout us -variant altgr-intl
+
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"

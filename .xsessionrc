@@ -1,6 +1,3 @@
-# Generic
-setxkbmap -option ctrl:nocaps -layout us -variant altgr-intl
-
 # Thinkpad
 xinput set-prop "SYNA8009:00 06CB:CE57 Mouse"  "libinput Natural Scrolling Enabled" 1
 xinput set-prop "SYNA8009:00 06CB:CE57 Touchpad"  "libinput Natural Scrolling Enabled" 1
