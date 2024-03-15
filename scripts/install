@@ -166,6 +166,7 @@ section "Installing softwares {$(join ' ' ${softwares[@]})}"
 
 softwares=(
   com.discordapp.Discord
+  com.obsproject.Studio
   com.slack.Slack
   com.spotify.Client
   org.telegram.desktop
