@@ -48,6 +48,8 @@ utils=(
   jq
   make
   pavucontrol
+  policykit-desktop-privileges
+  policykit-1-gnome
   resolvconf
   scdoc
   silversearcher-ag
