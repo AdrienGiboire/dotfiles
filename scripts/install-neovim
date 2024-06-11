@@ -1,0 +1,14 @@
+#!/bin/bash
+
+. $HOME/scripts/utilities
+
+section "Installing Neovim"
+
+{
+  [ ! -d $HOME/Applications ] && mkdir $HOME/Applications
+  cd $HOME/Applications
+  curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+  chmod u+x nvim.appimage
+} || {
+  showme "Could not install Neovim"
+}

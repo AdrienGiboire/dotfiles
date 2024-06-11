@@ -1,0 +1,20 @@
+#!/bin/bash
+
+. $HOME/scripts/utilities
+
+section "Installing Tmux"
+
+{
+  sudo apt install -y libevent-dev ncurses-dev build-essential bison pkg-config
+  curl -fLo /tmp/tmux.tar.gz --create-dirs \
+    $(curl -fLs 'https://api.github.com/repos/tmux/tmux/releases/latest' | jq -r '.assets[] | select(.name | match("tmux-*.*.tar.gz")).browser_download_url')
+  tar -xvzf /tmp/tmux.tar.gz
+  cd tmux-*.*
+  sudo make uninstall
+  ./configure
+  make && sudo make install
+  cd ..
+  rm -fr tmux-*.*
+} || {
+  showme "Could not install Tmux"
+}

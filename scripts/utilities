@@ -1,0 +1,8 @@
+#!/bin/bash
+
+function config { git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@; }
+function die { printf '%s\n' "$1" >&2; exit 1; }
+function join { local IFS="$1"; shift; echo "$*"; }
+function section { printf '\n%s\n' "=== $1"; }
+function showme { printf '%s\n' "$1" >&2; }
+function cleanup { $HOME/scripts/uninstall; }
