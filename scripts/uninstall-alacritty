@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# shellcheck source=utilities
+. "$HOME"/scripts/utilities
+
+section "Uninstalling Alacritty"
+
+## Terminfo
+terminfo_path=$(sudo tic -D | sed 1q)
+sudo rm "$terminfo_path"/*/{alacritty,alacritty-direct}
+
+## Desktop Entry
+sudo rm /usr/local/bin/alacritty
+sudo rm /usr/share/pixmaps/Alacritty.svg
+sudo rm /usr/share/applications/Alacritty.desktop
+sudo update-desktop-database
+
+# Manual Page
+sudo rm -fr /usr/local/share/man/man1
+sudo rm -fr /usr/local/share/man/man5
+
+# Shell Completions
+rm ~/.bash_completion/alacritty

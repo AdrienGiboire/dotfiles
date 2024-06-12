@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for file in "$HOME"/scripts/update-*; do
+  [ -r "$file" ] && [ -f "$file" ] && "$file"
+done
+unset file

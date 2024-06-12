@@ -42,6 +42,12 @@ do
   esac
 done
 
+for file in "$HOME"/scripts/uninstall-*; do
+  [ -r "$file" ] && [ -f "$file" ] && "$file"
+done
+unset file
+
+# Cleaning Files {{{
 declare -a list_of_files=(
   ".bash_profile"
   ".bashrc"
@@ -60,12 +66,12 @@ declare -a list_of_files=(
   "scripts"
 )
 
-
 echo "==> Deleting files..."
 
 for file in "${list_of_files[@]}"; do
   echo "====> Deleting $file..."
   rm -fr $HOME_DIRECTORY/$file
 done
+# }}}
 
 echo "==> Done Uninstalling."
