@@ -1,4 +1,4 @@
-eval `ssh-agent -s`
+eval "$(ssh-agent -s)"
 export EDITOR=vim
 
 # Load the shell dotfiles, and then some:
