@@ -53,4 +53,8 @@ export NVM_DIR="$HOME/.nvm"
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
-source ~/.bash_completion.d/alacritty
+# Source all completion files:
+for file in ~/.bash_completion.d/*; do
+  [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
