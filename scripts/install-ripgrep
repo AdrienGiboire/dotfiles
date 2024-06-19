@@ -1,0 +1,9 @@
+#!/bin/bash
+
+{
+  curl -fLo /tmp/ripgrep.deb --create-dirs \
+    curl -fLs 'https://api.github.com/repos/burntsushi/ripgrep/releases/latest' | jq -r '.assets[] | select(.name | match("ripgrep_*.*.*.deb$")).browser_download_url'
+  sudo dpkg -i /tmp/ripgrep.deb
+} || {
+  showme "Could not install ripgrep"
+}
