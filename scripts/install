@@ -35,6 +35,7 @@ utils=(
   brightnessctl
   ca-certificates
   curl
+  feh
   flatpak
   git
   gnupg-agent

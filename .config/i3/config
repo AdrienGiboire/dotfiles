@@ -218,3 +218,6 @@ bindsym $mod+Shift+S exec --no-startup-id /bin/sh $HOME/.screenlayout/main.sh
 
 # Run Polkit
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+
+# Run feh (for background image)
+exec_always --no-startup-id feh --bg-scale $HOME/Pictures/ColorWall-48592o.jpg
