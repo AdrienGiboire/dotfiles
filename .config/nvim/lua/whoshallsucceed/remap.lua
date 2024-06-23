@@ -56,17 +56,8 @@ vim.keymap.set('n', '<Leader>wq', ':w!<CR>:<C-U>bprevious <bar> bdelete #<CR>')
 vim.keymap.set('n', '<Leader>bc', ':<C-U>bprevious <bar> bdelete #<CR>')
 
 -- Make copy/paste from system clip easier
--- Seems like if you're on MacOS or Linux/Unix the register for the system
--- clipboard is not the same
-if vim.fn.has("unix") then
-  if vim.fn.has("mac") then
-    vim.keymap.set('v', '<Leader>y', '"*y')
-    vim.keymap.set('v', '<Leader>p', '"*p')
-  else
-    vim.keymap.set('v', '<Leader>y', '"+y')
-    vim.keymap.set('v', '<Leader>p', '"+p')
-  end
-end
+vim.keymap.set('v', '<Leader>y', '"+y')
+vim.keymap.set('v', '<Leader>p', '"+p')
 
 vim.keymap.set('n', '<Leader>u', 'yypVr-')
 vim.keymap.set('n', '<Leader>U', 'yypVr=')
@@ -93,8 +84,8 @@ vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
 -- sane regexes
-vim.keymap.set('n', '/', '/\v')
-vim.keymap.set('v', '/', '/\v')
+vim.keymap.set('n', '/', "/\\v")
+vim.keymap.set('v', '/', "/\\v")
 
 -- clear search matching
 vim.keymap.set('', '<Leader>/', ':noh<CR>:call clearmatches()<CR>')
