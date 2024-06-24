@@ -4,7 +4,7 @@ import = ["~/.config/alacritty/catppuccin-mocha.toml"]
 TERM = "xterm-256color"
 
 [font]
-size = 16.0
+size = 12.0
 
 [font.normal]
 family = "Noto Mono"
