@@ -1,0 +1,22 @@
+#! /bin/bash
+
+# TODO:
+# - usage
+# - option for list of excluded tables
+
+# set the database name
+DATABASE_NAME=$1
+
+# get the db user from the keyboard
+read -p "DB User: " DBUSER
+
+# get the db password from the keyboard
+read -s -p "DB Password: " DBPASSWORD
+
+# just to move to the next line
+echo ""
+
+# truncate all the tables in one go
+mysql -Nse 'SHOW TABLES' -D $DATABASE_NAME -u$DBUSER -p$DBPASSWORD | while read table; do echo "SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE \`$table\`; SET FOREIGN_KEY_CHECKS = 1;"; done | mysql $DATABASE_NAME -u$DBUSER -p$DBPASSWORD
+
+exit 0
