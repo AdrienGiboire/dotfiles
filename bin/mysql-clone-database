@@ -3,12 +3,13 @@
 source ~/.config/bash/functions/utils
 
 db_owner=$1
-db_source_name=$2
-db_target_name=$3
+db_password=$2
+db_source_name=$3
+db_target_name=$4
 
 function mysql_execute() {
   _debug "Executing SQL Statement: $1"
-  sudo mysql -e "$1"
+  sudo mysql -u$db_owner -p$db_password -e "$1"
 }
 
 function mysql_kill_processes() {
@@ -50,7 +51,7 @@ if $clone_db; then
   mysql_kill_processes
 
   _log "Creating database..."
-  sudo mysqldump $db_source_name -r /tmp/dump.sql
+  sudo mysqldump -u$db_owner -p$db_password $db_source_name -r /tmp/dump.sql
   mysql_execute "CREATE DATABASE $db_target_name;"
   mysql_execute "USE $db_target_name; SOURCE /tmp/dump.sql;"
   mysql_execute "GRANT ALL ON $db_target_name.* TO '$db_owner'@'localhost'; FLUSH PRIVILEGES;"
