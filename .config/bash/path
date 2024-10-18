@@ -18,6 +18,10 @@ if [ -d "$HOME/bin" ]; then
   PATH="$HOME/bin:$PATH"
 fi
 
+if [ -d "$HOME/.local/bin" ]; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+
 MYFILES=`ls -F $HOME/bin | grep "\/"`
 for FOLDER in $MYFILES; do
   PATH="$HOME/bin/$FOLDER:$PATH"
