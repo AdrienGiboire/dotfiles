@@ -11,4 +11,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 . "$HOME/.cargo/env"
 
-source ~/.bash_completion/alacritty
+source ~/.bash_completion.d/alacritty
