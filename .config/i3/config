@@ -11,9 +11,12 @@
 
 set $mod Mod4
 
+workspace_layout tabbed
+default_border none
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:Ionicons 9, Poppins Regular 9
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -36,14 +39,17 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-
+bindsym XF86AudioMute exec amixer set Master toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use hotkeys to adjust brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -57,6 +63,9 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id dmenu_run -i
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# bindsym $mod+d exec i3-dmenu-desktop --dmenu="dmenu -i -b \
+#  -fn 'Poppins:size=9' -nb '#141c21' -nf '#93a1a1' \
+#  -sb '#289c93' -sf '#141c21'"
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -179,18 +188,18 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+  status_command i3status
+  position top
 }
 
 # Arandr
 for_window [class="Arandr"] floating enable
 
 # Open and move apps
-exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/firefox'
+exec --no-startup-id i3-msg 'workspace 1; exec flatpak run org.mozilla.firefox'
 exec --no-startup-id i3-msg 'workspace 2; exec flatpak run com.google.Chrome'
-exec --no-startup-id i3-msg 'workspace 3; exec /usr/local/bin/alacritty'
+exec --no-startup-id i3-msg 'workspace 3; exec /home/bart/.cargo/bin/alacritty'
 exec --no-startup-id i3-msg 'workspace 5; exec flatpak run com.slack.Slack'
-exec --no-startup-id i3-msg 'workspace 7; exec flatpak run com.spotify.Client'
 
 # Run `xprop | grep WM_CLASS | awk '{ print $4 }'`
 # Then click on the app and the class name will be displayed in the terminal
@@ -200,25 +209,42 @@ assign [class="Alacritty"] $ws3
 assign [class="Slack"] $ws5
 assign [class="TelegramDesktop"] $ws5
 assign [class="Discord"] $ws5
-assign [class="Spotify"] $ws7
 
 ## Screenshots
-bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
-bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
-bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date).png"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date).png"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date).png"
 
 ## Clipboard Screenshots
 bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
 bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
 bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
 
-bindsym $mod+Shift+S exec --no-startup-id /bin/sh $HOME/.screenlayout/main.sh
-
 # Run Polkit
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
 # Run feh (for background image)
-exec_always --no-startup-id feh --bg-scale $HOME/Pictures/ColorWall-48592o.jpg
+exec_always --no-startup-id feh --bg-scale $HOME/wallpaper.jpg
 
 # Lock screen
 bindsym $mod+Ctrl+L exec --no-startup-id i3lock
+
+# Suspend
+bindsym $mod+Ctrl+S exec --no-startup-id systemctl suspend
+
+bindsym Ctrl+period exec --no-startup-id flatpak run it.mijorus.smile
+
+# ---
+
+set $mode_display Config monitor resolution - Home (d) - Work (t)
+
+mode "$mode_display" {
+    bindsym d exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1-0 --mode 2560x1440 --pos 1920x0 --rotate normal --output DP-1-4 --off, mode "default"
+    #bindsym t exec --no-startup-id xrandr --output eDP-1 --primary --mode 1600x900 --pos 0x809 --rotate normal --output VGA-1 --mode 1920x1080 --pos 2800x420 --rotate normal --output DP-1 --off --output HDMI-1 --mode 1920x1200 --pos 1600x0 --rotate left --output DP-2 --off --output HDMI-2 --off
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+S mode "$mode_display"

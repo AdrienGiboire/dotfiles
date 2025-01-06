@@ -42,6 +42,7 @@ utils=(
   htop
   i3
   jq
+  maim
   make
   pavucontrol
   policykit-desktop-privileges
@@ -120,21 +121,3 @@ section "Installing Neovim dependencies"
 # }}}
 
 $HOME/scripts/install-tmux
-
-# Softwares {{{
-section "Installing softwares {$(join ' ' ${softwares[@]})}"
-
-softwares=(
-  com.discordapp.Discord
-  com.google.Chrome
-  com.obsproject.Studio
-  com.slack.Slack
-  com.spotify.Client
-  org.gimp.GIMP
-  org.telegram.desktop
-  org.videolan.VLC
-  rest.insomnia.Insomnia
-)
-
-flatpak install -y $(join ' ' ${softwares[@]})
-# }}}

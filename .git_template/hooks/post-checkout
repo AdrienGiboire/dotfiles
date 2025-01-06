@@ -2,10 +2,6 @@
 
 [[ $SKIP_GIT_HOOK ]] && exit 0
 
-echo 'Generating tags...'
-.git/hooks/ctags
-echo 'Tags generated!'
-
 previous_ref=$1
 current_ref=$2
 flag=$3
@@ -49,8 +45,9 @@ function postgres_clone_database() {
 }
 
 function clone_database() {
-  db_adapter=`cat config/database.yml | grep -e 'adapter' | cut -d ':' -f2 | head -1 | sed 's/^[ \t]*//;s/[ \t]*$//'`
-  db_owner=`cat config/database.yml | grep -e 'username' | cut -d ':' -f2 | head -1 | sed 's/^[ \t]*//;s/[ \t]*$//'`
+  db_adapter=`cat config/database.yml | grep -e 'adapter:' | cut -d ':' -f2 | head -1 | sed 's/^[ \t]*//;s/[ \t]*$//'`
+  db_owner=`cat config/database.yml | grep -e 'username:' | cut -d ':' -f2 | head -1 | sed 's/^[ \t]*//;s/[ \t]*$//'`
+  db_password=`cat config/database.yml | grep -e 'password:' | cut -d ':' -f2 | head -1 | sed 's/^[ \t]*//;s/[ \t]*$//'`
 
   clone_db=true
   full_db_target_name="${project_name}_${db_cleaned_branch}"
@@ -62,7 +59,7 @@ function clone_database() {
 
   case $db_adapter in
     "mysql2" )
-      mysql-clone-database $db_owner $db_source_name $db_target_name
+      mysql-clone-database $db_owner $db_password $db_source_name $db_target_name
       ;;
     "postgres" )
       postgres_clone_database
@@ -119,4 +116,3 @@ if [ -n "$branch" ]; then
     fi
   fi
 fi
-

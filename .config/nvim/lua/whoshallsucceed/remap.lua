@@ -10,9 +10,6 @@ vim.keymap.set('n', ';', ':')
 -- better ESC
 vim.keymap.set('i', 'jk', '<ESC>')
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
@@ -32,13 +29,14 @@ end)
 vim.keymap.set('c', '<C-A>', '<Home>')
 vim.keymap.set('c', '<C-E>', '<End>')
 
--- Begining & End of line in mode
+-- Beginning & End of line in mode
 vim.keymap.set('n', '<C-A>', '^')
 vim.keymap.set('n', '<C-E>', 'g_')
+vim.keymap.set('v', '<C-A>', '^')
+vim.keymap.set('v', '<C-E>', '$')
 
 -- Make u/U behave for undo like n/N does for search
 vim.keymap.set('n', 'U', '<C-R>')
-
 
 -- You want to be part of the gurus? Time to get in serious stuff and stop using
 -- arrow keys. Learn the Hard Way!
@@ -63,11 +61,11 @@ vim.keymap.set('n', '<Leader>u', 'yypVr-')
 vim.keymap.set('n', '<Leader>U', 'yypVr=')
 
 -- pretty print JSON using python native tools
-vim.keymap.set('n', '<Leader>pp', ':%!python -m json.tool<CR>')
+vim.keymap.set('n', '<Leader>pp', ':%!python3 -m json.tool<CR>')
 
 -- URL encode/decode selection
-vim.keymap.set('v', '<leader>uen', ":!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>")
-vim.keymap.set('v', '<leader>ude', ":!python -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>")
+vim.keymap.set('v', '<leader>uen', ":!python3 -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>")
+vim.keymap.set('v', '<leader>ude', ":!python3 -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>")
 
 -- Instead of :tag jumping to first match definition, it jumps to the
 -- definition if there is only one match. Else, it displays a list of all

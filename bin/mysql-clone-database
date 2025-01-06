@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 source ~/.config/bash/functions/utils
 
 db_owner=$1
@@ -9,6 +11,7 @@ db_target_name=$4
 
 function mysql_execute() {
   _debug "Executing SQL Statement: $1"
+  echo "owner $db_owner db_password $db_password"
   sudo mysql -u$db_owner -p$db_password -e "$1"
 }
 

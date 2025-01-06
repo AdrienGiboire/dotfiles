@@ -3,4 +3,3 @@
 docker-clean () {
   docker rm -f $(docker ps -aq)
 }
-

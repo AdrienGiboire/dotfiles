@@ -1,0 +1,22 @@
+#!/bin/bash
+
+. $HOME/scripts/utilities
+
+# Softwares {{{
+softwares=(
+  com.discordapp.Discord
+  com.google.Chrome
+  com.obsproject.Studio
+  com.slack.Slack
+  com.spotify.Client
+  org.gimp.GIMP
+  org.mozilla.firefox
+  org.telegram.desktop
+  org.videolan.VLC
+  rest.insomnia.Insomnia
+)
+
+section "Installing softwares {$(join ' ' ${softwares[@]})}"
+
+flatpak install -y $(join ' ' ${softwares[@]})
+# }}}
