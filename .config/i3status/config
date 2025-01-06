@@ -39,7 +39,7 @@ memory {
 }
 
 volume master {
-  format = " %volume "
+  format = " .:! %volume "
   format_muted = " Muted "
   device = "default"
   mixer = "Master"
