@@ -203,12 +203,12 @@ exec --no-startup-id i3-msg 'workspace 5; exec flatpak run com.slack.Slack'
 
 # Run `xprop | grep WM_CLASS | awk '{ print $4 }'`
 # Then click on the app and the class name will be displayed in the terminal
-assign [class="firefox"] $ws1
-assign [class="Google-chrome"] $ws2
-assign [class="Alacritty"] $ws3
-assign [class="Slack"] $ws5
-assign [class="TelegramDesktop"] $ws5
-assign [class="Discord"] $ws5
+assign [class="(?i)irefox"] $ws1
+assign [class="(?i)oogle-chrome"] $ws2
+assign [class="(?i)lacritty"] $ws3
+assign [class="(?i)lack"] $ws5
+assign [class="(?i)TelegramDesktop"] $ws5
+assign [class="(?i)Discord"] $ws5
 
 ## Screenshots
 bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date).png"
