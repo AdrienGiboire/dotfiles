@@ -236,13 +236,14 @@ bindsym Ctrl+period exec --no-startup-id flatpak run it.mijorus.smile
 
 # ---
 
-set $mode_display Config monitor resolution - Home (1) - Home (2) - Work (3)
+set $mode_display Config monitor resolution - HDMINOTBOOT (1) - HDMIBOOT (2) - Five (3)
 
 mode "$mode_display" {
     # When HDMI is plugged after startup
-    bindsym 1 exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1-0 --mode 2560x1440 --pos 1920x0 --rotate normal --output DP-1-4 --off, mode "default"
+    bindsym 1 exec --no-startup-id |?.screenlayout/hdmi-not-plugged-at-boot.sh, mode "default"
     # When HDMI is already plugged at startup
-    bindsym 2 exec --no-startup-id xrandr --output DP-0 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-0 --mode 2560x1440 --pos 1920x0 --rotate normal --output DP-4 --off --output eDP-2-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-2-1 --off --output HDMI-2-1 --off --output DP-2-2 --off --output HDMI-2-2 --off, mode "default"
+    bindsym 2 exec --no-startup-id ~/.screenlayout/hdmi-plugged-at-boot.sh, mode "default"
+    bindsym 3 exec --no-startup-id ~/.screenlayout/five.sh, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
