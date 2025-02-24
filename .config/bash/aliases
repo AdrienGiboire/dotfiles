@@ -49,9 +49,6 @@ alias ducks='du -cks * | sort -rn | head'
 # for ubuntu (and more?), remap caps lock to ctrl
 alias nocaps="setxkbmap -option ctrl:nocaps"
 
-alias dc="docker-compose"
-alias dcr="dc run"
-
 # Aliases for Xilam Connect/DisConnect
 alias xc='wg-quick up $HOME/.config/tunsafe-profiles/krystal3.conf'
 alias xdc='wg-quick down $HOME/.config/tunsafe-profiles/krystal3.conf'
@@ -70,6 +67,11 @@ alias spine='tmux -L SPINE -f ~/.config/tmux/spine.conf a'
 alias 5m5v='tmuxnew 5m5v'
 alias vivi-client='tmux -L vivi-client -f ~/.config/tmux/vivi-client.conf a'
 alias vivi-server='tmux -L vivi-server -f ~/.config/tmux/vivi-server.conf a'
+
+# DOCKER {{{
+alias dc="docker compose"
+alias dce="dc exec"
+# }}}
 
 function tmuxnew () {
   PROJECT_DIRECTORY=$1
