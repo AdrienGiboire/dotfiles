@@ -240,7 +240,7 @@ set $mode_display Config monitor resolution - HDMINOTBOOT (1) - HDMIBOOT (2) - L
 
 mode "$mode_display" {
     # When HDMI is plugged after startup
-    bindsym 1 exec --no-startup-id |?.screenlayout/hdmi-not-plugged-at-boot.sh, mode "default"
+    bindsym 1 exec --no-startup-id ~/.screenlayout/hdmi-not-plugged-at-boot.sh, mode "default"
     # When HDMI is already plugged at startup
     bindsym 2 exec --no-startup-id ~/.screenlayout/hdmi-plugged-at-boot.sh, mode "default"
     bindsym 3 exec --no-startup-id ~/.screenlayout/laptop-only.sh, mode "default"
