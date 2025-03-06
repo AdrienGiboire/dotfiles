@@ -73,12 +73,18 @@ alias dc="docker compose"
 alias dce="dc exec"
 # }}}
 
+# TMUX {{{
+alias t='tmux'
+
 function tmuxnew () {
   PROJECT_DIRECTORY=$1
   PROJECT_NAME="${PROJECT_NAME:-$PROJECT_DIRECTORY}"
 
   PROJECT_DIRECTORY="$PROJECT_DIRECTORY" tmux -L $PROJECT_NAME -f ~/.config/tmux/generic.conf a
 }
+# }}}
+
+alias private-session='nohup chromium-browser --temp-profile > /dev/null 2>&1 &'
 
 function start () {
   for _service in $@
