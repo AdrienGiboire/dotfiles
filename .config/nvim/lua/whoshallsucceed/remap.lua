@@ -9,6 +9,7 @@ vim.keymap.set('n', ';', ':')
 
 -- better ESC
 vim.keymap.set('i', 'jk', '<ESC>')
+vim.keymap.set('t', 'jk', "<C-\\><C-N>")
 
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -99,4 +100,5 @@ vim.keymap.set('n', 'g,', 'g,zz')
 -- Open a Quickfix window for the last search.
 vim.keymap.set('n', '<Leader>?', ":execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>")
 
-vim.keymap.set('t', 'jk', "<C-\\><C-N>")
+-- Copy the file name of the file in the current buffer to the unnamed register
+vim.keymap.set('n', ':let @" = expand("%")<cr>')
