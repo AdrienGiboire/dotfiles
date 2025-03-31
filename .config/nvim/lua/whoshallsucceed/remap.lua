@@ -101,4 +101,4 @@ vim.keymap.set('n', 'g,', 'g,zz')
 vim.keymap.set('n', '<Leader>?', ":execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>")
 
 -- Copy the file name of the file in the current buffer to the unnamed register
-vim.keymap.set('n', ':let @" = expand("%")<cr>')
+vim.keymap.set('n', '<Leader>cp', ':let @" = expand("%")<cr>')

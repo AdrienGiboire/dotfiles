@@ -60,6 +60,3 @@ mods = "Control"
 [window]
 decorations = "none"
 startup_mode = "Maximized"
-
-[general]
-import = ["~/.config/alacritty/catppuccin-mocha.toml"]
