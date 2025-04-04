@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 now=`date +'%Y%m%d'`
 plans_path="$HOME/Documents/dotplans"
