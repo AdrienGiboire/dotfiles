@@ -68,7 +68,7 @@ alias vivi-client='tmux -L vivi-client -f ~/.config/tmux/vivi-client.conf a'
 alias vivi-server='tmux -L vivi-server -f ~/.config/tmux/vivi-server.conf a'
 
 # DOCKER {{{
-alias dc="docker compose"
+alias dc="docker compose -f .devcontainer/docker-compose.yml"
 alias dce="dc exec"
 # }}}
 
