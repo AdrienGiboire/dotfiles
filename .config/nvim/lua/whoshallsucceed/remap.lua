@@ -68,6 +68,9 @@ vim.keymap.set('n', '<Leader>pp', ':%!python3 -m json.tool<CR>')
 vim.keymap.set('v', '<leader>uen', ":!python3 -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>")
 vim.keymap.set('v', '<leader>ude', ":!python3 -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>")
 
+-- Create a directory for the current file
+vim.keymap.set('n', '<Leader>mkd', '!mkdir -p %:h')
+
 -- Instead of :tag jumping to first match definition, it jumps to the
 -- definition if there is only one match. Else, it displays a list of all
 -- matching tags.
