@@ -39,3 +39,26 @@ vim.opt.gdefault = true
 vim.opt.showmatch = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
+
+-- Keep the current directory and the browsing directory synced. This helps avoid the move files error.
+vim.g.netrw_keepdir = 0
+
+-- Change the copy command. Mostly to enable recursive copy of directories.
+vim.g.netrw_localcopydircmd = 'cp -r'
+
+---- BEGIN The following stuff is to preserve original CWD while keeping `netrw_keepdir = 0`
+-- Store the startup directory
+local startup_dir = vim.fn.getcwd()
+
+-- Restore it after opening files
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    -- Only restore if we're not in a terminal buffer, help, or special filetypes
+    local bt = vim.bo.buftype
+    local ft = vim.bo.filetype
+    if bt == "" and ft ~= "netrw" and ft ~= "help" then
+      vim.cmd("cd " .. startup_dir)
+    end
+  end,
+})
+---- END

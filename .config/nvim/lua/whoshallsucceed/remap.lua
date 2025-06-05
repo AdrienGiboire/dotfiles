@@ -1,6 +1,5 @@
 vim.g.mapleader = ' '
 
-vim.keymap.set('n', '-', vim.cmd.Ex)
 vim.opt.ruler = true
 
 -- Why a command used so much needs more keystroke than a barely known command?
@@ -105,3 +104,8 @@ vim.keymap.set('n', '<Leader>?', ":execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>")
 
 -- Copy the file name of the file in the current buffer to the unnamed register
 vim.keymap.set('n', '<Leader>cp', ':let @" = expand("%")<cr>')
+
+-- NETRW
+vim.keymap.set('n', '-', vim.cmd.Ex)
+vim.keymap.set('n', '<Leader>da', vim.cmd.Ex)
+vim.keymap.set('n', '<Leader>dd', ':Explore %:p:h<CR>')
