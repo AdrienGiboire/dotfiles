@@ -109,3 +109,6 @@ vim.keymap.set('n', '<Leader>cp', ':let @" = expand("%")<cr>')
 vim.keymap.set('n', '-', vim.cmd.Ex)
 vim.keymap.set('n', '<Leader>da', vim.cmd.Ex)
 vim.keymap.set('n', '<Leader>dd', ':Explore %:p:h<CR>')
+
+-- Access TODO
+vim.keymap.set('n', '<Leader>td', ':e ~/code/todo.todo<CR>')
