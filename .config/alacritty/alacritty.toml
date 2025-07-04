@@ -2,7 +2,7 @@
 TERM = "xterm-256color"
 
 [font]
-size = 10.0
+size = 15.0
 
 [font.normal]
 family = "Noto Mono"
