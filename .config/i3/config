@@ -196,14 +196,14 @@ bar {
 for_window [class="Arandr"] floating enable
 
 # Open and move apps
-exec --no-startup-id i3-msg 'workspace 1; exec flatpak run org.mozilla.firefox'
+exec --no-startup-id i3-msg 'workspace 1; exec flatpak run app.zen_browser.zen'
 exec --no-startup-id i3-msg 'workspace 2; exec flatpak run com.google.Chrome'
 exec --no-startup-id i3-msg 'workspace 3; exec /home/bart/.cargo/bin/alacritty'
 exec --no-startup-id i3-msg 'workspace 5; exec flatpak run com.slack.Slack'
 
 # Run `xprop | grep WM_CLASS | awk '{ print $4 }'`
 # Then click on the app and the class name will be displayed in the terminal
-assign [class="(?i)irefox"] $ws1
+assign [class="(?i)zen"] $ws1
 assign [class="(?i)oogle-chrome"] $ws2
 assign [class="(?i)lacritty"] $ws3
 assign [class="(?i)lack"] $ws5
