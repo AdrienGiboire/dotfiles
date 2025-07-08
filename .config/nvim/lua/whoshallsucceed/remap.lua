@@ -106,8 +106,8 @@ vim.keymap.set('n', '<Leader>?', ":execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>")
 vim.keymap.set('n', '<Leader>cp', ':let @" = expand("%")<cr>')
 
 -- NETRW
-vim.keymap.set('n', '-', vim.cmd.Ex)
-vim.keymap.set('n', '<Leader>da', vim.cmd.Ex)
+vim.keymap.set('n', '-', vim.cmd.Explore)
+vim.keymap.set('n', '<Leader>da', vim.cmd.Explore)
 vim.keymap.set('n', '<Leader>dd', ':Explore %:p:h<CR>')
 
 -- Access TODO
