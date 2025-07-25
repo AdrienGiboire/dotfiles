@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# Pop!_OS Keyboard Shortcuts Restore Script
+# Usage: restore-keyboard-shortcuts backup-file
+
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 \u003cbackup-file\u003e"
+    echo "Example: $0 ~/.config/keyboard-shortcuts-backups/keyboard-shortcuts-20250125-101733.conf"
+    exit 1
+fi
+
+BACKUP_FILE="$1"
+
+if [ ! -f "$BACKUP_FILE" ]; then
+    echo "Error: Backup file '$BACKUP_FILE' not found"
+    exit 1
+fi
+
+echo "Restoring keyboard shortcuts from: $BACKUP_FILE"
+
+# Function to restore settings from backup file
+restore_settings() {
+    local temp_file=$(mktemp)
+    
+    # Extract non-comment lines from backup file
+    grep -v '^#' "$BACKUP_FILE" | grep -v '^$' \u003e "$temp_file"
+    
+    while IFS= read -r line; do
+        # Skip empty lines
+        [ -z "$line" ] && continue
+        
+        # Parse the gsettings line: schema key value
+        if [[ $line =~ ^([a-z.-]+[[:space:]]+[a-z.-]+)[[:space:]]+(.+)$ ]]; then
+            schema_key="${BASH_REMATCH[1]}"
+            value="${BASH_REMATCH[2]}"
+            
+            # Split schema and key
+            schema=$(echo "$schema_key" | awk '{print $1}')
+            key=$(echo "$schema_key" | awk '{print $2}')
+            
+            # Check if schema exists before trying to set
+            if gsettings list-schemas | grep -q "^$schema$"; then
+                echo "Setting $schema $key = $value"
+                gsettings set "$schema" "$key" "$value" 2\u003e/dev/null || {
+                    echo "Warning: Failed to set $schema $key"
+                }
+            else
+                echo "Warning: Schema $schema not found, skipping"
+            fi
+        fi
+    done \u003c "$temp_file"
+    
+    rm -f "$temp_file"
+}
+
+# Confirm before proceeding
+echo "This will overwrite your current keyboard shortcuts settings."
+read -p "Are you sure you want to continue? (y/N): " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Restore cancelled"
+    exit 0
+fi
+
+# Perform the restore
+restore_settings
+
+echo "Keyboard shortcuts restore completed!"
+echo "You may need to log out and back in for all changes to take effect."
