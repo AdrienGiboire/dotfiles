@@ -1,5 +1,5 @@
-# Pop!_OS Keyboard Shortcuts Backup - Fri Jul 25 12:33:19 PM CEST 2025
-# Run 'restore-keyboard-shortcuts "/home/bart/.config/keyboard-shortcuts-backups/current-setup"' to restore these settings
+# Pop!_OS Keyboard Shortcuts Backup - Fri Jul 25 12:33:01 PM CEST 2025
+# Run 'restore-keyboard-shortcuts "/home/bart/.config/keyboard-shortcuts-backups/alacritty-terminal-setup"' to restore these settings
 
 # GNOME Window Manager Shortcuts
 org.gnome.desktop.wm.keybindings activate-window-menu ['<Alt>space']
