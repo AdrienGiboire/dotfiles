@@ -1,0 +1,9 @@
+[Unit]
+Description=Set XKB layout/options on login
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/setxkbmap-on-login.sh
+
+[Install]
+WantedBy=default.target
